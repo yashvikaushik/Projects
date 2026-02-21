@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>Patient Management System</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 40px;
+  background: #f2f4f7;
+}
+
+h1 {
+  text-align: center;
+}
+
+form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+input, select {
+  padding: 8px;
+  margin: 5px;
+  width: 150px;
+}
+
+button {
+  padding: 8px 15px;
+  border: none;
+  background: #4CAF50;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.delete-btn {
+  background: red;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+th {
+  background: #4CAF50;
+  color: white;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>Patient Management System</h1>
+
+<!-- ================= ADD PATIENT FORM ================= -->
+
+<form id="patientForm">
+
+<input type="text" id="id" placeholder="ID (P007)" required>
+<input type="text" id="name" placeholder="Name" required>
+<input type="text" id="city" placeholder="City" required>
+<input type="number" id="age" placeholder="Age" required>
+
+<select id="gender">
+  <option value="male">Male</option>
+  <option value="female">Female</option>
+  <option value="other">Other</option>
+</select>
+
+<input type="number" step="0.01" id="height" placeholder="Height (m)" required>
+<input type="number" step="0.01" id="weight" placeholder="Weight (kg)" required>
+
+<button type="submit">Add Patient</button>
+
+</form>
+
+<!-- ================= PATIENT TABLE ================= -->
+
+<table>
+
+<thead>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>City</th>
+<th>Age</th>
+<th>Gender</th>
+<th>Height</th>
+<th>Weight</th>
+<th>BMI</th>
+<th>Verdict</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="patientTable"></tbody>
+
+</table>
+
+<!-- ================= SCRIPT ================= -->
+
+<script>
+
+const API_URL = "http://127.0.0.1:8000";
+
+
+// -------- LOAD PATIENTS --------
+async function loadPatients() {
+
+  const res = await fetch(`${API_URL}/view`);
+  const data = await res.json();
+
+  const table = document.getElementById("patientTable");
+  table.innerHTML = "";
+
+  for (let id in data) {
+
+    const p = data[id];
+
+    const row = `
+      <tr>
+        <td>${id}</td>
+        <td>${p.name}</td>
+        <td>${p.city}</td>
+        <td>${p.age}</td>
+        <td>${p.gender}</td>
+        <td>${p.height}</td>
+        <td>${p.weight}</td>
+        <td>${p.bmi}</td>
+        <td>${p.verdict}</td>
+        <td>
+          <button class="delete-btn"
+            onclick="deletePatient('${id}')">
+            Delete
+          </button>
+        </td>
+      </tr>
+    `;
+
+    table.innerHTML += row;
+  }
+}
+
+
+// -------- ADD PATIENT --------
+document
+.getElementById("patientForm")
+.addEventListener("submit", async function(e) {
+
+  e.preventDefault();
+
+  const patient = {
+    id: document.getElementById("id").value,
+    name: document.getElementById("name").value,
+    city: document.getElementById("city").value,
+    age: parseInt(document.getElementById("age").value),
+    gender: document.getElementById("gender").value,
+    height: parseFloat(document.getElementById("height").value),
+    weight: parseFloat(document.getElementById("weight").value)
+  };
+
+  await fetch(`${API_URL}/create`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(patient)
+  });
+
+  document.getElementById("patientForm").reset();
+
+  loadPatients();
+});
+
+
+// -------- DELETE PATIENT --------
+async function deletePatient(id) {
+
+  await fetch(`${API_URL}/delete/${id}`, {
+    method: "DELETE"
+  });
+
+  loadPatients();
+}
+
+
+// -------- INITIAL LOAD --------
+loadPatients();
+
+</script>
+
+</body>
+</html>
