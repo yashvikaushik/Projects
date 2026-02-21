@@ -8,9 +8,10 @@ def start_scheduler():
 
         scheduler.add_job(
             lambda:whatsapp_messages("YOU ARE HACKED DADDY !!"),
-            trigger="cron",
-            hour=23,
-            minute=45
+            trigger="interval",
+            # hour=23,
+            # minutes=2
+            seconds=10
         )
 
         scheduler.start()
