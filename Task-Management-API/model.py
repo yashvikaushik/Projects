@@ -6,3 +6,6 @@ class CreateTask(BaseModel):
      description:Optional[str]=None
      priority:Annotated[Literal["high","medium","low"],Field(...,description="What is the priority of your task")]
      
+class UpdateTask(BaseModel):
+     description:Optional[str]=None
+     completed:Optional[bool]=None
