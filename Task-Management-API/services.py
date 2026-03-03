@@ -47,9 +47,9 @@ def update_task(task_id:str,update_data:UpdateTask):
              if update_data.completed is not None:
                 task["completed"] = update_data.completed
         
-         write_data(tasks)
-         return task
-    return None
+                write_data(tasks)
+                return task
+    raise HTTPException(status_code=404, detail="Task not found")
     
 
 def delete_task(task_id:str):
