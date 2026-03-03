@@ -2,6 +2,7 @@ import json
 from model import CreateTask,UpdateTask
 from datetime import datetime
 from uuid import uuid4
+from fastapi import HTTPException
 
 FILE_NAME="tasks.json"
 
@@ -60,6 +61,6 @@ def delete_task(task_id:str):
                 write_data(tasks)
                 return {"message": "Task deleted successfully"}
             else:
-                return {"message": "Task is not completed yet"}
+                raise HTTPException(status_code=404,detail="task is not completed yet")
 
-    return {"error": "Task not found"}
+    raise HTTPException(status_code=404, detail="Task not found")
