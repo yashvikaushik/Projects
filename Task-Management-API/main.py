@@ -1,7 +1,7 @@
 from fastapi import FastAPI,HTTPException
 from services import create_task,show_tasks,update_task,delete_task
 from model import CreateTask,UpdateTask
-
+from fastapi.middleware.cors import CORSMiddleware
 
 app=FastAPI()
 
@@ -24,3 +24,12 @@ def update_old_task(task_id:str,update_tasks:UpdateTask):
 @app.delete("/delete_task/{task_id}")
 def delete_completed_task(task_id:str):
      return delete_task(task_id)
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
