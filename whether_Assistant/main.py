@@ -1,6 +1,6 @@
 from fastapi import FastAPI,HTTPException
 from services.whether_service import fetch_coordinates,fetch_weather,get_weather_by_city
-from services.openai_api_service import get_suggestion
+from services.groq_api_service import get_suggestion
 
 app=FastAPI()
 
