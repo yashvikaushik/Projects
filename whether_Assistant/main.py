@@ -1,6 +1,6 @@
 from fastapi import FastAPI,HTTPException
 from services.whether_service import fetch_coordinates,fetch_weather,get_weather_by_city
-
+from services.openai_api_service import get_suggestion
 
 app=FastAPI()
 
@@ -33,4 +33,17 @@ async def get_temp(city:str):
         )
     
     return result
+
+@app.get("/suggestion/{city}")
+async def get_suggections(city):
+    result = await get_suggestion(city)
+
+    if result is None:
+        raise HTTPException(
+            status_code=404,
+            detail="City not found"
+        )
+    
+    return result
+
 
