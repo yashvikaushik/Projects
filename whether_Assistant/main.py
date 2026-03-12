@@ -1,6 +1,10 @@
+from dotenv import load_dotenv
+load_dotenv()
+
 from fastapi import FastAPI,HTTPException
 from services.whether_service import fetch_coordinates,fetch_weather,get_weather_by_city
 from services.groq_api_service import get_suggestion
+from services.whatsapp_service import send_whatsapp_message
 
 app=FastAPI()
 
@@ -36,6 +40,7 @@ async def get_temp(city:str):
 
 @app.get("/suggestion/{city}")
 async def get_suggections(city):
+    city=city.strip()
     result = await get_suggestion(city)
 
     if result is None:
@@ -45,5 +50,28 @@ async def get_suggections(city):
         )
     
     return result
+
+
+@app.get("/send-weather/{city}/{phone}")
+async def send_weather(city: str, phone: str):
+
+    result = await get_suggestion(city)
+
+    message = f"""
+Weather Update 🌤
+
+City: {result['city']}
+Temperature: {result['temperature']}°C
+Condition: {result['condition']}
+Wind Speed: {result['windspeed']} km/h
+
+Suggestion:
+{result['suggestion']}
+"""
+
+    send_whatsapp_message(phone, message)
+
+    return {"message": "Weather sent on WhatsApp"}
+
 
 

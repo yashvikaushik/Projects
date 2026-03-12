@@ -4,7 +4,7 @@ import json
 from utils.weather_codes import get_weather_description
 
 async def fetch_coordinates(city:str):
-    url =f"https://geocoding-api.open-meteo.com/v1/search?name={city}"
+    url ="https://geocoding-api.open-meteo.com/v1/search?name="+city
 
     async with httpx.AsyncClient(timeout=20.0) as client:
         response = await client.get(url)
@@ -23,10 +23,15 @@ async def fetch_coordinates(city:str):
 
 
 async def fetch_weather(latitude:float,longitude:float):
-    url=f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&current_weather=true"
+    url = (
+    "https://api.open-meteo.com/v1/forecast"
+    f"?latitude={latitude}&longitude={longitude}&current_weather=true"
+)
+    print("Weather URL:", repr(url))
 
     async with httpx.AsyncClient(timeout=20.0) as client:
         response = await client.get(url)
+    response.raise_for_status()
 
     data=response.json()
     
