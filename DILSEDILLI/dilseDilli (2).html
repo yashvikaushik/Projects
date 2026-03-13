@@ -1,0 +1,2168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>dilseDilli — Smart Travel Recommendations</title>
+<script>
+function makeImg(emoji, title, g1, g2, g3) {
+  const s = `<svg xmlns="http://www.w3.org/2000/svg" width="700" height="400" viewBox="0 0 700 400"><defs><linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${g1}"/><stop offset="55%" stop-color="${g2}"/><stop offset="100%" stop-color="${g3}"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="700" height="400" fill="url(#bg)"/><circle cx="580" cy="80" r="120" fill="rgba(255,255,255,0.03)"/><circle cx="120" cy="320" r="90" fill="rgba(255,255,255,0.03)"/><text x="350" y="195" font-size="96" text-anchor="middle" dominant-baseline="middle" filter="url(#glow)">${emoji}</text><text x="350" y="300" font-size="26" font-family="Georgia,serif" font-weight="bold" fill="rgba(255,255,255,0.92)" text-anchor="middle">${title}</text><rect x="260" y="320" width="180" height="2" rx="1" fill="rgba(255,255,255,0.2)"/></svg>`;
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(s);
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=Noto+Serif+Devanagari:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --saffron: #FF6B1A;
+    --deep-red: #C0392B;
+    --gold: #D4A017;
+    --midnight: #0D0D0D;
+    --ink: #1A1A2E;
+    --cream: #FFF8F0;
+    --warm-white: #FEFAF5;
+    --muted: #8A7F78;
+    --card-bg: rgba(255,255,255,0.05);
+    --glass: rgba(255,255,255,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; cursor: auto; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--midnight);
+    color: var(--cream);
+    overflow-x: hidden;
+    cursor: auto;
+  }
+
+  /* Custom Cursor */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--saffron);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9999;
+    transition: transform 0.15s ease;
+    mix-blend-mode: difference;
+  }
+  .cursor-trail {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(255,107,26,0.4);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9998;
+    transition: all 0.3s ease;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%;
+    z-index: 100;
+    padding: 1.2rem 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(13,13,13,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(212,160,23,0.15);
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, var(--saffron), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .logo span {
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .nav-links {
+    display: flex; gap: 2.5rem; list-style: none;
+    align-items: center;
+  }
+
+  .nav-links a, .nav-btn {
+    color: rgba(255,248,240,0.65);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    cursor: auto;
+    background: none;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    padding: 0;
+  }
+  .nav-links a:hover, .nav-btn:hover { color: var(--saffron); }
+
+  .nav-cta {
+    background: linear-gradient(135deg, var(--saffron), #FF4500);
+    color: white !important;
+    padding: 0.55rem 1.4rem;
+    border-radius: 50px;
+    font-weight: 600 !important;
+    transition: transform 0.2s, box-shadow 0.2s !important;
+    box-shadow: 0 4px 20px rgba(255,107,26,0.3);
+  }
+  .nav-cta:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 30px rgba(255,107,26,0.5) !important;
+    color: white !important;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex; align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #1a0008 0%, #3d0010 30%, #0a0820 60%, #1a0530 100%);
+    background-size: cover;
+    background-position: center;
+    filter: brightness(1);
+    transform: scale(1.05);
+    animation: slowZoom 20s ease infinite alternate;
+  }
+
+  @keyframes slowZoom {
+    from { transform: scale(1.05); }
+    to { transform: scale(1.12); }
+  }
+
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg,
+      rgba(13,13,13,0.85) 0%,
+      rgba(13,13,13,0.4) 50%,
+      rgba(192,57,43,0.15) 100%);
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    padding: 0 3rem;
+    max-width: 600px;
+    animation: heroFadeIn 1s ease forwards;
+  }
+
+  @keyframes heroFadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--saffron);
+    margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 40px; height: 1px;
+    background: var(--saffron);
+    display: block;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    line-height: 1.05;
+    font-weight: 900;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    background: linear-gradient(135deg, var(--saffron), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+    color: rgba(255,248,240,0.7);
+    line-height: 1.7;
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+  }
+
+  /* Search Bar */
+  .search-box {
+    display: flex; align-items: center;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 60px;
+    padding: 0.6rem 0.6rem 0.6rem 1.5rem;
+    gap: 1rem;
+    max-width: 520px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .search-box:focus-within {
+    border-color: rgba(255,107,26,0.6);
+    box-shadow: 0 0 0 3px rgba(255,107,26,0.15);
+  }
+
+  .search-box input {
+    flex: 1;
+    background: transparent;
+    border: none; outline: none;
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    cursor: auto;
+  }
+  .search-box input::placeholder { color: rgba(255,248,240,0.4); }
+
+  .search-btn {
+    background: linear-gradient(135deg, var(--saffron), #FF4500);
+    border: none;
+    color: white;
+    padding: 0.75rem 1.8rem;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: auto;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .search-btn:hover {
+    transform: scale(1.03);
+    box-shadow: 0 5px 20px rgba(255,107,26,0.5);
+  }
+
+  .hero-stats {
+    position: absolute;
+    right: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    z-index: 2;
+  }
+
+  .stat-card {
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 1rem 1.5rem;
+    text-align: center;
+    width: 120px;
+  }
+
+  .stat-card .num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--saffron), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .stat-card .label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(255,248,240,0.5);
+    margin-top: 0.2rem;
+  }
+
+  .scroll-hint {
+    position: absolute; bottom: 2.5rem; left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 0.5rem;
+    color: rgba(255,248,240,0.35);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+  .scroll-hint::after {
+    content: '';
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, rgba(255,107,26,0.6), transparent);
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* WEATHER STRIP */
+  .weather-strip {
+    background: linear-gradient(90deg, rgba(212,160,23,0.08), rgba(255,107,26,0.08));
+    border-top: 1px solid rgba(212,160,23,0.15);
+    border-bottom: 1px solid rgba(212,160,23,0.15);
+    padding: 1rem 3rem;
+    display: flex; align-items: center; gap: 3rem;
+    overflow-x: auto;
+  }
+
+  .weather-item {
+    display: flex; align-items: center; gap: 0.8rem;
+    white-space: nowrap;
+  }
+  .weather-icon { font-size: 1.5rem; }
+  .weather-info { font-size: 0.82rem; }
+  .weather-info .temp {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--gold);
+    font-family: 'Playfair Display', serif;
+  }
+  .weather-info .desc { color: rgba(255,248,240,0.5); }
+  .weather-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255,107,26,0.7);
+    border-right: 1px solid rgba(255,255,255,0.1);
+    padding-right: 3rem;
+    font-weight: 600;
+  }
+
+  /* CATEGORY TABS */
+  .section { padding: 5rem 3rem; }
+  .section-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--saffron);
+    margin-bottom: 0.8rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .section-label::before {
+    content: '';
+    width: 30px; height: 1px;
+    background: var(--saffron);
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+    line-height: 1.1;
+  }
+  .section-title em {
+    font-style: italic;
+    background: linear-gradient(135deg, var(--saffron), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .section-sub {
+    color: rgba(255,248,240,0.5);
+    font-size: 1rem;
+    margin-bottom: 3rem;
+    max-width: 500px;
+  }
+
+  /* Category tabs */
+  .cat-tabs {
+    display: flex; gap: 0.7rem; flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+
+  .cat-tab {
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: transparent;
+    color: rgba(255,248,240,0.55);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: auto;
+    transition: all 0.3s;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .cat-tab.active, .cat-tab:hover {
+    background: linear-gradient(135deg, rgba(255,107,26,0.2), rgba(212,160,23,0.15));
+    border-color: var(--saffron);
+    color: var(--cream);
+  }
+  .cat-tab.active {
+    box-shadow: 0 0 20px rgba(255,107,26,0.2);
+  }
+
+  /* CARDS GRID */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .place-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.23,1,0.32,1), box-shadow 0.4s;
+    cursor: auto;
+    position: relative;
+  }
+  .place-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,107,26,0.2);
+  }
+
+  .card-img {
+    width: 100%; height: 200px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease, filter 0.3s ease;
+  }
+  .place-card:hover .card-img { transform: scale(1.05); filter: brightness(1.1); }
+
+  .card-img-wrap {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .card-badge {
+    position: absolute; top: 1rem; left: 1rem;
+    background: linear-gradient(135deg, var(--saffron), #FF4500);
+    color: white;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    box-shadow: 0 4px 12px rgba(255,107,26,0.4);
+  }
+
+  .card-body {
+    padding: 1.4rem;
+  }
+
+  .card-rating {
+    display: flex; align-items: center; gap: 0.4rem;
+    margin-bottom: 0.6rem;
+    font-size: 0.8rem;
+    color: var(--gold);
+  }
+  .card-rating .stars { letter-spacing: 1px; }
+  .card-rating .count { color: rgba(255,248,240,0.4); font-size: 0.75rem; }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+    line-height: 1.2;
+  }
+
+  .card-meta {
+    font-size: 0.8rem;
+    color: rgba(255,248,240,0.45);
+    margin-bottom: 0.8rem;
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+  .card-meta svg { flex-shrink: 0; }
+
+  .card-desc {
+    font-size: 0.85rem;
+    color: rgba(255,248,240,0.55);
+    line-height: 1.6;
+    margin-bottom: 1.2rem;
+  }
+
+  .card-footer {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .card-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--gold);
+  }
+  .card-price span {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    color: rgba(255,248,240,0.4);
+    font-weight: 400;
+  }
+
+  .card-btn {
+    background: transparent;
+    border: 1px solid rgba(255,107,26,0.4);
+    color: var(--saffron);
+    padding: 0.45rem 1.1rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    cursor: auto;
+    transition: all 0.3s;
+  }
+  .card-btn:hover {
+    background: var(--saffron);
+    color: white;
+    box-shadow: 0 5px 15px rgba(255,107,26,0.4);
+  }
+
+  /* FEATURED BANNER */
+  .featured-section {
+    padding: 2rem 3rem 5rem;
+  }
+
+  .featured-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .featured-main {
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    height: 480px;
+    cursor: auto;
+  }
+  .featured-main img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: brightness(0.6);
+    transition: transform 0.6s ease, filter 0.4s;
+  }
+  .featured-main:hover img {
+    transform: scale(1.03);
+    filter: brightness(0.7);
+  }
+  .featured-main-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(13,13,13,0.95) 0%, transparent 50%);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 2.5rem;
+  }
+  .featured-tag {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--saffron), var(--gold));
+    color: var(--midnight);
+    font-size: 0.68rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.3rem 0.9rem;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+    width: fit-content;
+  }
+  .featured-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 0.8rem;
+  }
+  .featured-desc {
+    font-size: 0.9rem;
+    color: rgba(255,248,240,0.65);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+  .featured-cta {
+    background: linear-gradient(135deg, var(--saffron), #FF4500);
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    cursor: auto;
+    width: fit-content;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .featured-cta:hover {
+    transform: scale(1.04);
+    box-shadow: 0 8px 25px rgba(255,107,26,0.5);
+  }
+
+  .featured-side {
+    display: flex; flex-direction: column; gap: 1.5rem;
+  }
+
+  .side-card {
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    height: 225px;
+    cursor: auto;
+  }
+  .side-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: brightness(0.55);
+    transition: transform 0.5s, filter 0.3s;
+  }
+  .side-card:hover img {
+    transform: scale(1.05);
+    filter: brightness(0.7);
+  }
+  .side-card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(13,13,13,0.9) 0%, transparent 55%);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 1.5rem;
+  }
+  .side-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+  .side-card-sub {
+    font-size: 0.8rem;
+    color: rgba(255,248,240,0.55);
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+
+  /* MAP SECTION */
+  .map-section {
+    padding: 5rem 3rem;
+    background: linear-gradient(180deg, var(--midnight) 0%, #0A0A1A 100%);
+  }
+
+  .map-container {
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+    position: relative;
+    height: 420px;
+    margin-top: 2.5rem;
+    background: #1a1a2e;
+  }
+
+  .map-placeholder {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 1rem;
+    background: linear-gradient(135deg, #0d0d1e, #1a1030);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .map-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,107,26,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,107,26,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .map-pin {
+    position: absolute;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    cursor: auto;
+    transition: transform 0.3s;
+  }
+  .map-pin::before {
+    content: '';
+    position: absolute; inset: -4px;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255,107,26,0.5); }
+    70% { box-shadow: 0 0 0 12px rgba(255,107,26,0); }
+    100% { box-shadow: 0 0 0 0 rgba(255,107,26,0); }
+  }
+
+  .map-pin.hotel { background: #FF6B1A; }
+  .map-pin.tourist { background: #D4A017; }
+  .map-pin.food { background: #27AE60; }
+  .map-pin.hospital { background: #E74C3C; }
+  .map-pin:hover { transform: scale(1.5); }
+
+  .pin-label {
+    position: absolute; top: -28px; left: 50%;
+    transform: translateX(-50%);
+    background: rgba(13,13,13,0.9);
+    color: var(--cream);
+    font-size: 0.65rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+  }
+  .map-pin:hover .pin-label { opacity: 1; }
+
+  .map-legend {
+    position: absolute; bottom: 1.5rem; right: 1.5rem;
+    background: rgba(13,13,13,0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+    display: flex; flex-direction: column; gap: 0.5rem;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.75rem;
+    color: rgba(255,248,240,0.65);
+  }
+  .legend-dot {
+    width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+  }
+
+  .map-title-overlay {
+    position: absolute; top: 1.5rem; left: 1.5rem;
+    background: rgba(13,13,13,0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 0.8rem 1.2rem;
+    z-index: 5;
+  }
+  .map-title-overlay h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  .map-title-overlay p {
+    font-size: 0.72rem;
+    color: rgba(255,248,240,0.45);
+  }
+
+  /* HOSPITALS */
+  .hospitals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .hospital-card {
+    background: rgba(231,76,60,0.06);
+    border: 1px solid rgba(231,76,60,0.15);
+    border-radius: 16px;
+    padding: 1.4rem;
+    cursor: auto;
+    transition: all 0.3s;
+  }
+  .hospital-card:hover {
+    background: rgba(231,76,60,0.1);
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px rgba(231,76,60,0.15);
+  }
+
+  .hosp-icon {
+    width: 46px; height: 46px;
+    background: linear-gradient(135deg, rgba(231,76,60,0.25), rgba(192,57,43,0.2));
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .hosp-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+  .hosp-address {
+    font-size: 0.78rem;
+    color: rgba(255,248,240,0.45);
+    margin-bottom: 0.6rem;
+    line-height: 1.4;
+  }
+  .hosp-tags {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+  }
+  .hosp-tag {
+    background: rgba(231,76,60,0.12);
+    border: 1px solid rgba(231,76,60,0.2);
+    color: #FF8A8A;
+    font-size: 0.65rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 50px;
+    font-weight: 500;
+  }
+
+  /* CTA SECTION */
+  .cta-section {
+    margin: 0 3rem 5rem;
+    border-radius: 28px;
+    background: linear-gradient(135deg, #1a0a00, #200810, #0a0a20);
+    border: 1px solid rgba(255,107,26,0.15);
+    padding: 5rem;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .cta-section::before {
+    content: 'दिल से दिल्ली';
+    position: absolute;
+    font-family: 'Noto Serif Devanagari', serif;
+    font-size: 8rem;
+    font-weight: 700;
+    color: rgba(255,107,26,0.04);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .cta-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 900;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+  .cta-section p {
+    color: rgba(255,248,240,0.55);
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+    max-width: 450px;
+    margin-left: auto; margin-right: auto;
+    position: relative;
+  }
+  .cta-btns {
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    position: relative;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--saffron), #FF4500);
+    border: none;
+    color: white;
+    padding: 0.85rem 2.5rem;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: auto;
+    transition: all 0.3s;
+    box-shadow: 0 8px 25px rgba(255,107,26,0.35);
+  }
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(255,107,26,0.5);
+  }
+  .btn-secondary {
+    background: transparent;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    color: rgba(255,248,240,0.8);
+    padding: 0.85rem 2.5rem;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: auto;
+    transition: all 0.3s;
+  }
+  .btn-secondary:hover {
+    border-color: rgba(255,248,240,0.5);
+    background: rgba(255,255,255,0.06);
+  }
+
+  /* FOOTER */
+  footer {
+    background: #080808;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1.5rem;
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--saffron), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .footer-copy {
+    font-size: 0.8rem;
+    color: rgba(255,248,240,0.3);
+  }
+  .footer-links {
+    display: flex; gap: 1.5rem; list-style: none;
+  }
+  .footer-links a {
+    color: rgba(255,248,240,0.35);
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: color 0.3s;
+    cursor: auto;
+  }
+  .footer-links a:hover { color: var(--saffron); }
+
+  /* MODAL */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(10px);
+    z-index: 500;
+    display: flex; align-items: center; justify-content: center;
+    padding: 2rem;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .modal-overlay.active { opacity: 1; pointer-events: all; }
+
+  .modal {
+    background: #151520;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 24px;
+    max-width: 550px; width: 100%;
+    overflow: hidden;
+    transform: translateY(20px);
+    transition: transform 0.3s;
+  }
+  .modal-overlay.active .modal { transform: translateY(0); }
+
+  .modal-img {
+    width: 100%; height: 230px;
+    object-fit: cover;
+    filter: brightness(0.7);
+  }
+  .modal-body { padding: 2rem; }
+  .modal-tag {
+    background: linear-gradient(135deg, var(--saffron), var(--gold));
+    color: var(--midnight);
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.25rem 0.8rem;
+    border-radius: 50px;
+    display: inline-block;
+    margin-bottom: 0.8rem;
+  }
+  .modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    margin-bottom: 0.8rem;
+  }
+  .modal-text {
+    font-size: 0.9rem;
+    color: rgba(255,248,240,0.6);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+  .modal-actions {
+    display: flex; gap: 1rem;
+  }
+  .modal-close {
+    position: absolute; top: 1rem; right: 1rem;
+    background: rgba(0,0,0,0.5);
+    border: none; color: white;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    cursor: auto;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .modal-close:hover { background: rgba(255,107,26,0.7); }
+  .modal { position: relative; }
+
+  /* SECTION DIVIDER */
+  .divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255,107,26,0.2), transparent);
+    margin: 0 3rem;
+  }
+
+  /* Scroll reveal animations */
+  .reveal {
+    opacity: 1; transform: translateY(0);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { overflow: hidden; }
+  @media (max-width: 900px) {
+    .hero-stats { display: none; }
+  }
+    .section, .featured-section, .map-section { padding: 3rem 1.5rem; }
+    .featured-grid { grid-template-columns: 1fr; }
+    .cta-section { padding: 3rem 1.5rem; margin: 0 1.5rem 3rem; }
+    footer { flex-direction: column; text-align: center; }
+    .divider { margin: 0 1.5rem; }
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: var(--midnight); }
+  ::-webkit-scrollbar-thumb { background: var(--saffron); border-radius: 10px; }
+</style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-trail" id="cursorTrail"></div>
+
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modalImg" class="modal-img" style="background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;"></div>
+    <div class="modal-body">
+      <span class="modal-tag" id="modalTag"></span>
+      <div class="modal-title" id="modalTitle"></div>
+      <div class="modal-text" id="modalText"></div>
+      <div class="modal-actions">
+        <button class="btn-primary" style="font-size:0.85rem;padding:0.65rem 1.5rem" onclick="getDirections()">📍 Get Directions</button>
+        <button class="btn-secondary" style="font-size:0.85rem;padding:0.65rem 1.5rem" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PLAN TRIP MODAL -->
+<div id="planOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:600;overflow-y:auto;backdrop-filter:blur(6px)">
+  <div style="max-width:580px;margin:3rem auto;background:#1a1a2e;border:1px solid rgba(255,107,26,0.2);border-radius:24px;overflow:hidden;position:relative">
+    <button onclick="document.getElementById('planOverlay').style.display='none'" style="position:absolute;top:1.2rem;right:1.2rem;background:rgba(255,255,255,0.08);border:none;color:rgba(255,248,240,0.7);width:32px;height:32px;border-radius:50%;font-size:1rem;cursor:pointer;z-index:10">✕</button>
+
+    <div style="background:linear-gradient(135deg,#2a0530,#0a1030);padding:2rem 2rem 1.5rem">
+      <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--saffron);font-weight:700;margin-bottom:0.5rem">✨ Trip Planner</div>
+      <div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:var(--cream)">Plan Your <em>Delhi</em> Trip</div>
+      <p style="font-size:0.83rem;color:rgba(255,248,240,0.45);margin-top:0.4rem">Personalise your itinerary in seconds.</p>
+    </div>
+
+    <div style="padding:1.8rem 2rem;display:flex;flex-direction:column;gap:1.3rem">
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+        <div>
+          <label style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--saffron);display:block;margin-bottom:0.4rem">Arrival</label>
+          <input type="date" id="pt-from" style="width:100%;box-sizing:border-box;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:0.65rem 0.9rem;color:var(--cream);font-size:0.88rem;outline:none;color-scheme:dark">
+        </div>
+        <div>
+          <label style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--saffron);display:block;margin-bottom:0.4rem">Departure</label>
+          <input type="date" id="pt-to" style="width:100%;box-sizing:border-box;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:0.65rem 0.9rem;color:var(--cream);font-size:0.88rem;outline:none;color-scheme:dark">
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+        <div>
+          <label style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--saffron);display:block;margin-bottom:0.4rem">Guests</label>
+          <select id="pt-guests" style="width:100%;box-sizing:border-box;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:0.65rem 0.9rem;color:var(--cream);font-size:0.88rem;outline:none">
+            <option value="1">1 Person</option>
+            <option value="2" selected>2 People</option>
+            <option value="3">3 People</option>
+            <option value="4">4 People</option>
+            <option value="5">5+ People</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--saffron);display:block;margin-bottom:0.4rem">Budget / Day</label>
+          <select id="pt-budget" style="width:100%;box-sizing:border-box;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:0.65rem 0.9rem;color:var(--cream);font-size:0.88rem;outline:none">
+            <option value="budget">Budget (Under ₹3,000)</option>
+            <option value="mid" selected>Mid-Range (₹3–10k)</option>
+            <option value="luxury">Luxury (₹10,000+)</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <label style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--saffron);display:block;margin-bottom:0.6rem">Interests</label>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem">
+          <button class="ptag active" onclick="this.classList.toggle('active')">🏛️ History</button>
+          <button class="ptag active" onclick="this.classList.toggle('active')">🍛 Food</button>
+          <button class="ptag" onclick="this.classList.toggle('active')">🛍️ Shopping</button>
+          <button class="ptag" onclick="this.classList.toggle('active')">🕌 Architecture</button>
+          <button class="ptag" onclick="this.classList.toggle('active')">🎭 Culture</button>
+          <button class="ptag" onclick="this.classList.toggle('active')">🌿 Nature</button>
+          <button class="ptag" onclick="this.classList.toggle('active')">📸 Photography</button>
+          <button class="ptag" onclick="this.classList.toggle('active')">🏨 Luxury Stay</button>
+        </div>
+      </div>
+
+      <button onclick="buildItinerary()" style="background:var(--saffron);color:#fff;border:none;border-radius:50px;padding:0.9rem;font-size:1rem;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;transition:opacity 0.2s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+        ✨ Build My Itinerary
+      </button>
+
+      <div id="pt-result" style="display:none;background:rgba(255,107,26,0.07);border:1px solid rgba(255,107,26,0.25);border-radius:16px;padding:1.5rem">
+        <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--saffron);font-weight:700;margin-bottom:1rem">📋 Your Itinerary</div>
+        <div id="pt-body" style="font-size:0.86rem;color:rgba(255,248,240,0.82);line-height:2"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<style>
+.ptag { background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:rgba(255,248,240,0.5);padding:0.38rem 0.9rem;border-radius:50px;font-size:0.78rem;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all 0.2s; }
+.ptag.active { background:rgba(255,107,26,0.18);border-color:var(--saffron);color:var(--cream); }
+select option { background:#1a1a2e; color:#fff8f0; }
+</style>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">dilse<span>Dilli</span></div>
+  <ul class="nav-links">
+    <li><button class="nav-btn" onclick="document.getElementById('explore').scrollIntoView({behavior:'smooth'})">Explore</button></li>
+    <li><button class="nav-btn" onclick="document.getElementById('featured').scrollIntoView({behavior:'smooth'})">Highlights</button></li>
+    <li><button class="nav-btn" onclick="document.getElementById('map').scrollIntoView({behavior:'smooth'})">Map</button></li>
+    <li><button class="nav-btn" onclick="document.getElementById('hospitals').scrollIntoView({behavior:'smooth'})">Emergency</button></li>
+    <li><button class="nav-btn nav-cta" onclick="document.getElementById('planOverlay').style.display='block'">Plan Trip</button></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Smart Travel · New Delhi</div>
+    <h1>Discover<br>the <em>Soul of</em><br>Delhi</h1>
+    <p>AI-powered recommendations for hotels, restaurants, iconic landmarks and emergency services — all in one place.</p>
+    <div class="search-box">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,248,240,0.4)" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" placeholder="Search hotels, places, restaurants..." id="heroSearch">
+      <button class="search-btn">Explore</button>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-card"><div class="num">65+</div><div class="label">Hotels</div></div>
+    <div class="stat-card"><div class="num">19</div><div class="label">Spots</div></div>
+    <div class="stat-card"><div class="num">320+</div><div class="label">Hospitals</div></div>
+    <div class="stat-card"><div class="num">49</div><div class="label">Markets</div></div>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<!-- WEATHER STRIP -->
+<div class="weather-strip">
+  <div class="weather-label">Live Delhi Weather</div>
+  <div class="weather-item">
+    <div class="weather-icon">☀️</div>
+    <div class="weather-info">
+      <div class="temp">32°C</div>
+      <div class="desc">Sunny · Feels like 35°C</div>
+    </div>
+  </div>
+  <div class="weather-item">
+    <div class="weather-icon">💧</div>
+    <div class="weather-info">
+      <div class="temp">45%</div>
+      <div class="desc">Humidity</div>
+    </div>
+  </div>
+  <div class="weather-item">
+    <div class="weather-icon">🌬️</div>
+    <div class="weather-info">
+      <div class="temp">14 km/h</div>
+      <div class="desc">Wind · NW</div>
+    </div>
+  </div>
+  <div class="weather-item">
+    <div class="weather-icon">🌅</div>
+    <div class="weather-info">
+      <div class="temp">6:22 AM</div>
+      <div class="desc">Sunrise · 6:41 PM Sunset</div>
+    </div>
+  </div>
+  <div class="weather-item">
+    <div class="weather-icon">🌡️</div>
+    <div class="weather-info">
+      <div class="temp">AQI 148</div>
+      <div class="desc">Moderate · Wear a mask</div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPLORE SECTION -->
+<section class="section" id="explore">
+  <div class="section-label reveal">Curated Picks</div>
+  <div class="section-title reveal">Have Your <em>Perfect</em> Trip</div>
+  <div class="section-sub reveal">From Mughal monuments to modern marvels, discover Delhi's finest experiences.</div>
+
+  <div class="cat-tabs reveal">
+    <button class="cat-tab active" onclick="setCategory(this,'all')">🏛️ All</button>
+    <button class="cat-tab" onclick="setCategory(this,'hotel')">🏨 Hotels</button>
+    <button class="cat-tab" onclick="setCategory(this,'tourist')">📸 Tourist Spots</button>
+    <button class="cat-tab" onclick="setCategory(this,'restaurant')">🍛 Restaurants</button>
+    <button class="cat-tab" onclick="setCategory(this,'shopping')">🛍️ Shopping</button>
+  </div>
+
+  <div class="cards-grid" id="cardsGrid">
+    <!-- Cards injected by JS -->
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- FEATURED -->
+<section class="featured-section" id="featured">
+  <div class="section-label reveal">Must Visit</div>
+  <div class="section-title reveal">Delhi's <em>Crown</em> Jewels</div>
+  <div class="section-sub reveal">Iconic landmarks that define the soul of the city.</div>
+
+  <div class="featured-grid reveal">
+    <div class="featured-main">
+      <img src="" id="featuredMainImg" alt="Taj Mahal" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+      <div class="featured-main-overlay">
+        <span class="featured-tag">Day Trip Favourite</span>
+        <div class="featured-title">Taj Mahal<br>Day Escape</div>
+        <p class="featured-desc">3 hours from Delhi · UNESCO World Heritage · Most iconic monument in India</p>
+        <button class="featured-cta" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Taj+Mahal+Agra+India','_blank')">📍 View on Google Maps →</button>
+      </div>
+    </div>
+    <div class="featured-side">
+      <div class="side-card" id="sc-jama">
+        <img id="scJamaImg" alt="Jama Masjid" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;filter:brightness(0.8)">
+        <div class="side-card-overlay">
+          <div class="side-card-title">Jama Masjid</div>
+          <div class="side-card-sub">📍 Old Delhi · Mughal Architecture</div>
+        </div>
+      </div>
+      <div class="side-card" id="sc-indiagate">
+        <img id="scGateImg" alt="India Gate" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;filter:brightness(0.8)">
+        <div class="side-card-overlay">
+          <div class="side-card-title">India Gate</div>
+          <div class="side-card-sub">📍 Rajpath · National Monument</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- MAP -->
+<section class="map-section" id="map">
+  <div class="section-label reveal">Explore Spatially</div>
+  <div class="section-title reveal">Delhi <em>Live</em> Map</div>
+  <div class="section-sub reveal">Discover hotels, restaurants, tourist spots and hospitals near you.</div>
+
+  <div class="map-container reveal" style="padding:0;border-radius:20px;overflow:hidden;height:560px;border:1px solid rgba(255,107,26,0.25);position:relative;">
+    <div id="delhiMap" style="width:100%;height:100%;"></div>
+
+    <!-- Legend overlay -->
+    <div style="position:absolute;bottom:20px;left:20px;z-index:1000;background:rgba(13,13,13,0.92);border:1px solid rgba(255,107,26,0.2);border-radius:12px;padding:14px 18px;font-family:'DM Sans',sans-serif;font-size:0.82rem;color:rgba(255,248,240,0.85);backdrop-filter:blur(8px);">
+      <div style="font-weight:700;margin-bottom:10px;font-size:0.85rem;color:var(--saffron);">🗺️ Map Legend</div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div style="display:flex;align-items:center;gap:8px;"><span style="width:12px;height:12px;border-radius:50%;background:#e74c3c;display:inline-block;"></span> Selected Place</div>
+        <div style="display:flex;align-items:center;gap:8px;"><span style="width:12px;height:12px;border-radius:50%;background:#3498db;display:inline-block;"></span> Hotels</div>
+        <div style="display:flex;align-items:center;gap:8px;"><span style="width:12px;height:12px;border-radius:50%;background:#27ae60;display:inline-block;"></span> Hospitals</div>
+        <div style="display:flex;align-items:center;gap:8px;"><span style="width:12px;height:12px;border-radius:50%;background:#f39c12;display:inline-block;"></span> Tourist Spots</div>
+        <div style="display:flex;align-items:center;gap:8px;"><span style="width:12px;height:12px;border-radius:50%;background:#9b59b6;display:inline-block;"></span> Restaurants</div>
+        <div style="display:flex;align-items:center;gap:8px;"><span style="width:12px;height:12px;border-radius:50%;background:#c0392b;display:inline-block;"></span> Shopping</div>
+      </div>
+    </div>
+
+    <!-- Weather overlay -->
+    <div style="position:absolute;bottom:20px;right:20px;z-index:1000;background:rgba(13,13,13,0.92);border:1px solid rgba(255,107,26,0.2);border-radius:12px;padding:14px 18px;font-family:'DM Sans',sans-serif;font-size:0.82rem;color:rgba(255,248,240,0.85);backdrop-filter:blur(8px);">
+      <div style="font-weight:700;margin-bottom:8px;font-size:0.85rem;color:var(--saffron);">🌤️ Live Weather · Delhi</div>
+      <div>🌡️ 36.36°C &nbsp;(Feels 33.5°C)</div>
+      <div>🌥️ Broken clouds</div>
+      <div>💧 Humidity: 9%</div>
+      <div>🌬️ Wind: 2.6 m/s</div>
+      <div>🌧️ Rain: 0 mm</div>
+    </div>
+  </div>
+</section>
+
+<!-- Leaflet CSS & JS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
+<script>
+(function() {
+  // Wait for Leaflet to load
+  function initMap() {
+    if (typeof L === 'undefined') { setTimeout(initMap, 100); return; }
+
+    var map = L.map('delhiMap', { center: [28.6129, 77.2295], zoom: 13, zoomControl: true });
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    function mk(color, icon) {
+      return L.AwesomeMarkers.icon({ markerColor: color, iconColor: 'white', icon: icon, prefix: 'fa' });
+    }
+    function popup(html) { return L.popup({ maxWidth: 250 }).setContent(html); }
+
+    // ── Selected Place ──
+    L.marker([28.6129, 77.2295], { icon: mk('red','star') })
+      .bindPopup(popup('<b>📍 India Gate</b><br>Type: Tourist Attraction<br>⭐ 4.6<br>💰 ₹0<br>🕐 1 hr<br>🌅 Best: Oct–Mar'))
+      .bindTooltip('📍 India Gate (Selected)', { sticky: true })
+      .addTo(map);
+
+    // ── Hotels cluster ──
+    var hotels = L.markerClusterGroup();
+    [
+      { ll:[28.6261, 77.2250], n:'The Hans',                   r:'3.6', stars:'4', price:'₹4,860',  dist:'1.53 km' },
+      { ll:[28.6172, 77.2078], n:'The Connaught (IHCL)',        r:'4.5', stars:'4', price:'₹7,499',  dist:'2.17 km' },
+      { ll:[28.6172, 77.2078], n:'Jukaso Inn Down Town',        r:'3.6', stars:'3', price:'₹3,134',  dist:'2.17 km' },
+      { ll:[28.6172, 77.2078], n:'The Park New Delhi',          r:'3.5', stars:'5', price:'₹7,905',  dist:'2.17 km' },
+      { ll:[28.6172, 77.2078], n:'New Delhi YMCA Tourist Hostel',r:'3.5',stars:'–', price:'₹3,148',  dist:'2.17 km' },
+    ].forEach(h => {
+      L.marker(h.ll, { icon: mk('blue','bed') })
+        .bindPopup(popup(`<b>🏨 ${h.n}</b><br>⭐ ${h.r}<br>🌟 ${h.stars} Stars<br>💰 ${h.price}<br>📏 ${h.dist}`))
+        .bindTooltip(`🏨 ${h.n}`, { sticky: true })
+        .addTo(hotels);
+    });
+    hotels.addTo(map);
+
+    // ── Hospitals cluster ──
+    var hospitals = L.markerClusterGroup();
+    [
+      { ll:[28.6359, 77.2250], n:'Lions Kidney Hospital',       addr:'Opp B Block Friends Colony',          dist:'2.59 km' },
+      { ll:[28.6369, 77.2173], n:'Central Hospital',            addr:'Ganesh Nagar, Tilak Nagar',            dist:'2.93 km' },
+      { ll:[28.6418, 77.2340], n:'Thecity Clinic',              addr:'#17-A/1, Asaf Ali Road',               dist:'3.24 km' },
+      { ll:[28.5815, 77.2225], n:'Manav Medicare Centre',       addr:'E-11, South Extension',                dist:'3.56 km' },
+      { ll:[28.6424, 77.2440], n:'Chaudhary Eye Centre',        addr:'Bharat Ram Road, Darya Ganj',          dist:'3.57 km' },
+    ].forEach(h => {
+      L.marker(h.ll, { icon: mk('green','plus') })
+        .bindPopup(popup(`<b>🏥 ${h.n}</b><br>📍 ${h.addr}<br>📏 ${h.dist}`))
+        .bindTooltip(`🏥 ${h.n}`, { sticky: true })
+        .addTo(hospitals);
+    });
+    hospitals.addTo(map);
+
+    // ── Tourist Places cluster ──
+    var tourist = L.markerClusterGroup();
+    [
+      { ll:[28.6118, 77.2193], n:'National Museum',             r:'4.5', entry:'₹20',  dist:'1.00 km' },
+      { ll:[28.6096, 77.2435], n:'Purana Qila',                 r:'4.5', entry:'₹30',  dist:'1.42 km' },
+      { ll:[28.6261, 77.2250], n:'Agrasen Ki Baoli',            r:'4.5', entry:'₹0',   dist:'1.53 km' },
+      { ll:[28.6050, 77.2460], n:'National Zoological Park',    r:'4.5', entry:'₹80',  dist:'1.83 km' },
+      { ll:[28.6139, 77.2090], n:'Cathedral Church of Redemption',r:'4.5',entry:'₹0',  dist:'2.00 km' },
+    ].forEach(t => {
+      L.marker(t.ll, { icon: mk('orange','camera') })
+        .bindPopup(popup(`<b>🌍 ${t.n}</b><br>Type: Tourist Attraction<br>⭐ ${t.r}<br>💰 ${t.entry}<br>📏 ${t.dist}`))
+        .bindTooltip(`🌍 ${t.n}`, { sticky: true })
+        .addTo(tourist);
+    });
+    tourist.addTo(map);
+
+    // ── Restaurants cluster ──
+    var restaurants = L.markerClusterGroup();
+    [
+      { ll:[28.60874, 77.23006], n:'Chor Bizarre',  dist:'0.47 km' },
+      { ll:[28.60808, 77.22971], n:'Ichiban',        dist:'0.54 km' },
+      { ll:[28.60807, 77.22972], n:'Havemore',       dist:'0.54 km' },
+      { ll:[28.60801, 77.23014], n:'Gulati',         dist:'0.55 km' },
+      { ll:[28.60796, 77.22982], n:'Pindi',          dist:'0.55 km' },
+    ].forEach(r => {
+      L.marker(r.ll, { icon: mk('purple','cutlery') })
+        .bindPopup(popup(`<b>🍽️ ${r.n}</b><br>📏 ${r.dist}`))
+        .bindTooltip(`🍽️ ${r.n}`, { sticky: true })
+        .addTo(restaurants);
+    });
+    restaurants.addTo(map);
+
+    // ── Shopping cluster ──
+    var shopping = L.markerClusterGroup();
+    [
+      { ll:[28.6007, 77.2270], n:'Khan Market',      cat:'Luxury Market',      best:'Premium Brands, Cafes', hours:'10–22', off:'Sunday', r:'4.6', price:'💰💰💰', dist:'1.38 km' },
+      { ll:[28.6269, 77.2186], n:'Janpath Market',   cat:'Street Market',      best:'Jewelry, Handicrafts',  hours:'11–20', off:'Sunday', r:'4.4', price:'💰',     dist:'1.89 km' },
+      { ll:[28.6292, 77.2203], n:'Shankar Market',   cat:'Clothing Market',    best:'Tailoring, Fabrics',    hours:'10–20', off:'Sunday', r:'4.1', price:'💰💰',    dist:'2.02 km' },
+      { ll:[28.6328, 77.2197], n:'Palika Bazaar',    cat:'Underground Market', best:'Electronics, Clothes',  hours:'11–20', off:'Sunday', r:'4.1', price:'💰',     dist:'2.41 km' },
+      { ll:[28.6315, 77.2167], n:'Connaught Place',  cat:'Luxury Market',      best:'Brands, Restaurants',   hours:'10–22', off:'–',      r:'4.6', price:'💰💰💰', dist:'2.42 km' },
+    ].forEach(s => {
+      L.marker(s.ll, { icon: mk('darkred','shopping-bag') })
+        .bindPopup(popup(`<b>🛍️ ${s.n}</b><br>📦 ${s.cat}<br>🎯 ${s.best}<br>🕐 ${s.hours}<br>📅 Off: ${s.off}<br>⭐ ${s.r}<br>💰 ${s.price}<br>📏 ${s.dist}`))
+        .bindTooltip(`🛍️ ${s.n}`, { sticky: true })
+        .addTo(shopping);
+    });
+    shopping.addTo(map);
+
+    // ── Layer control ──
+    L.control.layers(
+      { 'OpenStreetMap': L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:19, attribution:'© OpenStreetMap' }) },
+      { '🏨 Hotels': hotels, '🏥 Hospitals': hospitals, '🌍 Tourist Places': tourist, '🍽️ Restaurants': restaurants, '🛍️ Shopping Markets': shopping },
+      { position: 'topright', collapsed: false }
+    ).addTo(map);
+  }
+  initMap();
+})();
+</script>
+
+<hr class="divider">
+
+<!-- HOSPITALS -->
+<section class="section" id="hospitals">
+  <div class="section-label reveal">Emergency & Healthcare</div>
+  <div class="section-title reveal">Trusted <em>Hospitals</em> Nearby</div>
+  <div class="section-sub reveal">24/7 emergency care facilities across Delhi NCR.</div>
+
+  <div class="hospitals-grid reveal" id="hospitalsGrid">
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section reveal">
+  <h2>Ready to Explore <em style="font-style:italic;background:linear-gradient(135deg,var(--saffron),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent">दिल्ली</em>?</h2>
+  <p>Let our AI find the perfect match for your style, budget and distance preferences.</p>
+  <div class="cta-btns">
+    <button class="btn-primary" onclick="setCategory(document.querySelector('.cat-tab[onclick*=tourist]'),'tourist');document.getElementById('explore').scrollIntoView({behavior:'smooth'})">🗺️ Start Exploring</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">dilseDilli</div>
+  <ul class="footer-links">
+    <li><a href="#">Privacy</a></li>
+    <li><a href="#">Terms</a></li>
+    <li><a href="#">Contact</a></li>
+    <li><a href="#">About</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 dilseDilli · Smart Travel Recommendations</div>
+</footer>
+
+<script>
+// ─── CURSOR ───
+const cursor = document.getElementById('cursor');
+const trail = document.getElementById('cursorTrail');
+let mx = 0, my = 0, tx = 0, ty = 0;
+
+if (cursor && trail) {
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx - 6 + 'px';
+    cursor.style.top = my - 6 + 'px';
+  });
+
+  function animateTrail() {
+    tx += (mx - tx) * 0.12;
+    ty += (my - ty) * 0.12;
+    trail.style.left = tx - 18 + 'px';
+    trail.style.top = ty - 18 + 'px';
+    requestAnimationFrame(animateTrail);
+  }
+  animateTrail();
+
+  document.querySelectorAll('button, a, .place-card, .side-card, .hospital-card, .featured-main').forEach(el => {
+    el.addEventListener('mouseenter', () => { cursor.style.transform = 'scale(2)'; trail.style.transform = 'scale(1.5)'; });
+    el.addEventListener('mouseleave', () => { cursor.style.transform = 'scale(1)'; trail.style.transform = 'scale(1)'; });
+  });
+}
+
+// ─── DATA ───
+
+const places = [
+  { id:1, cat:'hotel', name:"The Connaught, New Delhi - IHCL SeleQtions", area:"Connaught Place", img:makeImg('🏨',"The Connaught","#1a0530","#4a1060","#2d0845"), rating:4.5, reviews:'N/A', price:"\u20b97,499", unit:'/night', desc:"4 Star hotel in Connaught Place.", badge:"4 Star", lat:28.6171875, lng:77.2078082 },
+  { id:2, cat:'hotel', name:"Sheraton New Delhi", area:"Saket", img:makeImg('🏨',"Sheraton New Delhi","#0a1628","#1a3a6e","#0d2040"), rating:4.5, reviews:'N/A', price:"\u20b99,500", unit:'/night', desc:"5 Star hotel in Saket.", badge:"5 Star", lat:28.521168, lng:77.2022237 },
+  { id:3, cat:'hotel', name:"The Leela Ambience Convention Hotel Delhi", area:"East Delhi", img:makeImg('🏨',"The Leela Ambience","#0a2010","#1a5030","#0d3018"), rating:4.4, reviews:'N/A', price:"\u20b97,499", unit:'/night', desc:"5 Star hotel in East Delhi.", badge:"5 Star", lat:28.6117432, lng:77.2982794 },
+  { id:4, cat:'hotel', name:"Hotel Aman Continental @ Paharganj", area:"Paharganj", img:makeImg('🏨',"Hotel Aman Continental","#2a0e04","#7a2808","#3d1206"), rating:4.3, reviews:'N/A', price:"\u20b92,045", unit:'/night', desc:"3 Star hotel in Paharganj.", badge:"3 Star", lat:28.6423423, lng:77.2171563 },
+  { id:5, cat:'hotel', name:"The Gold Regency @ Paharganj", area:"Paharganj", img:makeImg('🏨',"The Gold Regency","#001428","#003868","#002040"), rating:4.3, reviews:'N/A', price:"\u20b92,044", unit:'/night', desc:"3 Star hotel in Paharganj.", badge:"3 Star", lat:28.6423423, lng:77.2171563 },
+  { id:6, cat:'hotel', name:"The Hosteller Delhi | Private Rooms & Dorms", area:"New Friends Colony", img:makeImg('🏨',"The Hosteller Delhi","#1a0530","#4a1060","#2d0845"), rating:4.3, reviews:'N/A', price:"\u20b92,228", unit:'/night', desc:"Hotel hotel in New Friends Colony.", badge:"Hotel", lat:28.5671008, lng:77.2697643 },
+  { id:7, cat:'hotel', name:"Crowne Plaza Mayur Vihar", area:"East Delhi", img:makeImg('🏨',"Crowne Plaza Mayur","#0a1628","#1a3a6e","#0d2040"), rating:4.3, reviews:'N/A', price:"\u20b98,649", unit:'/night', desc:"5 Star hotel in East Delhi.", badge:"5 Star", lat:28.6117432, lng:77.2982794 },
+  { id:8, cat:'hotel', name:"Crowne Plaza Okhla", area:"Okhla Industrial Area", img:makeImg('🏨',"Crowne Plaza Okhla","#0a2010","#1a5030","#0d3018"), rating:4.3, reviews:'N/A', price:"\u20b96,300", unit:'/night', desc:"5 Star hotel in Okhla Industrial Area.", badge:"5 Star", lat:28.5475409, lng:77.2828271 },
+  { id:9, cat:'hotel', name:"Radisson Blu Plaza Delhi Airport", area:"Mahipalpur", img:makeImg('🏨',"Radisson Blu Plaza","#2a0e04","#7a2808","#3d1206"), rating:4.3, reviews:'N/A', price:"\u20b94,500", unit:'/night', desc:"5 Star hotel in Mahipalpur.", badge:"5 Star", lat:28.5553942, lng:77.0847985 },
+  { id:10, cat:'hotel', name:"Hotel Smart Plaza", area:"Mahipalpur", img:makeImg('🏨',"Hotel Smart Plaza","#001428","#003868","#002040"), rating:4.3, reviews:'N/A', price:"\u20b91,525", unit:'/night', desc:"3 Star hotel in Mahipalpur.", badge:"3 Star", lat:28.5553942, lng:77.0847985 },
+  { id:11, cat:'hotel', name:"Hotel Aero Star", area:"Mahipalpur", img:makeImg('🏨',"Hotel Aero Star","#1a0530","#4a1060","#2d0845"), rating:4.3, reviews:'N/A', price:"\u20b92,472", unit:'/night', desc:"4 Star hotel in Mahipalpur.", badge:"4 Star", lat:28.5553942, lng:77.0847985 },
+  { id:12, cat:'hotel', name:"Hotel Star", area:"Mahipalpur", img:makeImg('🏨',"Hotel Star","#0a1628","#1a3a6e","#0d2040"), rating:4.3, reviews:'N/A', price:"\u20b92,472", unit:'/night', desc:"4 Star hotel in Mahipalpur.", badge:"4 Star", lat:28.5553942, lng:77.0847985 },
+  { id:13, cat:'hotel', name:"The Roseate", area:"Mahipalpur", img:makeImg('🏨',"The Roseate","#0a2010","#1a5030","#0d3018"), rating:4.3, reviews:'N/A', price:"\u20b912,024", unit:'/night', desc:"5 Star hotel in Mahipalpur.", badge:"5 Star", lat:28.5553942, lng:77.0847985 },
+  { id:14, cat:'hotel', name:"Hotel Delhi 37", area:"Mahipalpur", img:makeImg('🏨',"Hotel Delhi 37","#2a0e04","#7a2808","#3d1206"), rating:4.3, reviews:'N/A', price:"\u20b92,472", unit:'/night', desc:"3 Star hotel in Mahipalpur.", badge:"3 Star", lat:28.5553942, lng:77.0847985 },
+  { id:15, cat:'hotel', name:"Crowne Plaza Rohini", area:"Rohini", img:makeImg('🏨',"Crowne Plaza Rohini","#001428","#003868","#002040"), rating:4.3, reviews:'N/A', price:"\u20b96,498", unit:'/night', desc:"5 Star hotel in Rohini.", badge:"5 Star", lat:28.7162092, lng:77.1170743 },
+  { id:16, cat:'hotel', name:"Vivanta New Delhi, Dwarka", area:"Sector 21 Dwarka", img:makeImg('🏨',"Vivanta New Delhi","#1a0530","#4a1060","#2d0845"), rating:4.3, reviews:'N/A', price:"\u20b97,100", unit:'/night', desc:"5 Star hotel in Sector 21 Dwarka.", badge:"5 Star", lat:28.5696878, lng:77.0643221 },
+  { id:17, cat:'hotel', name:"The Grand Uddhav", area:"Paharganj", img:makeImg('🏨',"The Grand Uddhav","#0a1628","#1a3a6e","#0d2040"), rating:4.2, reviews:'N/A', price:"\u20b93,081", unit:'/night', desc:"3 Star hotel in Paharganj.", badge:"3 Star", lat:28.6423423, lng:77.2171563 },
+  { id:18, cat:'hotel', name:"goSTOPS Delhi - Rooms & Dorms", area:"Chandni Chowk", img:makeImg('🏨',"goSTOPS Delhi -","#0a2010","#1a5030","#0d3018"), rating:4.2, reviews:'N/A', price:"\u20b91,481", unit:'/night', desc:"Hotel hotel in Chandni Chowk.", badge:"Hotel", lat:28.6561624, lng:77.2401402 },
+  { id:19, cat:'hotel', name:"Red Brick | Home by Earthaa Escapes\nLike a 3", area:"Malviya Nagar", img:makeImg('🏨',"Red Brick |","#2a0e04","#7a2808","#3d1206"), rating:4.2, reviews:'N/A', price:"\u20b92,548", unit:'/night', desc:"Hotel hotel in Malviya Nagar.", badge:"Hotel", lat:28.5339201, lng:77.2124474 },
+  { id:20, cat:'hotel', name:"Shubham Vilas\nLike a 3", area:"Rajouri Garden", img:makeImg('🏨',"Shubham Vilas\nLike a","#001428","#003868","#002040"), rating:4.2, reviews:'N/A', price:"\u20b91,876", unit:'/night', desc:"Hotel hotel in Rajouri Garden.", badge:"Hotel", lat:28.6490563, lng:77.1227198 },
+  { id:21, cat:'tourist', name:"India Gate", area:'Delhi', img:makeImg('🏛️',"India Gate","#5a0000","#c02000","#800000"), rating:4.6, reviews:'N/A', price:"Free", unit:'/entry', desc:"War Memorial \u00b7 Best time: Evening \u00b7 0.5 hrs visit.", badge:"Historic", lat:28.6129332, lng:77.2294928 },
+  { id:22, cat:'tourist', name:"Humayun's Tomb", area:'Delhi', img:makeImg('🏛️',"Humayun's Tomb","#2a1400","#7a4000","#4a2200"), rating:4.5, reviews:'N/A', price:"\u20b930", unit:'/entry', desc:"Tomb \u00b7 Best time: Afternoon \u00b7 2.0 hrs visit.", badge:"Heritage", lat:28.5932856, lng:77.2506468 },
+  { id:23, cat:'tourist', name:"Akshardham Temple", area:'Delhi', img:makeImg('🏛️',"Akshardham Templ","#001830","#004080","#002050"), rating:4.6, reviews:'N/A', price:"\u20b960", unit:'/entry', desc:"Temple \u00b7 Best time: Afternoon \u00b7 5.0 hrs visit.", badge:"Religious", lat:28.6125167, lng:77.2773184 },
+  { id:24, cat:'tourist', name:"Waste to Wonder Park", area:'Delhi', img:makeImg('🏛️',"Waste to Wonder ","#0a2010","#1a6030","#0d3820"), rating:4.1, reviews:'N/A', price:"\u20b950", unit:'/entry', desc:"Theme Park \u00b7 Best time: Evening \u00b7 2.0 hrs visit. Closed: Monday.", badge:"Fun", lat:28.5834, lng:77.2574 },
+  { id:25, cat:'tourist', name:"Jantar Mantar", area:'Delhi', img:makeImg('🏛️',"Jantar Mantar","#28042a","#601870","#380850"), rating:4.2, reviews:'N/A', price:"\u20b915", unit:'/entry', desc:"Observatory \u00b7 Best time: Morning \u00b7 2.0 hrs visit.", badge:"Unique", lat:28.6271791, lng:77.2166166 },
+  { id:26, cat:'tourist', name:"Chandni Chowk", area:'Delhi', img:makeImg('🏛️',"Chandni Chowk","#5a0000","#c02000","#800000"), rating:4.2, reviews:'N/A', price:"Free", unit:'/entry', desc:"Market \u00b7 Best time: Afternoon \u00b7 3.0 hrs visit. Closed: Sunday.", badge:"Shopping", lat:28.6559834, lng:77.2321937 },
+  { id:27, cat:'tourist', name:"Lotus Temple", area:'Delhi', img:makeImg('🏛️',"Lotus Temple","#2a1400","#7a4000","#4a2200"), rating:4.5, reviews:'N/A', price:"Free", unit:'/entry', desc:"Temple \u00b7 Best time: Evening \u00b7 1.0 hrs visit. Closed: Monday.", badge:"Religious", lat:28.5533586, lng:77.2586006 },
+  { id:28, cat:'tourist', name:"Red Fort", area:'Delhi', img:makeImg('🏛️',"Red Fort","#001830","#004080","#002050"), rating:4.5, reviews:'N/A', price:"\u20b935", unit:'/entry', desc:"Fort \u00b7 Best time: Afternoon \u00b7 2.0 hrs visit.", badge:"UNESCO", lat:28.656081, lng:77.2407959 },
+  { id:29, cat:'tourist', name:"Agrasen ki Baoli", area:'Delhi', img:makeImg('🏛️',"Agrasen ki Baoli","#0a2010","#1a6030","#0d3820"), rating:4.2, reviews:'N/A', price:"Free", unit:'/entry', desc:"Stepwell \u00b7 Best time: Afternoon \u00b7 1.0 hrs visit.", badge:"Hidden Gem", lat:28.6260676, lng:77.2250111 },
+  { id:30, cat:'tourist', name:"Sunder Nursery", area:'Delhi', img:makeImg('🏛️',"Sunder Nursery","#28042a","#601870","#380850"), rating:4.6, reviews:'N/A', price:"Free", unit:'/entry', desc:"Park \u00b7 Best time: Afternoon \u00b7 2.0 hrs visit.", badge:"Nature", lat:28.5969098, lng:77.2470188 },
+  { id:31, cat:'tourist', name:"Garden of Five Senses", area:'Delhi', img:makeImg('🏛️',"Garden of Five S","#5a0000","#c02000","#800000"), rating:4.1, reviews:'N/A', price:"\u20b935", unit:'/entry', desc:"Park \u00b7 Best time: Morning \u00b7 2.0 hrs visit.", badge:"Nature", lat:28.5137724, lng:77.1983445 },
+  { id:32, cat:'tourist', name:"Lodhi Garden", area:'Delhi', img:makeImg('🏛️',"Lodhi Garden","#2a1400","#7a4000","#4a2200"), rating:4.5, reviews:'N/A', price:"Free", unit:'/entry', desc:"Park \u00b7 Best time: All \u00b7 1.0 hrs visit.", badge:"Nature", lat:28.5962998, lng:77.2215497 },
+  { id:33, cat:'tourist', name:"National Gallery of Modern Art", area:'Delhi', img:makeImg('🏛️',"National Gallery","#001830","#004080","#002050"), rating:4.5, reviews:'N/A', price:"\u20b920", unit:'/entry', desc:"Museum \u00b7 Best time: All \u00b7 3.0 hrs visit. Closed: Monday.", badge:"Cultural", lat:28.6096334, lng:77.2341764 },
+  { id:34, cat:'tourist', name:"National Zoological Park", area:'Delhi', img:makeImg('🏛️',"National Zoologi","#0a2010","#1a6030","#0d3820"), rating:4.1, reviews:'N/A', price:"\u20b980", unit:'/entry', desc:"Zoo \u00b7 Best time: All \u00b7 3.0 hrs visit. Closed: Friday.", badge:"Family", lat:28.6026948, lng:77.247176 },
+  { id:35, cat:'tourist', name:"Qutub Minar", area:'Delhi', img:makeImg('🏛️',"Qutub Minar","#28042a","#601870","#380850"), rating:4.5, reviews:'N/A', price:"\u20b935", unit:'/entry', desc:"Monument \u00b7 Best time: Afternoon \u00b7 1.0 hrs visit.", badge:"Must See", lat:28.524413, lng:77.1854501 },
+  { id:36, cat:'tourist', name:"National Science Centre", area:'Delhi', img:makeImg('🏛️',"National Science","#5a0000","#c02000","#800000"), rating:4.4, reviews:'N/A', price:"\u20b970", unit:'/entry', desc:"Science \u00b7 Best time: All \u00b7 5.0 hrs visit.", badge:"Educational", lat:28.6256148, lng:77.1621057 },
+  { id:37, cat:'tourist', name:"Gurudwara Bangla Sahib", area:'Delhi', img:makeImg('🏛️',"Gurudwara Bangla","#2a1400","#7a4000","#4a2200"), rating:4.8, reviews:'N/A', price:"Free", unit:'/entry', desc:"Gurudwara \u00b7 Best time: All \u00b7 1.0 hrs visit.", badge:"Spiritual", lat:28.6280479, lng:77.2093211 },
+  { id:38, cat:'tourist', name:"Jama Masjid", area:'Delhi', img:makeImg('🏛️',"Jama Masjid","#001830","#004080","#002050"), rating:4.5, reviews:'N/A', price:"Free", unit:'/entry', desc:"Mosque \u00b7 Best time: All \u00b7 1.0 hrs visit.", badge:"Heritage", lat:28.6506822, lng:77.232961 },
+  { id:39, cat:'tourist', name:"Rail Museum", area:'Delhi', img:makeImg('🏛️',"Rail Museum","#0a2010","#1a6030","#0d3820"), rating:4.4, reviews:'N/A', price:"\u20b950", unit:'/entry', desc:"Museum \u00b7 Best time: Morning \u00b7 2.0 hrs visit. Closed: Monday.", badge:"Cultural", lat:28.5847268, lng:77.1811827 },
+  { id:40, cat:'shopping', name:"Khan Market", area:"Central Delhi", img:makeImg('🛍️',"Khan Market","#28042a","#701870","#400850"), rating:4.6, reviews:'N/A', price:"\u20b9\u20b9\u20b9", unit:' entry', desc:"Luxury Market \u00b7 Best for: Premium Brands Cafes Books \u00b7 10:00-22:00. Closed: Sunday.", badge:"Luxury Market", lat:28.6007, lng:77.227 },
+  { id:41, cat:'shopping', name:"Janpath Market", area:"Central Delhi", img:makeImg('🛍️',"Janpath Market","#002818","#006840","#004028"), rating:4.4, reviews:'N/A', price:"Free", unit:' entry', desc:"Street Market \u00b7 Best for: Jewelry Handicrafts Clothes \u00b7 11:00-20:00. Closed: Sunday.", badge:"Street Market", lat:28.6269, lng:77.2186 },
+  { id:42, cat:'shopping', name:"Shankar Market", area:"Central Delhi", img:makeImg('🛍️',"Shankar Market","#1a0a28","#4a1a68","#2a0840"), rating:4.1, reviews:'N/A', price:"\u20b9\u20b9", unit:' entry', desc:"Clothing Market \u00b7 Best for: Tailoring Fabrics \u00b7 10:00-20:00. Closed: Sunday.", badge:"Clothing Market", lat:28.6292, lng:77.2203 },
+  { id:43, cat:'shopping', name:"Palika Bazaar", area:"Central Delhi", img:makeImg('🛍️',"Palika Bazaar","#0a1828","#1a4868","#0a2840"), rating:4.1, reviews:'N/A', price:"Free", unit:' entry', desc:"Underground Market \u00b7 Best for: Electronics Clothes Games \u00b7 11:00-20:00. Closed: Sunday.", badge:"Underground Market", lat:28.6328, lng:77.2197 },
+  { id:44, cat:'shopping', name:"Connaught Place", area:"Central Delhi", img:makeImg('🛍️',"Connaught Place","#1a1a08","#484818","#282808"), rating:4.6, reviews:'N/A', price:"\u20b9\u20b9\u20b9", unit:' entry', desc:"Luxury Market \u00b7 Best for: Brands Restaurants Cafes \u00b7 10:00-22:00.", badge:"Luxury Market", lat:28.6315, lng:77.2167 },
+  { id:45, cat:'shopping', name:"Paharganj Market", area:"Central Delhi", img:makeImg('🛍️',"Paharganj Market","#28042a","#701870","#400850"), rating:4.2, reviews:'N/A', price:"Free", unit:' entry', desc:"Tourist Market \u00b7 Best for: Souvenirs Clothes Bags \u00b7 10:00-21:00.", badge:"Tourist Market", lat:28.6421, lng:77.216 },
+  { id:46, cat:'shopping', name:"The Chanakya Mall", area:"Central Delhi", img:makeImg('🛍️',"The Chanakya Mal","#002818","#006840","#004028"), rating:4.5, reviews:'N/A', price:"\u20b9\u20b9\u20b9", unit:' entry', desc:"Luxury Mall \u00b7 Best for: Luxury Brands \u00b7 11:00-23:00.", badge:"Luxury Mall", lat:28.6028, lng:77.1891 },
+  { id:47, cat:'shopping', name:"Bhagirath Palace", area:"Old Delhi", img:makeImg('🛍️',"Bhagirath Palace","#1a0a28","#4a1a68","#2a0840"), rating:4.0, reviews:'N/A', price:"Free", unit:' entry', desc:"Electronics Market \u00b7 Best for: Electrical Goods \u00b7 10:00-20:00. Closed: Sunday.", badge:"Electronics Market", lat:28.6507, lng:77.2321 },
+  { id:48, cat:'shopping', name:"Dilli Haat INA", area:"South Delhi", img:makeImg('🛍️',"Dilli Haat INA","#0a1828","#1a4868","#0a2840"), rating:4.5, reviews:'N/A', price:"\u20b9\u20b9", unit:' entry', desc:"Handicrafts Market \u00b7 Best for: Handicrafts Food Cultural Items \u00b7 10:30-22:00.", badge:"Handicrafts Market", lat:28.5733, lng:77.2235 },
+  { id:49, cat:'shopping', name:"South Extension Market", area:"South Delhi", img:makeImg('🛍️',"South Extension ","#1a1a08","#484818","#282808"), rating:4.4, reviews:'N/A', price:"\u20b9\u20b9\u20b9", unit:' entry', desc:"Luxury Shopping \u00b7 Best for: Brands Jewelry Fashion \u00b7 10:00-21:00. Closed: Monday.", badge:"Luxury Shopping", lat:28.573, lng:77.2195 },
+  { id:50, cat:'shopping', name:"INA Market", area:"South Delhi", img:makeImg('🛍️',"INA Market","#28042a","#701870","#400850"), rating:4.4, reviews:'N/A', price:"\u20b9\u20b9", unit:' entry', desc:"Food Market \u00b7 Best for: Imported Food Spices \u00b7 10:00-20:00. Closed: Monday.", badge:"Food Market", lat:28.5739, lng:77.2109 },
+  { id:51, cat:'shopping', name:"Dariba Kalan", area:"Old Delhi", img:makeImg('🛍️',"Dariba Kalan","#002818","#006840","#004028"), rating:4.3, reviews:'N/A', price:"\u20b9\u20b9", unit:' entry', desc:"Jewelry Market \u00b7 Best for: Silver Jewelry Traditional Items \u00b7 11:00-20:00. Closed: Sunday.", badge:"Jewelry Market", lat:28.6555, lng:77.233 },
+  { id:52, cat:'shopping', name:"Chandni Chowk", area:"Old Delhi", img:makeImg('🛍️',"Chandni Chowk","#1a0a28","#4a1a68","#2a0840"), rating:4.5, reviews:'N/A', price:"Free", unit:' entry', desc:"Wholesale Market \u00b7 Best for: Clothes Jewelry Spices \u00b7 10:00-20:00. Closed: Sunday.", badge:"Wholesale Market", lat:28.6562, lng:77.2303 },
+  { id:53, cat:'shopping', name:"Omaxe Chowk Mall", area:"Old Delhi", img:makeImg('🛍️',"Omaxe Chowk Mall","#0a1828","#1a4868","#0a2840"), rating:4.2, reviews:'N/A', price:"\u20b9\u20b9", unit:' entry', desc:"Mall \u00b7 Best for: Shopping FoodCourt \u00b7 11:00-23:00.", badge:"Mall", lat:28.6567, lng:77.2306 },
+  { id:54, cat:'shopping', name:"Meena Bazaar", area:"Old Delhi", img:makeImg('🛍️',"Meena Bazaar","#1a1a08","#484818","#282808"), rating:4.2, reviews:'N/A', price:"Free", unit:' entry', desc:"Traditional Market \u00b7 Best for: Ethnic Clothes Jewelry \u00b7 10:00-20:00. Closed: Monday.", badge:"Traditional Market", lat:28.6569, lng:77.241 },
+  { id:55, cat:'shopping', name:"Sarojini Nagar Market", area:"South Delhi", img:makeImg('🛍️',"Sarojini Nagar M","#28042a","#701870","#400850"), rating:4.4, reviews:'N/A', price:"Free", unit:' entry', desc:"Street Market \u00b7 Best for: Clothes Fashion Bargains \u00b7 10:00-21:00. Closed: Monday.", badge:"Street Market", lat:28.5753, lng:77.199 },
+  { id:56, cat:'shopping', name:"Lajpat Nagar Market", area:"South Delhi", img:makeImg('🛍️',"Lajpat Nagar Mar","#002818","#006840","#004028"), rating:4.3, reviews:'N/A', price:"\u20b9\u20b9", unit:' entry', desc:"Shopping Market \u00b7 Best for: Clothes Footwear Accessories \u00b7 10:00-21:00. Closed: Monday.", badge:"Shopping Market", lat:28.5677, lng:77.2432 },
+  { id:57, cat:'shopping', name:"Sadar Bazaar", area:"Old Delhi", img:makeImg('🛍️',"Sadar Bazaar","#1a0a28","#4a1a68","#2a0840"), rating:4.1, reviews:'N/A', price:"Free", unit:' entry', desc:"Wholesale Market \u00b7 Best for: Household Items \u00b7 10:00-20:00. Closed: Sunday.", badge:"Wholesale Market", lat:28.6595, lng:77.2167 },
+  { id:58, cat:'shopping', name:"Ansal Plaza", area:"South Delhi", img:makeImg('🛍️',"Ansal Plaza","#0a1828","#1a4868","#0a2840"), rating:4.2, reviews:'N/A', price:"\u20b9\u20b9", unit:' entry', desc:"Mall \u00b7 Best for: Clothing Food \u00b7 11:00-22:00.", badge:"Mall", lat:28.5626, lng:77.2249 },
+  { id:59, cat:'shopping', name:"Karol Bagh Market", area:"Central Delhi", img:makeImg('🛍️',"Karol Bagh Marke","#1a1a08","#484818","#282808"), rating:4.3, reviews:'N/A', price:"\u20b9\u20b9", unit:' entry', desc:"Shopping Street \u00b7 Best for: Clothes Jewelry Electronics \u00b7 10:00-21:00. Closed: Monday.", badge:"Shopping Street", lat:28.6517, lng:77.1908 },
+  { id:60, cat:'shopping', name:"Gaffar Market", area:"Central Delhi", img:makeImg('🛍️',"Gaffar Market","#28042a","#701870","#400850"), rating:4.3, reviews:'N/A', price:"Free", unit:' entry', desc:"Electronics Market \u00b7 Best for: Mobile Phones Gadgets \u00b7 10:00-20:00. Closed: Monday.", badge:"Electronics Market", lat:28.651, lng:77.19 },
+  { id:61, cat:'shopping', name:"Central Market", area:"South Delhi", img:makeImg('🛍️',"Central Market","#002818","#006840","#004028"), rating:4.3, reviews:'N/A', price:"Free", unit:' entry', desc:"Street Market \u00b7 Best for: Clothes Food \u00b7 10:00-21:00. Closed: Monday.", badge:"Street Market", lat:28.5601, lng:77.2435 },
+  { id:62, cat:'shopping', name:"V3S Mall", area:"East Delhi", img:makeImg('🛍️',"V3S Mall","#1a0a28","#4a1a68","#2a0840"), rating:4.3, reviews:'N/A', price:"\u20b9\u20b9", unit:' entry', desc:"Mall \u00b7 Best for: Shopping FoodCourt \u00b7 11:00-23:00.", badge:"Mall", lat:28.6395, lng:77.2903 },
+  { id:63, cat:'shopping', name:"Shahpur Jat Market", area:"South Delhi", img:makeImg('🛍️',"Shahpur Jat Mark","#0a1828","#1a4868","#0a2840"), rating:4.2, reviews:'N/A', price:"\u20b9\u20b9", unit:' entry', desc:"Boutique Market \u00b7 Best for: Designer Clothes Accessories \u00b7 11:00-21:00. Closed: Sunday.", badge:"Boutique Market", lat:28.5492, lng:77.2184 },
+  { id:64, cat:'shopping', name:"Nehru Place Market", area:"South Delhi", img:makeImg('🛍️',"Nehru Place Mark","#1a1a08","#484818","#282808"), rating:4.3, reviews:'N/A', price:"\u20b9\u20b9", unit:' entry', desc:"Electronics Market \u00b7 Best for: Computers Gadgets Accessories \u00b7 10:00-20:00. Closed: Sunday.", badge:"Electronics Market", lat:28.5494, lng:77.251 },
+  { id:65, cat:'shopping', name:"Krishna Nagar Market", area:"East Delhi", img:makeImg('🛍️',"Krishna Nagar Ma","#28042a","#701870","#400850"), rating:4.2, reviews:'N/A', price:"Free", unit:' entry', desc:"Shopping Market \u00b7 Best for: Clothes Accessories \u00b7 10:00-21:00. Closed: Monday.", badge:"Shopping Market", lat:28.6578, lng:77.2855 },
+  { id:66, cat:'shopping', name:"Kamla Nagar Market", area:"North Delhi", img:makeImg('🛍️',"Kamla Nagar Mark","#002818","#006840","#004028"), rating:4.3, reviews:'N/A', price:"Free", unit:' entry', desc:"Student Market \u00b7 Best for: Clothes StreetFood Accessories \u00b7 10:00-21:00. Closed: Monday.", badge:"Student Market", lat:28.6814, lng:77.2045 },
+  { id:67, cat:'shopping', name:"Cross River Mall", area:"East Delhi", img:makeImg('🛍️',"Cross River Mall","#1a0a28","#4a1a68","#2a0840"), rating:4.1, reviews:'N/A', price:"\u20b9\u20b9", unit:' entry', desc:"Mall \u00b7 Best for: Shopping FoodCourt \u00b7 11:00-23:00.", badge:"Mall", lat:28.657, lng:77.3023 },
+  { id:68, cat:'shopping', name:"Select Citywalk", area:"South Delhi", img:makeImg('🛍️',"Select Citywalk","#0a1828","#1a4868","#0a2840"), rating:4.6, reviews:'N/A', price:"\u20b9\u20b9\u20b9", unit:' entry', desc:"Mall \u00b7 Best for: Luxury Shopping Brands \u00b7 11:00-23:00.", badge:"Mall", lat:28.5287, lng:77.2197 },
+  { id:69, cat:'shopping', name:"DLF Avenue Saket", area:"South Delhi", img:makeImg('🛍️',"DLF Avenue Saket","#1a1a08","#484818","#282808"), rating:4.6, reviews:'N/A', price:"\u20b9\u20b9\u20b9", unit:' entry', desc:"Mall \u00b7 Best for: Shopping FoodCourt \u00b7 11:00-23:00.", badge:"Mall", lat:28.5285, lng:77.2192 },
+  { id:70, cat:'shopping', name:"MGF Metropolitan Mall", area:"South Delhi", img:makeImg('🛍️',"MGF Metropolitan","#28042a","#701870","#400850"), rating:4.4, reviews:'N/A', price:"\u20b9\u20b9\u20b9", unit:' entry', desc:"Mall \u00b7 Best for: Luxury Shopping \u00b7 11:00-23:00.", badge:"Mall", lat:28.528, lng:77.217 },
+  { id:71, cat:'shopping', name:"Monastery Market", area:"North Delhi", img:makeImg('🛍️',"Monastery Market","#002818","#006840","#004028"), rating:4.2, reviews:'N/A', price:"Free", unit:' entry', desc:"Tibetan Market \u00b7 Best for: Clothes Accessories \u00b7 11:00-21:00.", badge:"Tibetan Market", lat:28.6995, lng:77.2281 },
+  { id:72, cat:'shopping', name:"Majnu Ka Tila Market", area:"North Delhi", img:makeImg('🛍️',"Majnu Ka Tila Ma","#1a0a28","#4a1a68","#2a0840"), rating:4.3, reviews:'N/A', price:"Free", unit:' entry', desc:"Tibetan Market \u00b7 Best for: Clothes Food \u00b7 11:00-21:00.", badge:"Tibetan Market", lat:28.7, lng:77.2279 },
+  { id:73, cat:'shopping', name:"Moments Mall Kirti Nagar", area:"West Delhi", img:makeImg('🛍️',"Moments Mall Kir","#0a1828","#1a4868","#0a2840"), rating:4.2, reviews:'N/A', price:"\u20b9\u20b9", unit:' entry', desc:"Mall \u00b7 Best for: Shopping Furniture \u00b7 11:00-23:00.", badge:"Mall", lat:28.6513, lng:77.139 },
+  { id:74, cat:'shopping', name:"Ashok Vihar Market", area:"North Delhi", img:makeImg('🛍️',"Ashok Vihar Mark","#1a1a08","#484818","#282808"), rating:4.1, reviews:'N/A', price:"Free", unit:' entry', desc:"Shopping Market \u00b7 Best for: Clothes Household \u00b7 10:00-21:00. Closed: Monday.", badge:"Shopping Market", lat:28.6957, lng:77.181 },
+  { id:75, cat:'shopping', name:"Ambience Mall Vasant Kunj", area:"South Delhi", img:makeImg('🛍️',"Ambience Mall Va","#28042a","#701870","#400850"), rating:4.6, reviews:'N/A', price:"\u20b9\u20b9\u20b9", unit:' entry', desc:"Mall \u00b7 Best for: Luxury Brands \u00b7 11:00-23:00.", badge:"Mall", lat:28.5418, lng:77.1558 },
+  { id:76, cat:'shopping', name:"DLF Promenade", area:"South Delhi", img:makeImg('🛍️',"DLF Promenade","#002818","#006840","#004028"), rating:4.6, reviews:'N/A', price:"\u20b9\u20b9\u20b9", unit:' entry', desc:"Mall \u00b7 Best for: Luxury Shopping Brands \u00b7 11:00-23:00.", badge:"Mall", lat:28.5417, lng:77.155 },
+  { id:77, cat:'shopping', name:"DLF Emporio", area:"South Delhi", img:makeImg('🛍️',"DLF Emporio","#1a0a28","#4a1a68","#2a0840"), rating:4.7, reviews:'N/A', price:"\u20b9\u20b9\u20b9", unit:' entry', desc:"Luxury Mall \u00b7 Best for: Luxury Brands \u00b7 11:00-23:00.", badge:"Luxury Mall", lat:28.5411, lng:77.1552 },
+  { id:78, cat:'shopping', name:"TDI Mall Rajouri", area:"West Delhi", img:makeImg('🛍️',"TDI Mall Rajouri","#0a1828","#1a4868","#0a2840"), rating:4.0, reviews:'N/A', price:"\u20b9\u20b9", unit:' entry', desc:"Mall \u00b7 Best for: Shopping FoodCourt \u00b7 11:00-23:00.", badge:"Mall", lat:28.647, lng:77.1205 },
+  { id:79, cat:'shopping', name:"Rajouri Garden Market", area:"West Delhi", img:makeImg('🛍️',"Rajouri Garden M","#1a1a08","#484818","#282808"), rating:4.4, reviews:'N/A', price:"\u20b9\u20b9", unit:' entry', desc:"Shopping Hub \u00b7 Best for: Clothes Restaurants Entertainment \u00b7 10:00-22:00.", badge:"Shopping Hub", lat:28.6474, lng:77.12 },
+  { id:80, cat:'shopping', name:"Pacific Mall Tagore Garden", area:"West Delhi", img:makeImg('🛍️',"Pacific Mall Tag","#28042a","#701870","#400850"), rating:4.5, reviews:'N/A', price:"\u20b9\u20b9\u20b9", unit:' entry', desc:"Mall \u00b7 Best for: Brands Entertainment \u00b7 11:00-23:00.", badge:"Mall", lat:28.6453, lng:77.112 },
+  { id:81, cat:'shopping', name:"Unity One Mall", area:"West Delhi", img:makeImg('🛍️',"Unity One Mall","#002818","#006840","#004028"), rating:4.2, reviews:'N/A', price:"\u20b9\u20b9", unit:' entry', desc:"Mall \u00b7 Best for: Brands FoodCourt \u00b7 11:00-23:00.", badge:"Mall", lat:28.6283, lng:77.0875 },
+  { id:82, cat:'shopping', name:"City Square Mall", area:"West Delhi", img:makeImg('🛍️',"City Square Mall","#1a0a28","#4a1a68","#2a0840"), rating:4.1, reviews:'N/A', price:"\u20b9\u20b9", unit:' entry', desc:"Mall \u00b7 Best for: Shopping FoodCourt \u00b7 11:00-23:00.", badge:"Mall", lat:28.6307, lng:77.0871 },
+  { id:83, cat:'shopping', name:"Jwala Heri Market", area:"West Delhi", img:makeImg('🛍️',"Jwala Heri Marke","#0a1828","#1a4868","#0a2840"), rating:4.2, reviews:'N/A', price:"Free", unit:' entry', desc:"Street Market \u00b7 Best for: Clothes Accessories \u00b7 10:00-21:00. Closed: Tuesday.", badge:"Street Market", lat:28.6882, lng:77.114 },
+  { id:84, cat:'shopping', name:"Tilak Nagar Market", area:"West Delhi", img:makeImg('🛍️',"Tilak Nagar Mark","#1a1a08","#484818","#282808"), rating:4.2, reviews:'N/A', price:"Free", unit:' entry', desc:"Street Market \u00b7 Best for: Clothes Footwear Accessories \u00b7 10:00-21:00. Closed: Tuesday.", badge:"Street Market", lat:28.6374, lng:77.0872 },
+  { id:85, cat:'shopping', name:"Shipra Mall", area:"East Delhi", img:makeImg('🛍️',"Shipra Mall","#28042a","#701870","#400850"), rating:4.3, reviews:'N/A', price:"\u20b9\u20b9", unit:' entry', desc:"Mall \u00b7 Best for: Brands FoodCourt \u00b7 11:00-23:00.", badge:"Mall", lat:28.6416, lng:77.3722 },
+  { id:86, cat:'shopping', name:"Rohini Sector 7 Market", area:"North Delhi", img:makeImg('🛍️',"Rohini Sector 7 ","#002818","#006840","#004028"), rating:4.1, reviews:'N/A', price:"Free", unit:' entry', desc:"Shopping Market \u00b7 Best for: Clothes Food \u00b7 10:00-21:00. Closed: Tuesday.", badge:"Shopping Market", lat:28.7214, lng:77.1173 },
+  { id:87, cat:'shopping', name:"Ambience Mall Gurgaon", area:"Gurgaon", img:makeImg('🛍️',"Ambience Mall Gu","#1a0a28","#4a1a68","#2a0840"), rating:4.6, reviews:'N/A', price:"\u20b9\u20b9\u20b9", unit:' entry', desc:"Mall \u00b7 Best for: Luxury Brands \u00b7 11:00-23:00.", badge:"Mall", lat:28.5057, lng:77.0954 },
+  { id:88, cat:'shopping', name:"Vegas Mall Dwarka", area:"South Delhi", img:makeImg('🛍️',"Vegas Mall Dwark","#0a1828","#1a4868","#0a2840"), rating:4.4, reviews:'N/A', price:"₹₹", unit:' entry', desc:"Mall · Best for: Shopping Entertainment · 11:00-23:00.", badge:"Mall", lat:28.5921, lng:77.041 },
+  { id:89, cat:'restaurant', name:"Karim's", area:"Old Delhi", img:makeImg('🍽️',"Karim's","#2a0e00","#7a3000","#501800"), rating:4.5, reviews:'N/A', price:"₹800", unit:'/2 pax', desc:"Iconic Mughlai restaurant · Est. 1913 · Near Jama Masjid", badge:"Mughlai", lat:28.6507, lng:77.2334 },
+  { id:90, cat:'restaurant', name:"Bukhara - ITC Maurya", area:"Chanakyapuri", img:makeImg('🍽️',"Bukhara ITC","#1a0428","#50106a","#2a0840"), rating:4.7, reviews:'N/A', price:"₹6,000", unit:'/2 pax', desc:"World-famous North Indian · Dal Bukhara · Fine dining", badge:"Fine Dining", lat:28.5987, lng:77.1711 },
+  { id:91, cat:'restaurant', name:"Indian Accent", area:"New Friends Colony", img:makeImg('🍽️',"Indian Accent","#2a1800","#6a3800","#402000"), rating:4.8, reviews:'N/A', price:"₹5,000", unit:'/2 pax', desc:"Contemporary Indian cuisine · Award-winning restaurant", badge:"Award Winning", lat:28.5677, lng:77.2635 },
+  { id:92, cat:'restaurant', name:"Paranthe Wali Gali", area:"Chandni Chowk", img:makeImg('🍽️',"Paranthe Wali","#28042a","#701870","#400850"), rating:4.3, reviews:'N/A', price:"₹200", unit:'/2 pax', desc:"Famous stuffed parathas · Old Delhi street food · Since 1875", badge:"Street Food", lat:28.6562, lng:77.2273 },
+  { id:93, cat:'restaurant', name:"Saravana Bhavan", area:"Connaught Place", img:makeImg('🍽️',"Saravana Bhavan","#002818","#006840","#004028"), rating:4.4, reviews:'N/A', price:"₹600", unit:'/2 pax', desc:"South Indian vegetarian · Dosa · Idli · Authentic flavours", badge:"South Indian", lat:28.6329, lng:77.2195 },
+  { id:94, cat:'restaurant', name:"Moti Mahal Delux", area:"Daryaganj", img:makeImg('🍽️',"Moti Mahal","#0a1628","#1a3a6e","#0d2040"), rating:4.3, reviews:'N/A', price:"₹1,200", unit:'/2 pax', desc:"Birthplace of Butter Chicken · Classic Mughlai · Since 1947", badge:"Mughlai", lat:28.6434, lng:77.2402 },
+  { id:95, cat:'restaurant', name:"SodaBottleOpenerWala", area:"Khan Market", img:makeImg('🍽️',"SodaBottleOpener","#0a2010","#1a5030","#0d3018"), rating:4.4, reviews:'N/A', price:"₹1,800", unit:'/2 pax', desc:"Irani Café style · Parsi cuisine · Eclectic ambience", badge:"Parsi Cuisine", lat:28.5999, lng:77.2263 },
+  { id:96, cat:'restaurant', name:"Diggin Cafe", area:"Santushti Complex", img:makeImg('🍽️',"Diggin Cafe","#28180a","#685030","#402818"), rating:4.5, reviews:'N/A', price:"₹1,400", unit:'/2 pax', desc:"Garden café · Continental & Indian · Cozy outdoor seating", badge:"Café", lat:28.5997, lng:77.1972 },
+  { id:97, cat:'restaurant', name:"The Big Chill Café", area:"Khan Market", img:makeImg('🍽️',"The Big Chill","#001428","#003868","#002040"), rating:4.5, reviews:'N/A', price:"₹1,600", unit:'/2 pax', desc:"Italian & continental · Best desserts in Delhi · Must visit", badge:"Italian", lat:28.5999, lng:77.2263 },
+  { id:98, cat:'restaurant', name:"Al Jawahar", area:"Old Delhi", img:makeImg('🍽️',"Al Jawahar","#280808","#681818","#401010"), rating:4.4, reviews:'N/A', price:"₹700", unit:'/2 pax', desc:"Old Delhi Mughlai classic · Near Jama Masjid · Since 1947", badge:"Mughlai", lat:28.6507, lng:77.2327 },
+  { id:99, cat:'restaurant', name:"Gulati Restaurant", area:"Pandara Road", img:makeImg('🍽️',"Gulati","#002828","#006868","#004040"), rating:4.4, reviews:'N/A', price:"₹1,500", unit:'/2 pax', desc:"North Indian · Butter Chicken & Dal Makhani · Since 1959", badge:"North Indian", lat:28.6015, lng:77.2273 }
+];
+
+const hospitals = [
+  { name:"Lions Kidney Hospital & Urology Research Insitute", address:"Opp B Block Friends Colony", tags:['Emergency 24/7','Multi-Specialty'], icon:'🏥', img:makeImg('🏥',"Lions Kidney Hospital","#001428","#003868","#002040"), phone:'Call 112', lat:28.635892, lng:77.224957, dist:2.59 },
+  { name:"Central Hospital", address:"A-142/1, Ganesh Nagar P.O, Tilak Nagartilak Nagar", tags:['Emergency 24/7','Multi-Specialty'], icon:'🏥', img:makeImg('🏥',"Central Hospital","#001e10","#005030","#002818"), phone:'Call 112', lat:28.636947, lng:77.21734, dist:2.93 },
+  { name:"Thecity Clinic (Unitof Siddharth Medical Services (P) Ltd)", address:"#17-A/1, Asaf Ali Road", tags:['Emergency 24/7','Multi-Specialty'], icon:'🏥', img:makeImg('🏥',"Thecity Clinic (Unitof","#180428","#481268","#280840"), phone:'Call 112', lat:28.641805, lng:77.234034, dist:3.24 },
+  { name:"Manav Medicare Centre", address:"E-11, South Extension Part", tags:['Emergency 24/7','Multi-Specialty'], icon:'🏥', img:makeImg('🏥',"Manav Medicare Centre","#28180a","#685030","#402818"), phone:'Call 112', lat:28.581507, lng:77.222506, dist:3.56 },
+  { name:"Chaudhary Eye Centre & Laser Vision", address:"4802/24, Bharat Ram Road, Darya Ganj, 24, Darya Ganj", tags:['Emergency 24/7','Multi-Specialty'], icon:'🏥', img:makeImg('🏥',"Chaudhary Eye Centre","#280808","#681818","#401010"), phone:'Call 112', lat:28.642389, lng:77.244012, dist:3.57 },
+  { name:"Neera Eye Centre & Laser Vision", address:"B-99, Bharat Ram Road, Opp-Commercial School Darya Ganj", tags:['Emergency 24/7','Multi-Specialty'], icon:'🏥', img:makeImg('🏥',"Neera Eye Centre","#002828","#006868","#004040"), phone:'Call 112', lat:28.643971, lng:77.241734, dist:3.66 },
+  { name:"Delhi Hospital & Temple Nursing Home", address:"#1, Ansari Road, Darya Ganj, New", tags:['Emergency 24/7','Multi-Specialty'], icon:'🏥', img:makeImg('🏥',"Delhi Hospital &","#001428","#003868","#002040"), phone:'Call 112', lat:28.643444, lng:77.244462, dist:3.7 },
+  { name:"Sanjeevan Medical Research Centre (P) Ltd.", address:"#4869/24, Ansari Road, Darya Gunj", tags:['Emergency 24/7','Multi-Specialty'], icon:'🏥', img:makeImg('🏥',"Sanjeevan Medical Research","#001e10","#005030","#002818"), phone:'Call 112', lat:28.644122, lng:77.244259, dist:3.76 },
+  { name:"Navjyoti Eye Centre", address:"# 90, Darya Ganj", tags:['Emergency 24/7','Multi-Specialty'], icon:'🏥', img:makeImg('🏥',"Navjyoti Eye Centre","#180428","#481268","#280840"), phone:'Call 112', lat:28.645553, lng:77.240403, dist:3.78 },
+  { name:"Dr.Shroff'S Charity Eye Hospital", address:"# 5027, Kedar Nath Road Opp Golcha Cinema", tags:['Emergency 24/7','Multi-Specialty'], icon:'🏥', img:makeImg('🏥',"Dr.Shroff'S Charity Eye","#28180a","#685030","#402818"), phone:'Call 112', lat:28.646984, lng:77.242285, dist:3.99 },
+  { name:"Sanjeevan Medical Centre", address:"8666 Ara Kasha Road Hospital Lane -55 Arakashan Road, Paharganj", tags:['Emergency 24/7','Multi-Specialty'], icon:'🏥', img:makeImg('🏥',"Sanjeevan Medical Centre","#280808","#681818","#401010"), phone:'Call 112', lat:28.646796, lng:77.215727, dist:4.0 },
+  { name:"Delhi Heart And Lung Institute", address:"#3Mm Ii Panchkuian Road", tags:['Emergency 24/7','Multi-Specialty'], icon:'🏥', img:makeImg('🏥',"Delhi Heart And","#002828","#006868","#004040"), phone:'Call 112', lat:28.643067, lng:77.204777, dist:4.13 }
+];
+
+// ─── RENDER CARDS ───
+let activeCategory = 'all';
+let searchQuery = '';
+// Keep a snapshot of static CSV data as default
+const staticPlaces = [...places];
+
+// Declared here so renderCards can use them
+let isShowingLiveResults = false;
+let placeNames = [];
+const DELHI_PLACES = [
+  'India Gate', "Humayun's Tomb", 'Akshardham Temple', 'Waste to Wonder Park',
+  'Jantar Mantar', 'Chandni Chowk', 'Lotus Temple', 'Red Fort',
+  'Agrasen ki Baoli', 'Sunder Nursery', 'Garden of Five Senses', 'Lodhi Garden',
+  'National Gallery of Modern Art', 'National Zoological Park', 'Qutub Minar',
+  'National Science Centre', 'Gurudwara Bangla Sahib', 'Jama Masjid', 'Rail Museum'
+];
+
+function renderCards() {
+  const grid = document.getElementById('cardsGrid');
+  const filtered = places.filter(p => {
+    const catMatch = activeCategory === 'all' || p.cat === activeCategory;
+    // If showing live API results, just apply category filter — never text-filter them
+    if (isShowingLiveResults) return catMatch;
+    const q = searchQuery.toLowerCase().trim();
+    if (!q) return catMatch;
+    // Check against both backend list and hardcoded list
+    const nameList = (placeNames && placeNames.length > 0) ? placeNames : DELHI_PLACES;
+    const isPlaceName = nameList.some(n => n.toLowerCase().includes(q));
+    if (isPlaceName) return catMatch;
+    // Normal text search
+    const textMatch = p.name.toLowerCase().includes(q) || p.area.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q) || p.badge.toLowerCase().includes(q);
+    return catMatch && textMatch;
+  });
+
+  if (!filtered.length) {
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:3rem;color:rgba(255,248,240,0.4)"><div style="font-size:2rem;margin-bottom:1rem">🔍</div><div>No results found for "<strong style="color:var(--saffron)">${searchQuery}</strong>"</div></div>`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map(p => `
+    <div class="place-card" data-id="${p.id}">
+      <div class="card-img-wrap">
+        <img class="card-img" src="${p.img}" alt="${p.name}" loading="lazy">
+        <div class="card-badge">${p.badge}</div>
+      </div>
+      <div class="card-body">
+        <div class="card-rating">
+          <span class="stars">${'★'.repeat(Math.floor(p.rating))}${ p.rating % 1 >= 0.5 ? '½' : ''}</span>
+          <strong>${p.rating}</strong>
+          <span class="count">(${p.reviews})</span>
+        </div>
+        <div class="card-title">${p.name}</div>
+        <div class="card-meta">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          ${p.area}
+        </div>
+        <div class="card-desc">${p.desc.slice(0, 90)}…</div>
+        <div class="card-footer">
+          <div class="card-price">${p.price} <span>${p.unit}</span></div>
+          <button class="card-btn">View Details</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  // Attach click handlers after render
+  grid.querySelectorAll('.place-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const p = places.find(x => x.id == card.dataset.id);
+      if (p) openModal(p.img, p.badge, p.name, p.desc);
+    });
+  });
+}
+
+function renderHospitals() {
+  document.getElementById('hospitalsGrid').innerHTML = hospitals.map(h => `
+    <div class="hospital-card" style="padding:0;overflow:hidden">
+      <div style="position:relative;height:140px;overflow:hidden">
+        <img src="${h.img}" alt="${h.name}" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.55);transition:transform 0.4s" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,13,13,0.9),transparent);display:flex;align-items:flex-end;padding:1rem">
+          <div style="font-size:1.4rem">${h.icon}</div>
+        </div>
+        <div style="position:absolute;top:0.7rem;right:0.7rem;background:rgba(231,76,60,0.85);color:white;font-size:0.6rem;font-weight:700;padding:0.2rem 0.6rem;border-radius:50px;text-transform:uppercase;letter-spacing:0.05em">Emergency</div>
+      </div>
+      <div style="padding:1.2rem">
+        <div class="hosp-name">${h.name}</div>
+        <div class="hosp-address">📍 ${h.address}</div>
+        <div style="font-size:0.78rem;color:var(--saffron);margin-bottom:0.8rem;font-weight:600">📞 ${h.phone}</div>
+        <div class="hosp-tags" style="margin-bottom:0.9rem">${h.tags.map(t => `<span class="hosp-tag">${t}</span>`).join('')}</div>
+        <div style="font-size:0.75rem;color:rgba(255,248,240,0.4);margin-bottom:0.7rem">📏 ${h.dist ? h.dist + ' km away' : 'Delhi'}</div>
+        <button onclick="window.open('https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(h.name + ', Delhi, India')}&destination_place_id=','_blank')"
+          style="width:100%;background:rgba(231,76,60,0.12);border:1px solid rgba(231,76,60,0.4);color:#ff6b6b;border-radius:50px;padding:0.5rem 1rem;font-size:0.78rem;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all 0.2s;letter-spacing:0.03em"
+          onmouseover="this.style.background='rgba(231,76,60,0.25)'" onmouseout="this.style.background='rgba(231,76,60,0.12)'">
+          📍 Get Directions
+        </button>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ─── FILTERS ───
+function setCategory(btn, cat) {
+  document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeCategory = cat;
+  renderCards();
+}
+
+function filterCards(q) {
+  searchQuery = q;
+  renderCards();
+}
+
+// ─── MODAL ───
+let currentPlaceName = '';
+
+function openModal(img, tag, title, text) {
+  currentPlaceName = title;
+  const modalImg = document.getElementById('modalImg');
+  if (img) {
+    modalImg.style.backgroundImage = `url('${img}')`;
+    modalImg.style.display = 'block';
+  } else {
+    modalImg.style.display = 'none';
+  }
+  document.getElementById('modalTag').textContent = tag;
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalText').textContent = text;
+  document.getElementById('modalOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function getDirections() {
+  const query = encodeURIComponent(currentPlaceName + ', New Delhi, India');
+  window.open('https://www.google.com/maps/search/?api=1&query=' + query, '_blank');
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.getElementById('modalOverlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+});
+
+// ─── SCROLL REVEAL ───
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.08 });
+
+function observeReveal() {
+  document.querySelectorAll('.reveal').forEach(el => {
+    el.classList.add('visible'); // make visible immediately as fallback
+    observer.observe(el);
+  });
+}
+observeReveal();
+
+// ─── PLAN TRIP ───
+function buildItinerary() {
+  const from    = document.getElementById('pt-from').value;
+  const to      = document.getElementById('pt-to').value;
+  const guests  = document.getElementById('pt-guests').value;
+  const budget  = document.getElementById('pt-budget').value;
+  const tags    = [...document.querySelectorAll('.ptag.active')].map(b => b.textContent.trim());
+
+  // ── Validation ──
+  const errors = [];
+  if (!from)            errors.push('Arrival date');
+  if (!to)              errors.push('Departure date');
+  if (to && from && new Date(to) <= new Date(from)) errors.push('Departure must be after arrival');
+  if (tags.length === 0) errors.push('At least one interest');
+
+  if (errors.length) {
+    document.getElementById('pt-result').style.display = 'block';
+    document.getElementById('pt-body').innerHTML = `
+      <div style="display:flex;align-items:flex-start;gap:10px;">
+        <div style="font-size:1.4rem;margin-top:2px;">⚠️</div>
+        <div>
+          <div style="font-weight:700;color:#FF6B1A;margin-bottom:6px;">Please fill in all required fields:</div>
+          ${errors.map(e => `<div style="color:rgba(255,248,240,0.7);padding:3px 0;">• ${e}</div>`).join('')}
+        </div>
+      </div>`;
+    document.getElementById('pt-result').style.background = 'rgba(255,107,26,0.08)';
+    document.getElementById('pt-result').style.borderColor = 'rgba(255,107,26,0.35)';
+
+    // Highlight empty fields in red
+    document.getElementById('pt-from').style.borderColor   = !from ? '#e74c3c' : 'rgba(255,255,255,0.1)';
+    document.getElementById('pt-to').style.borderColor     = (!to || (to && from && new Date(to) <= new Date(from))) ? '#e74c3c' : 'rgba(255,255,255,0.1)';
+    return;
+  }
+
+  // Reset field borders on success
+  document.getElementById('pt-from').style.borderColor = 'rgba(255,255,255,0.1)';
+  document.getElementById('pt-to').style.borderColor   = 'rgba(255,255,255,0.1)';
+  document.getElementById('pt-result').style.background   = 'rgba(255,107,26,0.07)';
+  document.getElementById('pt-result').style.borderColor  = 'rgba(255,107,26,0.25)';
+
+  const nights  = from && to ? Math.max(1, Math.round((new Date(to)-new Date(from))/(86400000))) : 3;
+  const budgetLabel = { budget:'Budget', mid:'Mid-Range', luxury:'Luxury' }[budget];
+  const interests = tags.length ? tags.join(', ') : 'General Sightseeing';
+
+  const itineraries = {
+    1: [
+      '🌅 <strong>Morning:</strong> Red Fort + Chandni Chowk breakfast at Paranthe Wali Gali',
+      '🕌 <strong>Afternoon:</strong> Jama Masjid → Humayun Tomb → Nizamuddin Dargah',
+      '🌆 <strong>Evening:</strong> India Gate stroll → Connaught Place dinner',
+    ],
+    2: [
+      '🌅 <strong>Day 1 Morning:</strong> Red Fort + Chandni Chowk street food tour',
+      '🕌 <strong>Day 1 Afternoon:</strong> Jama Masjid → Humayun Tomb',
+      '🌆 <strong>Day 1 Evening:</strong> India Gate → Khan Market dinner',
+      '🗼 <strong>Day 2 Morning:</strong> Qutub Minar complex → Mehrauli',
+      '🪷 <strong>Day 2 Afternoon:</strong> Lotus Temple → Dilli Haat shopping',
+      '🍽️ <strong>Day 2 Evening:</strong> Bukhara / Indian Accent dinner',
+    ],
+    3: [
+      '🌅 <strong>Day 1:</strong> Old Delhi — Red Fort, Jama Masjid, Chandni Chowk, Karim\'s lunch',
+      '🕌 <strong>Day 2:</strong> Mughal Trail — Humayun Tomb, Lodhi Gardens, Nizamuddin Dargah',
+      '🗼 <strong>Day 3:</strong> South Delhi — Qutub Minar, Lotus Temple, Dilli Haat, India Gate at sunset',
+    ]
+  };
+
+  const days = nights <= 1 ? 1 : nights <= 2 ? 2 : 3;
+  const plan = itineraries[days];
+
+  const hotelRec = budget === 'luxury'
+    ? '🏰 <strong>Recommended Stay:</strong> The Leela Palace or ITC Maurya'
+    : budget === 'mid'
+    ? '🏨 <strong>Recommended Stay:</strong> Haveli Dharampura (boutique & central)'
+    : '🛏️ <strong>Recommended Stay:</strong> Budget guesthouses in Paharganj or Karol Bagh';
+
+  document.getElementById('pt-body').innerHTML = `
+    <div style="margin-bottom:0.8rem;padding-bottom:0.8rem;border-bottom:1px solid rgba(255,255,255,0.08)">
+      🗓️ <strong>${nights} Night${nights>1?'s':''}</strong> &nbsp;·&nbsp; 👥 ${guests} Guest${guests>1?'s':''} &nbsp;·&nbsp; 💰 ${budgetLabel}<br>
+      <span style="color:rgba(255,248,240,0.45);font-size:0.8rem">Interests: ${interests}</span>
+    </div>
+    ${plan.map(d=>`<div style="padding:0.3rem 0">${d}</div>`).join('')}
+    <div style="margin-top:0.8rem;padding-top:0.8rem;border-top:1px solid rgba(255,255,255,0.08)">${hotelRec}</div>
+    <div style="margin-top:0.5rem">🍽️ <strong>Must Eat:</strong> Karim's nihari, Paranthe Wali Gali, Dal Bukhara</div>
+    <div style="margin-top:0.5rem">🚇 <strong>Getting Around:</strong> Delhi Metro is safe, fast & covers all major spots</div>
+  `;
+  document.getElementById('pt-result').style.display = 'block';
+}
+
+
+// ═══════════════════════════════════════════════════════════
+//  BACKEND API INTEGRATION — dilseDilli
+//  FastAPI server: http://127.0.0.1:8000
+//  Run with: uvicorn main:app --reload
+//  Falls back to static CSV data if backend is offline
+// ═══════════════════════════════════════════════════════════
+
+const API_BASE = 'http://127.0.0.1:8000';
+let backendOnline = false;
+
+// ── Toast notification ─────────────────────────────────────
+function showToast(msg, duration=4000) {
+  let t = document.getElementById('apiToast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'apiToast';
+    t.style.cssText = 'position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:rgba(13,13,13,0.96);border:1px solid rgba(255,107,26,0.45);color:rgba(255,248,240,0.92);padding:11px 22px;border-radius:50px;font-family:"DM Sans",sans-serif;font-size:0.83rem;z-index:9999;opacity:0;transition:opacity 0.3s;max-width:88%;text-align:center;backdrop-filter:blur(10px);pointer-events:none;';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.style.opacity = '1';
+  clearTimeout(t._t);
+  t._t = setTimeout(() => t.style.opacity = '0', duration);
+}
+
+// ── Check if backend is alive ──────────────────────────────
+async function checkBackend() {
+  try {
+    const r = await fetch(API_BASE + '/', { signal: AbortSignal.timeout(2500) });
+    if (r.ok) { backendOnline = true; return true; }
+  } catch(e) {}
+  backendOnline = false;
+  return false;
+}
+
+// ── Weather: fetch from GET /recommend/{place} → .weather ──
+async function fetchLiveWeather() {
+  if (!backendOnline) return;
+  try {
+    const r    = await fetch(API_BASE + '/recommend/India%20Gate');
+    const data = await r.json();
+    const w    = data.weather;
+    if (!w) return;
+
+    // Weather strip
+    const temps = document.querySelectorAll('.weather-item .temp');
+    const descs = document.querySelectorAll('.weather-item .desc');
+    if (temps[0]) temps[0].textContent = Math.round(w.temperature) + '°C';
+    if (descs[0]) descs[0].textContent = w.description + ' · Feels ' + Math.round(w.feels_like) + '°C';
+    if (temps[1]) temps[1].textContent = w.humidity + '%';
+    if (temps[2]) temps[2].textContent = w.wind_speed + ' m/s';
+
+    // Map weather overlay
+    const mapWeather = document.querySelector('.map-container > div:last-of-type');
+    if (mapWeather && mapWeather.textContent.includes('Weather')) {
+      mapWeather.innerHTML =
+        '<div style="font-weight:700;margin-bottom:8px;color:#FF6B1A;">🌤️ Delhi Weather</div>' +
+        '<div>🌡️ ' + Math.round(w.temperature) + '°C · Feels ' + Math.round(w.feels_like) + '°C</div>' +
+        '<div>🌥️ ' + w.description + '</div>' +
+        '<div>💧 Humidity: ' + w.humidity + '%</div>' +
+        '<div>🌬️ Wind: ' + w.wind_speed + ' m/s</div>' +
+        (w.rain_1h > 0 ? '<div>🌧️ Rain: ' + w.rain_1h + ' mm</div>' : '');
+    }
+
+    // Weather tip
+    if (data.weather_tip) showToast('🌤️ ' + data.weather_tip, 5000);
+
+    console.log('✅ Live weather loaded:', w.description, w.temperature + '°C');
+  } catch(e) { console.warn('Weather API error:', e.message); }
+}
+
+// ── Places: GET /recommend/{place} → .hotels / .shopping / .nearby_places ──
+async function fetchLivePlaces(placeName) {
+  if (!backendOnline) return;
+  if (!placeName) return;
+  console.log('🔍 Fetching recommendations for:', placeName);
+  const encoded = encodeURIComponent(placeName);
+  try {
+    const r    = await fetch(API_BASE + '/recommend/' + encoded);
+    const data = await r.json();
+    if (data.detail || data.error) { console.warn('Place not found:', placeName); return; }
+
+    const apiPlaces = [];
+    let pid = 1000;
+
+    // Hotels from API
+    const hotelGrads = [['#1a0530','#4a1060','#2d0845'],['#0a1628','#1a3a6e','#0d2040'],['#0a2010','#1a5030','#0d3018'],['#2a0e04','#7a2808','#3d1206'],['#001428','#003868','#002040']];
+    (data.hotels || []).forEach((h, i) => {
+      const g = hotelGrads[i % hotelGrads.length];
+      const stars = h.star_rating ? Math.round(h.star_rating) + ' Star' : 'Hotel';
+      apiPlaces.push({
+        id: pid++, cat: 'hotel',
+        name: h.name, area: 'Delhi',
+        img: makeImg('🏨', h.name.split(' ').slice(0,3).join(' '), g[0], g[1], g[2]),
+        rating: h.rating || 4.0, reviews: 'Live',
+        price: h.price_inr ? '₹' + Math.round(h.price_inr).toLocaleString('en-IN') : 'Call',
+        unit: '/night',
+        desc: stars + ' hotel · ' + (h.distance_km || '?') + ' km from ' + placeName,
+        badge: stars,
+        lat: null, lng: null
+      });
+    });
+
+    // Nearby tourist places from API
+    const tourGrads = [['#5a0000','#c02000','#800000'],['#2a1400','#7a4000','#4a2200'],['#001830','#004080','#002050']];
+    (data.nearby_places || []).forEach((t, i) => {
+      const g = tourGrads[i % tourGrads.length];
+      apiPlaces.push({
+        id: pid++, cat: 'tourist',
+        name: t.name, area: 'Delhi',
+        img: makeImg('🏛️', t.name.slice(0,16), g[0], g[1], g[2]),
+        rating: t.rating || 4.2, reviews: 'Live',
+        price: t.entrance_fee > 0 ? '₹' + t.entrance_fee : 'Free',
+        unit: '/entry',
+        desc: (t.type || 'Attraction') + ' · ' + t.distance_km + ' km from ' + placeName,
+        badge: t.entrance_fee == 0 ? 'Free Entry' : 'Must See',
+        lat: null, lng: null
+      });
+    });
+
+    // Restaurants from API (zom.csv)
+    const restGrads = [['#2a0e00','#7a3000','#501800'],['#1a0428','#50106a','#2a0840'],['#2a1800','#6a3800','#402000']];
+    (data.restaurants || []).forEach((r, i) => {
+      const g = restGrads[i % restGrads.length];
+      apiPlaces.push({
+        id: pid++, cat: 'restaurant',
+        name: r.name, area: 'Delhi',
+        img: makeImg('🍽️', r.name.split(' ').slice(0,3).join(' '), g[0], g[1], g[2]),
+        rating: r.dining_rating ? Math.min(5, parseFloat((r.dining_rating).toFixed(1))) : 4.3,
+        reviews: 'Live',
+        price: r.price_for_2 ? '₹' + Math.round(r.price_for_2).toLocaleString('en-IN') : 'N/A',
+        unit: '/2 pax',
+        desc: 'Restaurant · ' + (r.distance_km || '?') + ' km from ' + placeName,
+        badge: 'Live Data',
+        lat: null, lng: null
+      });
+    });
+
+    // Shopping from API
+    const shopGrads = [['#28042a','#701870','#400850'],['#002818','#006840','#004028'],['#1a0a28','#4a1a68','#2a0840']];
+    (data.shopping || []).forEach((s, i) => {
+      const g = shopGrads[i % shopGrads.length];
+      apiPlaces.push({
+        id: pid++, cat: 'shopping',
+        name: s.name, area: 'Delhi',
+        img: makeImg('🛍️', s.name.slice(0,16), g[0], g[1], g[2]),
+        rating: s.google_rating || 4.0, reviews: 'Live',
+        price: s.price_level <= 1 ? 'Free' : '₹'.repeat(s.price_level),
+        unit: ' entry',
+        desc: (s.best_for || '').replace(/_/g,' ') + ' · ' + (s.opening_hours || '') + ' · ' + s.distance_km + ' km',
+        badge: (s.category || 'Market').replace(/_/g,' '),
+        lat: null, lng: null
+      });
+    });
+
+    // All data from API — replace places array
+    places.length = 0;
+    apiPlaces.forEach(p => places.push(p));
+
+    // Reset category filter but KEEP the search text so user sees what they searched
+    activeCategory = 'all';
+    document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
+    document.querySelector('.cat-tab').classList.add('active');
+    searchQuery = ''; // clear internal filter so all results show
+    renderCards();
+    observeReveal();
+    showToast('✅ Showing ' + apiPlaces.length + ' results near ' + placeName, 3000);
+
+    console.log('✅ Live places loaded:', apiPlaces.length, 'from API for', placeName);
+  } catch(e) { console.warn('Places API error:', e.message); }
+}
+
+// ── Hospitals: GET /recommend/{place} → .hospitals ─────────
+async function fetchLiveHospitals(placeName) {
+  if (!backendOnline) return;
+  if (!placeName) return;
+  const encoded = encodeURIComponent(placeName);
+  try {
+    const r    = await fetch(API_BASE + '/recommend/' + encoded);
+    const data = await r.json();
+    const list = data.hospitals;
+    if (!list || !list.length) return;
+
+    const hospGrads = [['#001428','#003868','#002040'],['#001e10','#005030','#002818'],['#180428','#481268','#280840'],['#28180a','#685030','#402818'],['#280808','#681818','#401010'],['#002828','#006868','#004040']];
+    const grid = document.getElementById('hospitalsGrid');
+    grid.innerHTML = list.map((h, i) => {
+      const g = hospGrads[i % hospGrads.length];
+      const short = h.name.split(' ').slice(0,3).join(' ');
+      const mapsUrl = 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(h.name + ', Delhi, India');
+      return '<div class="hospital-card" style="padding:0;overflow:hidden">' +
+        '<div style="position:relative;height:140px;overflow:hidden">' +
+        '<img src="' + makeImg('🏥', short, g[0], g[1], g[2]) + '" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.55)">' +
+        '<div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,13,13,0.9),transparent);display:flex;align-items:flex-end;padding:1rem"><div style="font-size:1.4rem">🏥</div></div>' +
+        '<div style="position:absolute;top:0.7rem;right:0.7rem;background:rgba(231,76,60,0.85);color:white;font-size:0.6rem;font-weight:700;padding:0.2rem 0.6rem;border-radius:50px;text-transform:uppercase">Emergency</div>' +
+        '</div>' +
+        '<div style="padding:1.2rem">' +
+        '<div class="hosp-name">' + h.name + '</div>' +
+        '<div class="hosp-address">📍 ' + (h.address || 'Delhi, India') + '</div>' +
+        '<div style="font-size:0.76rem;color:rgba(255,248,240,0.4);margin-bottom:0.6rem">📏 ' + h.distance_km + ' km away</div>' +
+        '<div class="hosp-tags" style="margin-bottom:0.9rem"><span class="hosp-tag">Emergency 24/7</span><span class="hosp-tag">Multi-Specialty</span></div>' +
+        '<button onclick="window.open(\'' + mapsUrl + '\',\'_blank\')" style="width:100%;background:rgba(231,76,60,0.12);border:1px solid rgba(231,76,60,0.4);color:#ff6b6b;border-radius:50px;padding:0.5rem 1rem;font-size:0.78rem;font-weight:700;font-family:\'DM Sans\',sans-serif;cursor:pointer;transition:all 0.2s" onmouseover="this.style.background=\'rgba(231,76,60,0.25)\'" onmouseout="this.style.background=\'rgba(231,76,60,0.12)\'">📍 Get Directions</button>' +
+        '</div></div>';
+    }).join('');
+
+    console.log('✅ Live hospitals loaded:', list.length);
+  } catch(e) { console.warn('Hospitals API error:', e.message); }
+}
+
+// ── Get all tourist place names: GET /places ───────────────
+async function fetchPlacesList() {
+  if (!backendOnline) return null;
+  try {
+    const r = await fetch(API_BASE + '/places');
+    const d = await r.json();
+    return d.places || null;
+  } catch(e) { return null; }
+}
+
+// ── Search ─────────────────────────────────────────────────
+let searchDebounce = null;
+let currentSearchedPlace = '';
+
+async function onHeroSearch(q) {
+  q = (q || '').trim();
+
+  if (!q) {
+    isShowingLiveResults = false;
+    currentSearchedPlace = '';
+    searchQuery = '';
+    activeCategory = 'all';
+    document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
+    document.querySelector('.cat-tab').classList.add('active');
+    places.length = 0;
+    staticPlaces.forEach(p => places.push(p));
+    renderCards();
+    return;
+  }
+
+  // Re-check backend if it was offline (user may have started it after page load)
+  if (!backendOnline) await checkBackend();
+
+  if (backendOnline && q.length >= 2) {
+    const nameList = (placeNames && placeNames.length > 0) ? placeNames : DELHI_PLACES;
+    const qLow = q.toLowerCase();
+    const match = nameList.find(p => p.toLowerCase() === qLow)
+               || nameList.find(p => p.toLowerCase().startsWith(qLow))
+               || nameList.find(p => p.toLowerCase().includes(qLow))
+               || nameList.find(p => qLow.includes(p.toLowerCase()));
+
+    console.log('Search:', q, '→ match:', match, '| backendOnline:', backendOnline);
+
+    if (match) {
+      clearTimeout(searchDebounce);
+      searchDebounce = setTimeout(async () => {
+        currentSearchedPlace = match;
+        isShowingLiveResults = true;
+        showToast('📍 Loading results near ' + match + '...', 2000);
+        await Promise.all([
+          fetchLivePlaces(match),
+          fetchLiveHospitals(match),
+          fetchLiveWeather()
+        ]);
+      }, 600);
+      return;
+    }
+  }
+
+  // Plain text filter on static cards
+  if (isShowingLiveResults) {
+    places.length = 0;
+    staticPlaces.forEach(p => places.push(p));
+    isShowingLiveResults = false;
+  }
+  filterCards(q);
+}
+
+// ── Wire hero search ───────────────────────────────────────
+document.getElementById('heroSearch').addEventListener('input', e => onHeroSearch(e.target.value));
+document.getElementById('heroSearch').addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    document.getElementById('explore').scrollIntoView({behavior:'smooth'});
+  }
+});
+document.querySelector('.search-btn').addEventListener('click', () => {
+  const q = document.getElementById('heroSearch').value.trim();
+  if (q) onHeroSearch(q);
+  setTimeout(() => document.getElementById('explore').scrollIntoView({behavior:'smooth'}), 800);
+});
+
+// ── Startup ────────────────────────────────────────────────
+(async function initBackend() {
+  // Always render static CSV data first (instant load)
+  renderCards();
+  renderHospitals();
+
+  const alive = await checkBackend();
+
+  if (alive) {
+    placeNames = (await fetchPlacesList()) || [];
+    console.log('📍 Place names from backend:', placeNames);
+    await fetchLiveWeather();
+    showToast('✅ Backend connected! Search any Delhi place to get live nearby recommendations.', 5000);
+  } else {
+    showToast('📦 Static mode · Run: uvicorn main:app --reload to enable live data', 6000);
+  }
+})();
+
+
+
+// Set featured SVG images
+document.getElementById('featuredMainImg').src = makeImg('🕌','Taj Mahal · Day Trip','#1a0530','#4a0060','#0a1030');
+document.getElementById('scJamaImg').src       = makeImg('🕌','Jama Masjid','#3a0800','#8a2000','#5a1000');
+document.getElementById('scGateImg').src       = makeImg('🏛️','India Gate','#001830','#004080','#002858');
+
+// Featured card clicks (safe, no inline strings)
+document.getElementById('sc-jama').addEventListener('click', () =>
+  openModal('', 'Old Delhi', 'Jama Masjid', 'One of the largest mosques in India, Jama Masjid was built by Mughal Emperor Shah Jahan. Its grand courtyard can hold 25,000 worshippers and the minaret offers a stunning panoramic view of Old Delhi.')
+);
+document.getElementById('sc-indiagate').addEventListener('click', () =>
+  openModal('', 'New Delhi', 'India Gate', 'A war memorial on Rajpath, India Gate commemorates 82,000 soldiers of the Indian Army who died between 1914 and 1921. A must-visit national landmark in the heart of New Delhi.')
+);
+document.querySelector('.featured-main').addEventListener('click', () =>
+  openModal('', 'UNESCO Heritage', 'Taj Mahal Day Trip', 'A day trip from Delhi to the world greatest monument of love. Located just 200km away, the Taj Mahal is accessible in 3 hours by express train and remains the crown jewel of any North India itinerary.')
+);
+</script>
+</body>
+</html>

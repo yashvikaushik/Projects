@@ -1,0 +1,20 @@
+Zone,State,City,Name,Type,Establishment Year,time needed to visit in hrs,Google review rating,Entrance Fee in INR,Airport with 50km Radius,Weekly Off,Significance,DSLR Allowed,Number of google review in lakhs,Best Time to visit,Full_Address,Latitude,Longitude
+Northern,Delhi,Delhi,India Gate,War Memorial,1921.0,0.5,4.6,0,Yes,Not Available,Historical,Yes,2.6,Evening,"India Gate, Delhi, India",28.6129332,77.2294928
+Northern,Delhi,Delhi,Humayun's Tomb,Tomb,1572.0,2.0,4.5,30,Yes,Not Available,Historical,Yes,0.4,Afternoon,"Humayun's Tomb, Delhi, India",28.5932856,77.2506468
+Northern,Delhi,Delhi,Akshardham Temple,Temple,2005.0,5.0,4.6,60,Yes,Not Available,Religious,No,0.4,Afternoon,"Akshardham Temple, Delhi, India",28.6125167,77.2773184
+Northern,Delhi,Delhi,Waste to Wonder Park,Theme Park,2019.0,2.0,4.1,50,Yes,Monday,Environmental,Yes,0.27,Evening,"Waste to Wonder Park, Delhi, India",28.5834,77.2574
+Northern,Delhi,Delhi,Jantar Mantar,Observatory,1724.0,2.0,4.2,15,Yes,Not Available,Scientific,Yes,0.31,Morning,"Jantar Mantar, Delhi, India",28.6271791,77.2166166
+Northern,Delhi,Delhi,Chandni Chowk,Market,1700.0,3.0,4.2,0,Yes,Sunday,Market,Yes,0.25,Afternoon,"Chandni Chowk, Delhi, India",28.6559834,77.2321937
+Northern,Delhi,Delhi,Lotus Temple,Temple,1986.0,1.0,4.5,0,Yes,Monday,Religious,Yes,0.59,Evening,"Lotus Temple, Delhi, India",28.5533586,77.2586006
+Northern,Delhi,Delhi,Red Fort,Fort,1648.0,2.0,4.5,35,Yes,Not Available,Historical,Yes,1.5,Afternoon,"Red Fort, Delhi, India",28.656081,77.2407959
+Northern,Delhi,Delhi,Agrasen ki Baoli,Stepwell,1400.0,1.0,4.2,0,Yes,Not Available,Historical,Yes,0.41,Afternoon,"Agrasen ki Baoli, Delhi, India",28.6260676,77.2250111
+Northern,Delhi,Delhi,Sunder Nursery,Park,1600.0,2.0,4.6,0,Yes,Not Available,Botanical,Yes,0.16,Afternoon,"Sunder Nursery, Delhi, India",28.5969098,77.2470188
+Northern,Delhi,Delhi,Garden of Five Senses,Park,2003.0,2.0,4.1,35,Yes,Not Available,Botanical,Yes,0.23,Morning,"Garden of Five Senses, Delhi, India",28.5137724,77.1983445
+Northern,Delhi,Delhi,Lodhi Garden,Park,1500.0,1.0,4.5,0,Yes,Not Available,Botanical,Yes,0.48,All,"Lodhi Garden, Delhi, India",28.5962998,77.2215497
+Northern,Delhi,Delhi,National Gallery of Modern Art,Museum,1954.0,3.0,4.5,20,Yes,Monday,Artistic,Yes,0.08,All,"National Gallery of Modern Art, Delhi, India",28.6096334,77.2341764
+Northern,Delhi,Delhi,National Zoological Park ,Zoo,1959.0,3.0,4.1,80,Yes,Friday,Environmental,Yes,0.41,All,"National Zoological Park , Delhi, India",28.6026948,77.247176
+Northern,Delhi,Delhi,Qutub Minar,Monument,1192.0,1.0,4.5,35,Yes,Not Available,Historical,Yes,1.37,Afternoon,"Qutub Minar, Delhi, India",28.524413,77.1854501
+Northern,Delhi,Delhi,National Science Centre,Science,1992.0,5.0,4.4,70,Yes,Not Available,Scientific,Yes,0.23,All,"National Science Centre, Delhi, India",28.6256148,77.1621057
+Northern,Delhi,New Delhi,Gurudwara Bangla Sahib,Gurudwara,,1.0,4.8,0,Yes,Not Available,Religious,Yes,1.05,All,"Gurudwara Bangla Sahib, Delhi, India",28.6280479,77.2093211
+Northern,Delhi,New Delhi,Jama Masjid,Mosque,1656.0,1.0,4.5,0,Yes,Not Available,Historical,Yes,0.49,All,"Jama Masjid, Delhi, India",28.6506822,77.232961
+Northern,Delhi,New Delhi,Rail Museum,Museum,1977.0,2.0,4.4,50,Yes,Monday,Cultural,Yes,0.24,Morning,"Rail Museum, Delhi, India",28.5847268,77.1811827

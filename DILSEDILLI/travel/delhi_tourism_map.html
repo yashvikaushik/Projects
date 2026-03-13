@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_e6b76073e7ac906136462c4dfc72ae00 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
+</head>
+<body>
+    
+    
+        <div style="position:fixed; bottom:10px; right:10px; z-index:1000;
+                    background:white; padding:10px; border-radius:8px;
+                    box-shadow:2px 2px 6px rgba(0,0,0,0.3); font-family:Arial;">
+            <b>🌤️ Live Weather</b><br>
+            🌡️ 36.36°C (Feels 33.5°C)<br>
+            🌥️ Broken clouds<br>
+            💧 Humidity: 9%<br>
+            🌬️ Wind: 2.6 m/s<br>
+            🌧️ Rain: 0 mm
+        </div>
+        
+    
+    <div style="position:fixed; bottom:30px; left:30px; z-index:1000;
+                background:white; padding:12px; border-radius:8px;
+                box-shadow:2px 2px 6px rgba(0,0,0,0.3); font-family:Arial; font-size:13px;">
+        <b>🗺️ Map Legend</b><br><br>
+        🔴 Selected Tourist Place<br>
+        🔵 Hotels<br>
+        🟢 Hospitals<br>
+        🟠 Nearby Tourist Places<br>
+        🟣 Restaurants<br>
+        🔻 Shopping Markets
+    </div>
+    
+    
+            <div class="folium-map" id="map_e6b76073e7ac906136462c4dfc72ae00" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_e6b76073e7ac906136462c4dfc72ae00 = L.map(
+                "map_e6b76073e7ac906136462c4dfc72ae00",
+                {
+                    center: [28.6129, 77.2295],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 13,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_506ddda6ddae44b3760ea6049b473e4b = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_506ddda6ddae44b3760ea6049b473e4b.addTo(map_e6b76073e7ac906136462c4dfc72ae00);
+        
+    
+            var marker_be11b79d7eb10ed2abb31cb63482aab6 = L.marker(
+                [28.6129, 77.2295],
+                {
+}
+            ).addTo(map_e6b76073e7ac906136462c4dfc72ae00);
+        
+    
+            var icon_6eaa4b09074dd4c444815e8b6ce3ddae = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f081cd5220a87dd660d3044fa17b9550 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_eb01b585838baf021c452dcb73fcfb31 = $(`<div id="html_eb01b585838baf021c452dcb73fcfb31" style="width: 100.0%; height: 100.0%;">             <b>📍 India Gate</b><br>             Type: Tourist Attraction<br>             ⭐ Rating: 4.6<br>             💰 Entry: ₹0<br>             🕐 Visit: 1.0 hrs<br>             🌅 Best Time: Oct-Mar         </div>`)[0];
+                popup_f081cd5220a87dd660d3044fa17b9550.setContent(html_eb01b585838baf021c452dcb73fcfb31);
+            
+        
+
+        marker_be11b79d7eb10ed2abb31cb63482aab6.bindPopup(popup_f081cd5220a87dd660d3044fa17b9550)
+        ;
+
+        
+    
+    
+            marker_be11b79d7eb10ed2abb31cb63482aab6.bindTooltip(
+                `<div>
+                     📍 India Gate (Selected)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_be11b79d7eb10ed2abb31cb63482aab6.setIcon(icon_6eaa4b09074dd4c444815e8b6ce3ddae);
+            
+    
+            var marker_cluster_d5c95a475907a13f042b80217a508d97 = L.markerClusterGroup(
+                {
+}
+            );
+        
+    
+            var marker_3389f041ee8a9692e80162cae456e86d = L.marker(
+                [28.6260676, 77.2250111],
+                {
+}
+            ).addTo(marker_cluster_d5c95a475907a13f042b80217a508d97);
+        
+    
+            var icon_30145543cb4e06d443231ca98c770c63 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "bed",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_427afb7e51e68165cd1b57244385315d = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_c0107c8367c8afad3f55b8d60040a2c5 = $(`<div id="html_c0107c8367c8afad3f55b8d60040a2c5" style="width: 100.0%; height: 100.0%;">                 <b>🏨 The Hans</b><br>                 ⭐ Rating: 3.6<br>                 🌟 Stars: 4.0<br>                 💰 Price: ₹4860<br>                 📏 Distance: 1.53 km             </div>`)[0];
+                popup_427afb7e51e68165cd1b57244385315d.setContent(html_c0107c8367c8afad3f55b8d60040a2c5);
+            
+        
+
+        marker_3389f041ee8a9692e80162cae456e86d.bindPopup(popup_427afb7e51e68165cd1b57244385315d)
+        ;
+
+        
+    
+    
+            marker_3389f041ee8a9692e80162cae456e86d.bindTooltip(
+                `<div>
+                     🏨 The Hans
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3389f041ee8a9692e80162cae456e86d.setIcon(icon_30145543cb4e06d443231ca98c770c63);
+            
+    
+            var marker_74ff61119aecf683235e8a3baba7a123 = L.marker(
+                [28.6171875, 77.2078082],
+                {
+}
+            ).addTo(marker_cluster_d5c95a475907a13f042b80217a508d97);
+        
+    
+            var icon_d193ca6393fdfe115b1802fb675d60c4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "bed",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3c13d8c53faeac3229a048241e171b43 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_4a83e7c493b5bbe3ac6e5b7233cbb13d = $(`<div id="html_4a83e7c493b5bbe3ac6e5b7233cbb13d" style="width: 100.0%; height: 100.0%;">                 <b>🏨 The Connaught, New Delhi - IHCL SeleQtions</b><br>                 ⭐ Rating: 4.5<br>                 🌟 Stars: 4.0<br>                 💰 Price: ₹7499<br>                 📏 Distance: 2.17 km             </div>`)[0];
+                popup_3c13d8c53faeac3229a048241e171b43.setContent(html_4a83e7c493b5bbe3ac6e5b7233cbb13d);
+            
+        
+
+        marker_74ff61119aecf683235e8a3baba7a123.bindPopup(popup_3c13d8c53faeac3229a048241e171b43)
+        ;
+
+        
+    
+    
+            marker_74ff61119aecf683235e8a3baba7a123.bindTooltip(
+                `<div>
+                     🏨 The Connaught, New Delhi - IHCL SeleQtions
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_74ff61119aecf683235e8a3baba7a123.setIcon(icon_d193ca6393fdfe115b1802fb675d60c4);
+            
+    
+            var marker_0c17e5f5e9ea25b09a5d7c5404dc1100 = L.marker(
+                [28.6171875, 77.2078082],
+                {
+}
+            ).addTo(marker_cluster_d5c95a475907a13f042b80217a508d97);
+        
+    
+            var icon_cc67e52cc498c9d8abafec2e070de447 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "bed",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4ef2a460027bf864aa3b59a4cd6635c4 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_4ed5079baddbbe6ae9f63d53260902db = $(`<div id="html_4ed5079baddbbe6ae9f63d53260902db" style="width: 100.0%; height: 100.0%;">                 <b>🏨 Jukaso Inn Down Town</b><br>                 ⭐ Rating: 3.6<br>                 🌟 Stars: 3.0<br>                 💰 Price: ₹3134<br>                 📏 Distance: 2.17 km             </div>`)[0];
+                popup_4ef2a460027bf864aa3b59a4cd6635c4.setContent(html_4ed5079baddbbe6ae9f63d53260902db);
+            
+        
+
+        marker_0c17e5f5e9ea25b09a5d7c5404dc1100.bindPopup(popup_4ef2a460027bf864aa3b59a4cd6635c4)
+        ;
+
+        
+    
+    
+            marker_0c17e5f5e9ea25b09a5d7c5404dc1100.bindTooltip(
+                `<div>
+                     🏨 Jukaso Inn Down Town
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_0c17e5f5e9ea25b09a5d7c5404dc1100.setIcon(icon_cc67e52cc498c9d8abafec2e070de447);
+            
+    
+            var marker_a85157fff70a75dd7a5c8d02b8f18d1d = L.marker(
+                [28.6171875, 77.2078082],
+                {
+}
+            ).addTo(marker_cluster_d5c95a475907a13f042b80217a508d97);
+        
+    
+            var icon_99bf833c61c83d3e59876f81649bc2c7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "bed",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a9239dbe0b3ab85b7b5230e0e155627c = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_e89ff82ac3ff854aff7362209c457983 = $(`<div id="html_e89ff82ac3ff854aff7362209c457983" style="width: 100.0%; height: 100.0%;">                 <b>🏨 The Park New Delhi</b><br>                 ⭐ Rating: 3.5<br>                 🌟 Stars: 5.0<br>                 💰 Price: ₹7905<br>                 📏 Distance: 2.17 km             </div>`)[0];
+                popup_a9239dbe0b3ab85b7b5230e0e155627c.setContent(html_e89ff82ac3ff854aff7362209c457983);
+            
+        
+
+        marker_a85157fff70a75dd7a5c8d02b8f18d1d.bindPopup(popup_a9239dbe0b3ab85b7b5230e0e155627c)
+        ;
+
+        
+    
+    
+            marker_a85157fff70a75dd7a5c8d02b8f18d1d.bindTooltip(
+                `<div>
+                     🏨 The Park New Delhi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a85157fff70a75dd7a5c8d02b8f18d1d.setIcon(icon_99bf833c61c83d3e59876f81649bc2c7);
+            
+    
+            var marker_e9c47cf778d80e32c7e23c327f4042a3 = L.marker(
+                [28.6171875, 77.2078082],
+                {
+}
+            ).addTo(marker_cluster_d5c95a475907a13f042b80217a508d97);
+        
+    
+            var icon_ff4a420ed1cb0c0a36e11e9e8eafe6a8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "bed",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3665c67cd66d069fed41296d943dec71 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_4b02cacff860e41c6681a27554df4f0b = $(`<div id="html_4b02cacff860e41c6681a27554df4f0b" style="width: 100.0%; height: 100.0%;">                 <b>🏨 New Delhi YMCA Tourist Hostel | Rooms & Wi-Fi
+ Like a 3</b><br>                 ⭐ Rating: 3.5<br>                 🌟 Stars: nan<br>                 💰 Price: ₹3148<br>                 📏 Distance: 2.17 km             </div>`)[0];
+                popup_3665c67cd66d069fed41296d943dec71.setContent(html_4b02cacff860e41c6681a27554df4f0b);
+            
+        
+
+        marker_e9c47cf778d80e32c7e23c327f4042a3.bindPopup(popup_3665c67cd66d069fed41296d943dec71)
+        ;
+
+        
+    
+    
+            marker_e9c47cf778d80e32c7e23c327f4042a3.bindTooltip(
+                `<div>
+                     🏨 New Delhi YMCA Tourist Hostel | Rooms & Wi-Fi
+Like a 3
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e9c47cf778d80e32c7e23c327f4042a3.setIcon(icon_ff4a420ed1cb0c0a36e11e9e8eafe6a8);
+            
+    
+            marker_cluster_d5c95a475907a13f042b80217a508d97.addTo(map_e6b76073e7ac906136462c4dfc72ae00);
+        
+    
+            var marker_cluster_589b3c13764bef47083822fd6707d295 = L.markerClusterGroup(
+                {
+}
+            );
+        
+    
+            var marker_14f9b19ca503e64528d3de4832ce2a8b = L.marker(
+                [28.635892, 77.224957],
+                {
+}
+            ).addTo(marker_cluster_589b3c13764bef47083822fd6707d295);
+        
+    
+            var icon_b257ab588af4ac1acef12e55c9df4e40 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "plus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_1721129855bd4267b84aa89c3b35d335 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_81f76e46c9c04eaeb79461a4edade09f = $(`<div id="html_81f76e46c9c04eaeb79461a4edade09f" style="width: 100.0%; height: 100.0%;">                 <b>🏥 Lions Kidney Hospital & Urology Research Insitute</b><br>                 📍 Opp B Block Friends Colony<br>                 📏 Distance: 2.59 km             </div>`)[0];
+                popup_1721129855bd4267b84aa89c3b35d335.setContent(html_81f76e46c9c04eaeb79461a4edade09f);
+            
+        
+
+        marker_14f9b19ca503e64528d3de4832ce2a8b.bindPopup(popup_1721129855bd4267b84aa89c3b35d335)
+        ;
+
+        
+    
+    
+            marker_14f9b19ca503e64528d3de4832ce2a8b.bindTooltip(
+                `<div>
+                     🏥 Lions Kidney Hospital & Urology Research Insitute
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_14f9b19ca503e64528d3de4832ce2a8b.setIcon(icon_b257ab588af4ac1acef12e55c9df4e40);
+            
+    
+            var marker_fad50e598834f55b3bf4ff4691c14b97 = L.marker(
+                [28.636947, 77.21734],
+                {
+}
+            ).addTo(marker_cluster_589b3c13764bef47083822fd6707d295);
+        
+    
+            var icon_919a821f8b14c159b0785999a45250c5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "plus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3c379f6a550522a498ec9efce16a110d = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_01c4141d2e43ea0bfb03c9ac283acfcd = $(`<div id="html_01c4141d2e43ea0bfb03c9ac283acfcd" style="width: 100.0%; height: 100.0%;">                 <b>🏥 Central Hospital</b><br>                 📍 A-142/1, Ganesh Nagar P.O, Tilak Nagartilak Nagar<br>                 📏 Distance: 2.93 km             </div>`)[0];
+                popup_3c379f6a550522a498ec9efce16a110d.setContent(html_01c4141d2e43ea0bfb03c9ac283acfcd);
+            
+        
+
+        marker_fad50e598834f55b3bf4ff4691c14b97.bindPopup(popup_3c379f6a550522a498ec9efce16a110d)
+        ;
+
+        
+    
+    
+            marker_fad50e598834f55b3bf4ff4691c14b97.bindTooltip(
+                `<div>
+                     🏥 Central Hospital
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_fad50e598834f55b3bf4ff4691c14b97.setIcon(icon_919a821f8b14c159b0785999a45250c5);
+            
+    
+            var marker_461b0888dd50169d16cd7ff1b1994013 = L.marker(
+                [28.641805, 77.234034],
+                {
+}
+            ).addTo(marker_cluster_589b3c13764bef47083822fd6707d295);
+        
+    
+            var icon_8a0060a614f4a1f4296168f32b90627b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "plus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_baf1436883c6bf002c9396bba3b20866 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_e4ff24f73f05edc7659cdae5154346b4 = $(`<div id="html_e4ff24f73f05edc7659cdae5154346b4" style="width: 100.0%; height: 100.0%;">                 <b>🏥 Thecity Clinic (Unitof Siddharth Medical Services (P) Ltd)</b><br>                 📍 #17-A/1, Asaf Ali Road<br>                 📏 Distance: 3.24 km             </div>`)[0];
+                popup_baf1436883c6bf002c9396bba3b20866.setContent(html_e4ff24f73f05edc7659cdae5154346b4);
+            
+        
+
+        marker_461b0888dd50169d16cd7ff1b1994013.bindPopup(popup_baf1436883c6bf002c9396bba3b20866)
+        ;
+
+        
+    
+    
+            marker_461b0888dd50169d16cd7ff1b1994013.bindTooltip(
+                `<div>
+                     🏥 Thecity Clinic (Unitof Siddharth Medical Services (P) Ltd)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_461b0888dd50169d16cd7ff1b1994013.setIcon(icon_8a0060a614f4a1f4296168f32b90627b);
+            
+    
+            var marker_da0b7bb81e01a561819d7d0c02a9a639 = L.marker(
+                [28.581507, 77.222506],
+                {
+}
+            ).addTo(marker_cluster_589b3c13764bef47083822fd6707d295);
+        
+    
+            var icon_ef32b8eb7f1c6e38025c87476c820701 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "plus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2730b76092cd70df6e128a5c0d160819 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_63ea02c91c740a8385443f77d9a767d4 = $(`<div id="html_63ea02c91c740a8385443f77d9a767d4" style="width: 100.0%; height: 100.0%;">                 <b>🏥 Manav Medicare Centre</b><br>                 📍 E-11, South Extension Part<br>                 📏 Distance: 3.56 km             </div>`)[0];
+                popup_2730b76092cd70df6e128a5c0d160819.setContent(html_63ea02c91c740a8385443f77d9a767d4);
+            
+        
+
+        marker_da0b7bb81e01a561819d7d0c02a9a639.bindPopup(popup_2730b76092cd70df6e128a5c0d160819)
+        ;
+
+        
+    
+    
+            marker_da0b7bb81e01a561819d7d0c02a9a639.bindTooltip(
+                `<div>
+                     🏥 Manav Medicare Centre
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_da0b7bb81e01a561819d7d0c02a9a639.setIcon(icon_ef32b8eb7f1c6e38025c87476c820701);
+            
+    
+            var marker_ea6862f2319e1f0baea910d0d49020ee = L.marker(
+                [28.642389, 77.244012],
+                {
+}
+            ).addTo(marker_cluster_589b3c13764bef47083822fd6707d295);
+        
+    
+            var icon_37199a84de7f7b47603768a199a2fd02 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "plus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_1046ae5de38f0403a960dd623bc33e66 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_56593cf4bd2c12af22f5c80fd7b6b696 = $(`<div id="html_56593cf4bd2c12af22f5c80fd7b6b696" style="width: 100.0%; height: 100.0%;">                 <b>🏥 Chaudhary Eye Centre & Laser Vision</b><br>                 📍 4802/24, Bharat Ram Road, Darya Ganj, 24, Darya Ganj<br>                 📏 Distance: 3.57 km             </div>`)[0];
+                popup_1046ae5de38f0403a960dd623bc33e66.setContent(html_56593cf4bd2c12af22f5c80fd7b6b696);
+            
+        
+
+        marker_ea6862f2319e1f0baea910d0d49020ee.bindPopup(popup_1046ae5de38f0403a960dd623bc33e66)
+        ;
+
+        
+    
+    
+            marker_ea6862f2319e1f0baea910d0d49020ee.bindTooltip(
+                `<div>
+                     🏥 Chaudhary Eye Centre & Laser Vision
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ea6862f2319e1f0baea910d0d49020ee.setIcon(icon_37199a84de7f7b47603768a199a2fd02);
+            
+    
+            marker_cluster_589b3c13764bef47083822fd6707d295.addTo(map_e6b76073e7ac906136462c4dfc72ae00);
+        
+    
+            var marker_cluster_36c7e680372d0c8b79807681da3e2670 = L.markerClusterGroup(
+                {
+}
+            );
+        
+    
+            var marker_bf11b1c24a6ee24e2a658155cd847a99 = L.marker(
+                [28.6118, 77.2193],
+                {
+}
+            ).addTo(marker_cluster_36c7e680372d0c8b79807681da3e2670);
+        
+    
+            var icon_3a8313dda2e700ace5fb971c919e1cf9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "camera",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3013fdd30fb3baa3ffd25ea0a4156b79 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_f2cc28353dc71e249a2bb15af544d38f = $(`<div id="html_f2cc28353dc71e249a2bb15af544d38f" style="width: 100.0%; height: 100.0%;">                 <b>🌍 National Museum</b><br>                 Type: Tourist Attraction<br>                 ⭐ Rating: 4.5<br>                 💰 Entry: ₹20<br>                 📏 Distance: 1.00 km             </div>`)[0];
+                popup_3013fdd30fb3baa3ffd25ea0a4156b79.setContent(html_f2cc28353dc71e249a2bb15af544d38f);
+            
+        
+
+        marker_bf11b1c24a6ee24e2a658155cd847a99.bindPopup(popup_3013fdd30fb3baa3ffd25ea0a4156b79)
+        ;
+
+        
+    
+    
+            marker_bf11b1c24a6ee24e2a658155cd847a99.bindTooltip(
+                `<div>
+                     🌍 National Museum
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_bf11b1c24a6ee24e2a658155cd847a99.setIcon(icon_3a8313dda2e700ace5fb971c919e1cf9);
+            
+    
+            var marker_55d97ff4e8f329b2a5f66b889157b36a = L.marker(
+                [28.6096, 77.2435],
+                {
+}
+            ).addTo(marker_cluster_36c7e680372d0c8b79807681da3e2670);
+        
+    
+            var icon_0ae412d37673297b99cfe0f3d3557bbe = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "camera",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ba5ddcebb45f6e4510e43c0d36c0d2ee = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_24ffab6a3298d39e67451e4deb64517b = $(`<div id="html_24ffab6a3298d39e67451e4deb64517b" style="width: 100.0%; height: 100.0%;">                 <b>🌍 Purana Qila</b><br>                 Type: Tourist Attraction<br>                 ⭐ Rating: 4.5<br>                 💰 Entry: ₹30<br>                 📏 Distance: 1.42 km             </div>`)[0];
+                popup_ba5ddcebb45f6e4510e43c0d36c0d2ee.setContent(html_24ffab6a3298d39e67451e4deb64517b);
+            
+        
+
+        marker_55d97ff4e8f329b2a5f66b889157b36a.bindPopup(popup_ba5ddcebb45f6e4510e43c0d36c0d2ee)
+        ;
+
+        
+    
+    
+            marker_55d97ff4e8f329b2a5f66b889157b36a.bindTooltip(
+                `<div>
+                     🌍 Purana Qila
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_55d97ff4e8f329b2a5f66b889157b36a.setIcon(icon_0ae412d37673297b99cfe0f3d3557bbe);
+            
+    
+            var marker_249aa2dec7b3f1e85170ed5f64342ba4 = L.marker(
+                [28.6261, 77.225],
+                {
+}
+            ).addTo(marker_cluster_36c7e680372d0c8b79807681da3e2670);
+        
+    
+            var icon_9f9934624e8402637dcad32146416d34 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "camera",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e3d784b8be1afa42c432f7005f05b7f1 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_6ab1c421f7958277f6ec8a574ff407a1 = $(`<div id="html_6ab1c421f7958277f6ec8a574ff407a1" style="width: 100.0%; height: 100.0%;">                 <b>🌍 Agrasen Ki Baoli</b><br>                 Type: Tourist Attraction<br>                 ⭐ Rating: 4.5<br>                 💰 Entry: ₹0<br>                 📏 Distance: 1.53 km             </div>`)[0];
+                popup_e3d784b8be1afa42c432f7005f05b7f1.setContent(html_6ab1c421f7958277f6ec8a574ff407a1);
+            
+        
+
+        marker_249aa2dec7b3f1e85170ed5f64342ba4.bindPopup(popup_e3d784b8be1afa42c432f7005f05b7f1)
+        ;
+
+        
+    
+    
+            marker_249aa2dec7b3f1e85170ed5f64342ba4.bindTooltip(
+                `<div>
+                     🌍 Agrasen Ki Baoli
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_249aa2dec7b3f1e85170ed5f64342ba4.setIcon(icon_9f9934624e8402637dcad32146416d34);
+            
+    
+            var marker_71952a412225662465ca3f61ab8ef161 = L.marker(
+                [28.605, 77.246],
+                {
+}
+            ).addTo(marker_cluster_36c7e680372d0c8b79807681da3e2670);
+        
+    
+            var icon_b7dcab012c5cc75e6c5f3bd769caa77d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "camera",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_05340771f7ebabfe72f3da002be0323f = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_20d300f8a6cc803ecffc00c33f6fe6e2 = $(`<div id="html_20d300f8a6cc803ecffc00c33f6fe6e2" style="width: 100.0%; height: 100.0%;">                 <b>🌍 National Zoological Park</b><br>                 Type: Tourist Attraction<br>                 ⭐ Rating: 4.5<br>                 💰 Entry: ₹80<br>                 📏 Distance: 1.83 km             </div>`)[0];
+                popup_05340771f7ebabfe72f3da002be0323f.setContent(html_20d300f8a6cc803ecffc00c33f6fe6e2);
+            
+        
+
+        marker_71952a412225662465ca3f61ab8ef161.bindPopup(popup_05340771f7ebabfe72f3da002be0323f)
+        ;
+
+        
+    
+    
+            marker_71952a412225662465ca3f61ab8ef161.bindTooltip(
+                `<div>
+                     🌍 National Zoological Park
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_71952a412225662465ca3f61ab8ef161.setIcon(icon_b7dcab012c5cc75e6c5f3bd769caa77d);
+            
+    
+            var marker_1d07718c1a97f3eaf3c814e86a129d04 = L.marker(
+                [28.6139, 77.209],
+                {
+}
+            ).addTo(marker_cluster_36c7e680372d0c8b79807681da3e2670);
+        
+    
+            var icon_2be75f57a6287961678cb8194bd3e205 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "camera",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3b753342a025d36e5b4c15f03b13d7d3 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_b01960b87a4d8b85349bd88daba7abd6 = $(`<div id="html_b01960b87a4d8b85349bd88daba7abd6" style="width: 100.0%; height: 100.0%;">                 <b>🌍 Cathedral Church of the Redemption</b><br>                 Type: Tourist Attraction<br>                 ⭐ Rating: 4.5<br>                 💰 Entry: ₹0<br>                 📏 Distance: 2.00 km             </div>`)[0];
+                popup_3b753342a025d36e5b4c15f03b13d7d3.setContent(html_b01960b87a4d8b85349bd88daba7abd6);
+            
+        
+
+        marker_1d07718c1a97f3eaf3c814e86a129d04.bindPopup(popup_3b753342a025d36e5b4c15f03b13d7d3)
+        ;
+
+        
+    
+    
+            marker_1d07718c1a97f3eaf3c814e86a129d04.bindTooltip(
+                `<div>
+                     🌍 Cathedral Church of the Redemption
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1d07718c1a97f3eaf3c814e86a129d04.setIcon(icon_2be75f57a6287961678cb8194bd3e205);
+            
+    
+            marker_cluster_36c7e680372d0c8b79807681da3e2670.addTo(map_e6b76073e7ac906136462c4dfc72ae00);
+        
+    
+            var marker_cluster_e3ac43c7c904c669554fa5f150170354 = L.markerClusterGroup(
+                {
+}
+            );
+        
+    
+            var marker_1f32e33d035a4c63105b2ac4cb022821 = L.marker(
+                [28.60874005, 77.23006457],
+                {
+}
+            ).addTo(marker_cluster_e3ac43c7c904c669554fa5f150170354);
+        
+    
+            var icon_14fed3fb9cfd9827a0195f25300e1915 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "purple",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2361e267335faebebf7a498be9c474e4 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_8a69a8b67a02e85cbb96639d64db85b6 = $(`<div id="html_8a69a8b67a02e85cbb96639d64db85b6" style="width: 100.0%; height: 100.0%;">                     <b>🍽️ Chor Bizarre</b><br>                     ⭐ Rating: 0.46<br>                     💰 For 2: ₹0.5451606682778642<br>                     📏 Distance: 0.47 km                 </div>`)[0];
+                popup_2361e267335faebebf7a498be9c474e4.setContent(html_8a69a8b67a02e85cbb96639d64db85b6);
+            
+        
+
+        marker_1f32e33d035a4c63105b2ac4cb022821.bindPopup(popup_2361e267335faebebf7a498be9c474e4)
+        ;
+
+        
+    
+    
+            marker_1f32e33d035a4c63105b2ac4cb022821.bindTooltip(
+                `<div>
+                     🍽️ Chor Bizarre
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1f32e33d035a4c63105b2ac4cb022821.setIcon(icon_14fed3fb9cfd9827a0195f25300e1915);
+            
+    
+            var marker_da811e38993aa29cfd0c301a0b82b278 = L.marker(
+                [28.60807689, 77.22971488],
+                {
+}
+            ).addTo(marker_cluster_e3ac43c7c904c669554fa5f150170354);
+        
+    
+            var icon_902727f6aa9339c9cb27f2b6adfe8afc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "purple",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8e353e957c1616fcc017ffcd8ff2241a = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_c28fd27b3969c830c173dfa718da2acc = $(`<div id="html_c28fd27b3969c830c173dfa718da2acc" style="width: 100.0%; height: 100.0%;">                     <b>🍽️ Ichiban</b><br>                     ⭐ Rating: 0.16<br>                     💰 For 2: ₹0.1170069060212682<br>                     📏 Distance: 0.54 km                 </div>`)[0];
+                popup_8e353e957c1616fcc017ffcd8ff2241a.setContent(html_c28fd27b3969c830c173dfa718da2acc);
+            
+        
+
+        marker_da811e38993aa29cfd0c301a0b82b278.bindPopup(popup_8e353e957c1616fcc017ffcd8ff2241a)
+        ;
+
+        
+    
+    
+            marker_da811e38993aa29cfd0c301a0b82b278.bindTooltip(
+                `<div>
+                     🍽️ Ichiban
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_da811e38993aa29cfd0c301a0b82b278.setIcon(icon_902727f6aa9339c9cb27f2b6adfe8afc);
+            
+    
+            var marker_884df9a5523ca861cc13ee785b655cc9 = L.marker(
+                [28.60807424, 77.22971756],
+                {
+}
+            ).addTo(marker_cluster_e3ac43c7c904c669554fa5f150170354);
+        
+    
+            var icon_4d602e4473f9930f8bdd5f74b063a99c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "purple",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_58e616382f668091dc7750f9ee8fab56 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_994e569e350d4758edce9520c101465d = $(`<div id="html_994e569e350d4758edce9520c101465d" style="width: 100.0%; height: 100.0%;">                     <b>🍽️ Havemore</b><br>                     ⭐ Rating: 0.26<br>                     💰 For 2: ₹1.2944297522269077<br>                     📏 Distance: 0.54 km                 </div>`)[0];
+                popup_58e616382f668091dc7750f9ee8fab56.setContent(html_994e569e350d4758edce9520c101465d);
+            
+        
+
+        marker_884df9a5523ca861cc13ee785b655cc9.bindPopup(popup_58e616382f668091dc7750f9ee8fab56)
+        ;
+
+        
+    
+    
+            marker_884df9a5523ca861cc13ee785b655cc9.bindTooltip(
+                `<div>
+                     🍽️ Havemore
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_884df9a5523ca861cc13ee785b655cc9.setIcon(icon_4d602e4473f9930f8bdd5f74b063a99c);
+            
+    
+            var marker_216da9cbe39992a187c528dd5da1a7b8 = L.marker(
+                [28.608007, 77.23014],
+                {
+}
+            ).addTo(marker_cluster_e3ac43c7c904c669554fa5f150170354);
+        
+    
+            var icon_d9b6ef441a45f5091d4877933e8c535e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "purple",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_1e87bd351d6e315efe2ee0ff238c664b = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_3897fd0f25c9735eb352ef03ae0232fc = $(`<div id="html_3897fd0f25c9735eb352ef03ae0232fc" style="width: 100.0%; height: 100.0%;">                     <b>🍽️ Gulati</b><br>                     ⭐ Rating: 0.55<br>                     💰 For 2: ₹1.5085066333552055<br>                     📏 Distance: 0.55 km                 </div>`)[0];
+                popup_1e87bd351d6e315efe2ee0ff238c664b.setContent(html_3897fd0f25c9735eb352ef03ae0232fc);
+            
+        
+
+        marker_216da9cbe39992a187c528dd5da1a7b8.bindPopup(popup_1e87bd351d6e315efe2ee0ff238c664b)
+        ;
+
+        
+    
+    
+            marker_216da9cbe39992a187c528dd5da1a7b8.bindTooltip(
+                `<div>
+                     🍽️ Gulati
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_216da9cbe39992a187c528dd5da1a7b8.setIcon(icon_d9b6ef441a45f5091d4877933e8c535e);
+            
+    
+            var marker_55d196abe184c80ec765f346f36ef031 = L.marker(
+                [28.60795562, 77.22982217],
+                {
+}
+            ).addTo(marker_cluster_e3ac43c7c904c669554fa5f150170354);
+        
+    
+            var icon_e16ab2d7848bd07a19d8be8cde476975 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "purple",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d20c8754f5f9dad0cb22d521d89be645 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_17e8d5e02d34dc36b8ea079ae7f7164b = $(`<div id="html_17e8d5e02d34dc36b8ea079ae7f7164b" style="width: 100.0%; height: 100.0%;">                     <b>🍽️ Pindi</b><br>                     ⭐ Rating: -0.04<br>                     💰 For 2: ₹0.3310837871495662<br>                     📏 Distance: 0.55 km                 </div>`)[0];
+                popup_d20c8754f5f9dad0cb22d521d89be645.setContent(html_17e8d5e02d34dc36b8ea079ae7f7164b);
+            
+        
+
+        marker_55d196abe184c80ec765f346f36ef031.bindPopup(popup_d20c8754f5f9dad0cb22d521d89be645)
+        ;
+
+        
+    
+    
+            marker_55d196abe184c80ec765f346f36ef031.bindTooltip(
+                `<div>
+                     🍽️ Pindi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_55d196abe184c80ec765f346f36ef031.setIcon(icon_e16ab2d7848bd07a19d8be8cde476975);
+            
+    
+            marker_cluster_e3ac43c7c904c669554fa5f150170354.addTo(map_e6b76073e7ac906136462c4dfc72ae00);
+        
+    
+            var marker_cluster_9f0b5e0b5adbe7f91a2971e34335a386 = L.markerClusterGroup(
+                {
+}
+            );
+        
+    
+            var marker_9621012ae624cefa7bff83def797bee8 = L.marker(
+                [28.6007, 77.227],
+                {
+}
+            ).addTo(marker_cluster_9f0b5e0b5adbe7f91a2971e34335a386);
+        
+    
+            var icon_650a1ecc44532085c75be9f8dd7aca8d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkred",
+  "iconColor": "white",
+  "icon": "shopping-bag",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_21e37f9e2c9e40849ad0607e7bcb6ddd = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_adc4dd6de53570ff66006709ff801573 = $(`<div id="html_adc4dd6de53570ff66006709ff801573" style="width: 100.0%; height: 100.0%;">                 <b>🛍️ Khan Market</b><br>                 📦 Category: Luxury_Market<br>                 🎯 Best For: Premium_Brands_Cafes_Books<br>                 🕐 Hours: 10:00-22:00<br>                 📅 Weekly Off: Sunday<br>                 ⭐ Rating: 4.6<br>                 💰 Price Level: 💰💰💰<br>                 📏 Distance: 1.38 km             </div>`)[0];
+                popup_21e37f9e2c9e40849ad0607e7bcb6ddd.setContent(html_adc4dd6de53570ff66006709ff801573);
+            
+        
+
+        marker_9621012ae624cefa7bff83def797bee8.bindPopup(popup_21e37f9e2c9e40849ad0607e7bcb6ddd)
+        ;
+
+        
+    
+    
+            marker_9621012ae624cefa7bff83def797bee8.bindTooltip(
+                `<div>
+                     🛍️ Khan Market
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_9621012ae624cefa7bff83def797bee8.setIcon(icon_650a1ecc44532085c75be9f8dd7aca8d);
+            
+    
+            var marker_2f24f85362ec0db5bcfb72b8baa5c434 = L.marker(
+                [28.6269, 77.2186],
+                {
+}
+            ).addTo(marker_cluster_9f0b5e0b5adbe7f91a2971e34335a386);
+        
+    
+            var icon_6cc04aa6bb83b85626a6a9496e94e330 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkred",
+  "iconColor": "white",
+  "icon": "shopping-bag",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_07858910558cb3ed160abe9910f2be06 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_64ed55014999a1f13495f84394437292 = $(`<div id="html_64ed55014999a1f13495f84394437292" style="width: 100.0%; height: 100.0%;">                 <b>🛍️ Janpath Market</b><br>                 📦 Category: Street_Market<br>                 🎯 Best For: Jewelry_Handicrafts_Clothes<br>                 🕐 Hours: 11:00-20:00<br>                 📅 Weekly Off: Sunday<br>                 ⭐ Rating: 4.4<br>                 💰 Price Level: 💰<br>                 📏 Distance: 1.89 km             </div>`)[0];
+                popup_07858910558cb3ed160abe9910f2be06.setContent(html_64ed55014999a1f13495f84394437292);
+            
+        
+
+        marker_2f24f85362ec0db5bcfb72b8baa5c434.bindPopup(popup_07858910558cb3ed160abe9910f2be06)
+        ;
+
+        
+    
+    
+            marker_2f24f85362ec0db5bcfb72b8baa5c434.bindTooltip(
+                `<div>
+                     🛍️ Janpath Market
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2f24f85362ec0db5bcfb72b8baa5c434.setIcon(icon_6cc04aa6bb83b85626a6a9496e94e330);
+            
+    
+            var marker_8f88f9ad06d36c8ea783272685b76f9b = L.marker(
+                [28.6292, 77.2203],
+                {
+}
+            ).addTo(marker_cluster_9f0b5e0b5adbe7f91a2971e34335a386);
+        
+    
+            var icon_d7b5ae115ca639a8fb9d220a1eb06fb4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkred",
+  "iconColor": "white",
+  "icon": "shopping-bag",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a736d95179f0db94b2c4fb6f09b6971c = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_50f4d106b1f2ffe924968fc20d69d7dd = $(`<div id="html_50f4d106b1f2ffe924968fc20d69d7dd" style="width: 100.0%; height: 100.0%;">                 <b>🛍️ Shankar Market</b><br>                 📦 Category: Clothing_Market<br>                 🎯 Best For: Tailoring_Fabrics<br>                 🕐 Hours: 10:00-20:00<br>                 📅 Weekly Off: Sunday<br>                 ⭐ Rating: 4.1<br>                 💰 Price Level: 💰💰<br>                 📏 Distance: 2.02 km             </div>`)[0];
+                popup_a736d95179f0db94b2c4fb6f09b6971c.setContent(html_50f4d106b1f2ffe924968fc20d69d7dd);
+            
+        
+
+        marker_8f88f9ad06d36c8ea783272685b76f9b.bindPopup(popup_a736d95179f0db94b2c4fb6f09b6971c)
+        ;
+
+        
+    
+    
+            marker_8f88f9ad06d36c8ea783272685b76f9b.bindTooltip(
+                `<div>
+                     🛍️ Shankar Market
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8f88f9ad06d36c8ea783272685b76f9b.setIcon(icon_d7b5ae115ca639a8fb9d220a1eb06fb4);
+            
+    
+            var marker_6e86e1342e087b14e1e7a0c45d75406c = L.marker(
+                [28.6328, 77.2197],
+                {
+}
+            ).addTo(marker_cluster_9f0b5e0b5adbe7f91a2971e34335a386);
+        
+    
+            var icon_34907922d0a229a51bb3dd030132c6d2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkred",
+  "iconColor": "white",
+  "icon": "shopping-bag",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_43e2301f4a3de4c100f4bc5695024f3f = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_a3bad1ae3aedae12b667b4746462c6aa = $(`<div id="html_a3bad1ae3aedae12b667b4746462c6aa" style="width: 100.0%; height: 100.0%;">                 <b>🛍️ Palika Bazaar</b><br>                 📦 Category: Underground_Market<br>                 🎯 Best For: Electronics_Clothes_Games<br>                 🕐 Hours: 11:00-20:00<br>                 📅 Weekly Off: Sunday<br>                 ⭐ Rating: 4.1<br>                 💰 Price Level: 💰<br>                 📏 Distance: 2.41 km             </div>`)[0];
+                popup_43e2301f4a3de4c100f4bc5695024f3f.setContent(html_a3bad1ae3aedae12b667b4746462c6aa);
+            
+        
+
+        marker_6e86e1342e087b14e1e7a0c45d75406c.bindPopup(popup_43e2301f4a3de4c100f4bc5695024f3f)
+        ;
+
+        
+    
+    
+            marker_6e86e1342e087b14e1e7a0c45d75406c.bindTooltip(
+                `<div>
+                     🛍️ Palika Bazaar
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6e86e1342e087b14e1e7a0c45d75406c.setIcon(icon_34907922d0a229a51bb3dd030132c6d2);
+            
+    
+            var marker_34e54ca9d769c689e87562f3c8a35757 = L.marker(
+                [28.6315, 77.2167],
+                {
+}
+            ).addTo(marker_cluster_9f0b5e0b5adbe7f91a2971e34335a386);
+        
+    
+            var icon_e2ef3acef172e82cf98562210f0a3ba9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkred",
+  "iconColor": "white",
+  "icon": "shopping-bag",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_bd3210bef93dc6c2153f32d0638c78e6 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_02c8244177667655033683cf608ca75c = $(`<div id="html_02c8244177667655033683cf608ca75c" style="width: 100.0%; height: 100.0%;">                 <b>🛍️ Connaught Place</b><br>                 📦 Category: Luxury_Market<br>                 🎯 Best For: Brands_Restaurants_Cafes<br>                 🕐 Hours: 10:00-22:00<br>                 📅 Weekly Off: nan<br>                 ⭐ Rating: 4.6<br>                 💰 Price Level: 💰💰💰<br>                 📏 Distance: 2.42 km             </div>`)[0];
+                popup_bd3210bef93dc6c2153f32d0638c78e6.setContent(html_02c8244177667655033683cf608ca75c);
+            
+        
+
+        marker_34e54ca9d769c689e87562f3c8a35757.bindPopup(popup_bd3210bef93dc6c2153f32d0638c78e6)
+        ;
+
+        
+    
+    
+            marker_34e54ca9d769c689e87562f3c8a35757.bindTooltip(
+                `<div>
+                     🛍️ Connaught Place
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_34e54ca9d769c689e87562f3c8a35757.setIcon(icon_e2ef3acef172e82cf98562210f0a3ba9);
+            
+    
+            marker_cluster_9f0b5e0b5adbe7f91a2971e34335a386.addTo(map_e6b76073e7ac906136462c4dfc72ae00);
+        
+    
+            var layer_control_b967d3741b940743d699aca39ba8c902_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_506ddda6ddae44b3760ea6049b473e4b,
+                },
+                overlays :  {
+                    "\ud83c\udfe8 Hotels" : marker_cluster_d5c95a475907a13f042b80217a508d97,
+                    "\ud83c\udfe5 Hospitals" : marker_cluster_589b3c13764bef47083822fd6707d295,
+                    "\ud83c\udf0d Tourist Places" : marker_cluster_36c7e680372d0c8b79807681da3e2670,
+                    "\ud83c\udf7d\ufe0f Restaurants" : marker_cluster_e3ac43c7c904c669554fa5f150170354,
+                    "\ud83d\udecd\ufe0f Shopping Markets" : marker_cluster_9f0b5e0b5adbe7f91a2971e34335a386,
+                },
+            };
+            let layer_control_b967d3741b940743d699aca39ba8c902 = L.control.layers(
+                layer_control_b967d3741b940743d699aca39ba8c902_layers.base_layers,
+                layer_control_b967d3741b940743d699aca39ba8c902_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_e6b76073e7ac906136462c4dfc72ae00);
+
+        
+</script>
+</html>

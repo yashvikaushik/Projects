@@ -1,7 +1,6 @@
 from dotenv import load_dotenv
 load_dotenv()
-
-from fastapi import FastAPI,HTTPException
+from fastapi import FastAPI,HTTPException,Form
 from services.whether_service import fetch_coordinates,fetch_weather,get_weather_by_city
 from services.groq_api_service import get_suggestion
 from services.whatsapp_service import send_whatsapp_message
@@ -74,4 +73,34 @@ Suggestion:
     return {"message": "Weather sent on WhatsApp"}
 
 
+@app.post("/whatsapp")
+async def whatsapp_webhook(
+    From: str = Form(...),
+    Body: str = Form(...)
+):
 
+    message = Body.lower()
+
+    if "weather" in message:
+
+        city = message.replace("weather", "").strip()
+
+        result = await get_suggestion(city)
+
+        reply = f"""
+Weather Update 🌤
+
+City: {result['city']}
+Temperature: {result['temperature']}°C
+Condition: {result['condition']}
+Wind Speed: {result['windspeed']} km/h
+
+Suggestion 
+{result['suggestion']}
+"""
+
+        phone = From.replace("whatsapp:", "")
+
+        send_whatsapp_message(phone, reply)
+
+    return "ok"

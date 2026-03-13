@@ -1,0 +1,98 @@
+Zone,State,City,Name,Type,Establishment Year,time needed to visit in hrs,Google review rating,Entrance Fee in INR,Airport with 50km Radius,Weekly Off,Significance,DSLR Allowed,Number of google review in lakhs,Best Time to visit,Full_Address,Latitude,Longitude
+Northern,Delhi,Delhi,India Gate,Tourist Attraction,1931.0,1.0,4.6,0,Yes,None,All India War Memorial for soldiers of WWI.,Yes,2.8,Oct-Mar,"Rajpath, India Gate, New Delhi, Delhi 110001",28.6129,77.2295
+Northern,Delhi,Delhi,Red Fort,Tourist Attraction,1648.0,3.0,4.5,25,Yes,Monday,"UNESCO World Heritage site, former residence of Mughal Emperors.",Yes,2.1,Oct-Mar,"Netaji Subhash Marg, Lal Qila, Chandni Chowk, New Delhi, Delhi 110006",28.6562,77.241
+Northern,Delhi,Delhi,Qutub Minar,Tourist Attraction,1220.0,2.0,4.5,40,Yes,None,"UNESCO World Heritage site, tallest brick minaret in the world.",Yes,1.6,Oct-Mar,"Seth Sarai, Mehrauli, New Delhi, Delhi 110030",28.5245,77.1855
+Northern,Delhi,Delhi,Humayun's Tomb,Tourist Attraction,1572.0,2.0,4.5,40,Yes,None,"UNESCO World Heritage site, first garden-tomb on the Indian subcontinent.",Yes,0.9,Oct-Mar,"Mathura Road, Nizamuddin East, New Delhi, Delhi 110013",28.5933,77.2507
+Northern,Delhi,Delhi,Lotus Temple,Tourist Attraction,1986.0,1.5,4.5,0,Yes,Monday,"Baha'i House of Worship, notable for its flowerlike shape.",Yes,1.1,Oct-Mar,"Lotus Temple Rd, Bahapur, Shambhu Dayal Bagh, Kalkaji, New Delhi, Delhi 110019",28.5535,77.2588
+Northern,Delhi,Delhi,Akshardham Temple,Tourist Attraction,2005.0,4.0,4.6,0,Yes,Monday,Large Hindu temple complex showcasing Indian culture and spirituality.,Yes,1.8,Oct-Mar,"Noida Mor, Pandav Nagar, New Delhi, Delhi 110092",28.6127,77.2773
+Northern,Delhi,Delhi,Jama Masjid,Tourist Attraction,1656.0,1.5,4.5,0,Yes,None,"One of the largest mosques in India, built by Shah Jahan.",Yes,0.8,Oct-Mar,"Jama Masjid, Old Delhi, Delhi 110006",28.6507,77.2334
+Northern,Delhi,Delhi,Purana Qila,Tourist Attraction,1538.0,2.0,4.5,30,Yes,None,"One of the oldest forts in Delhi, built by Humayun and Sher Shah Suri.",Yes,0.5,Oct-Mar,"Mathura Rd, Near Delhi Zoo, New Delhi, Delhi 110003",28.6096,77.2435
+Northern,Delhi,Delhi,Safdarjung Tomb,Tourist Attraction,1754.0,2.0,4.5,25,Yes,None,"Mausoleum of Safdarjung, last monumental garden tomb of the Mughals.",Yes,0.5,Oct-Mar,"Airforce Golf Course, Delhi Race Club, New Delhi, Delhi 110021",28.5893,77.2106
+Northern,Delhi,Delhi,Lodhi Garden,Tourist Attraction,1444.0,2.0,4.5,0,Yes,None,City park containing tombs of Sayyid and Lodhi rulers.,Yes,0.5,Oct-Mar,"Lodhi Rd, Lodhi Gardens, Lodhi Estate, New Delhi, Delhi 110003",28.5931,77.2197
+Northern,Delhi,Delhi,Rashtrapati Bhavan,Tourist Attraction,1929.0,2.0,4.5,50,Yes,Mon-Wed,Official residence of the President of India.,Yes,0.5,Oct-Mar,"Rashtrapati Bhawan, President's Estate, New Delhi, Delhi 110004",28.6143,77.1996
+Northern,Delhi,Delhi,Raj Ghat,Tourist Attraction,1948.0,2.0,4.5,0,Yes,None,Memorial dedicated to Mahatma Gandhi.,Yes,0.5,Oct-Mar,"Gandhi Smriti, Raj Ghat, New Delhi, Delhi 110006",28.6406,77.2495
+Northern,Delhi,Delhi,Shanti Van,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Vijay Ghat,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,National War Memorial,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,National Museum,Tourist Attraction,1949.0,2.0,4.5,20,Yes,Monday,One of the largest museums in India with artifacts from pre-historic era.,Yes,0.5,Oct-Mar,"Janpath, New Delhi, Delhi 110011",28.6118,77.2193
+Northern,Delhi,Delhi,National Gallery of Modern Art,Tourist Attraction,Historical,2.0,4.5,50,Yes,Monday,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Gandhi Smriti,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Indira Gandhi Memorial Museum,Tourist Attraction,Historical,2.0,4.5,50,Yes,Monday,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Nehru Memorial Museum & Library,Tourist Attraction,Historical,2.0,4.5,50,Yes,Monday,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Pradhanmantri Sangrahalaya,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,National Rail Museum,Tourist Attraction,1977.0,2.0,4.5,50,Yes,Monday,Museum focusing on the rail heritage of India.,Yes,0.5,Oct-Mar,"Chanakyapuri, New Delhi, Delhi 110021",28.5855,77.1897
+Northern,Delhi,Delhi,National Handicrafts and Handlooms Museum,Tourist Attraction,Historical,2.0,4.5,50,Yes,Monday,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,National Science Centre,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,National Zoological Park,Tourist Attraction,1959.0,2.0,4.5,80,Yes,Friday,"Delhi Zoo, home to white tigers and many other species.",Yes,0.5,Oct-Mar,"Mathura Rd, Near Purana Qila, New Delhi, Delhi 110003",28.605,77.246
+Northern,Delhi,Delhi,Garden of Five Senses,Tourist Attraction,2003.0,2.0,4.5,35,Yes,None,"Park spread over 20 acres, designed to stimulate the five senses.",Yes,0.5,Oct-Mar,"Saidul Ajaib, Near Saket Metro Station, New Delhi, Delhi 110030",28.5133,77.1977
+Northern,Delhi,Delhi,Hauz Khas Fort,Tourist Attraction,1284.0,2.0,4.5,25,Yes,None,"Medieval structures surrounding a water tank, built during Alauddin Khalji's reign.",Yes,0.5,Oct-Mar,"Hauz Khas Village, New Delhi, Delhi 110016",28.554,77.1944
+Northern,Delhi,Delhi,Hauz Khas Village,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Mehrauli Archaeological Park,Tourist Attraction,Historical,2.0,4.5,0,Yes,None,Lush green public park and garden.,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Adham Khan Tomb,Tourist Attraction,Historical,2.0,4.5,25,Yes,None,Historical Mughal era tomb.,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Jamali Kamali Mosque and Tomb,Tourist Attraction,Historical,2.0,4.5,25,Yes,None,Historical Mughal era tomb.,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Rajon Ki Baoli,Tourist Attraction,Historical,2.0,4.5,25,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Gandhak Ki Baoli,Tourist Attraction,Historical,2.0,4.5,25,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Zafar Mahal,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Jahaz Mahal,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Quli Khan Tomb,Tourist Attraction,Historical,2.0,4.5,25,Yes,None,Historical Mughal era tomb.,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Balban Tomb,Tourist Attraction,Historical,2.0,4.5,25,Yes,None,Historical Mughal era tomb.,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Agrasen Ki Baoli,Tourist Attraction,1350.0,2.0,4.5,0,Yes,None,Ancient stepwell designated as a protected monument by ASI.,Yes,0.5,Oct-Mar,"Hailey Road, Near Connaught Place, New Delhi, Delhi 110001",28.6261,77.225
+Northern,Delhi,Delhi,Feroz Shah Kotla Fort,Tourist Attraction,Historical,2.0,4.5,25,Yes,None,Ancient historical fort and ruins.,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Khuni Darwaza,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Teen Murti Bhavan,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Nehru Planetarium,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Chhatarpur Temple,Tourist Attraction,1974.0,2.0,4.5,0,Yes,None,"Second largest temple complex in India, dedicated to Goddess Katyayani.",Yes,0.5,Oct-Mar,"Main Chhatarpur Rd, Chhatarpur Village, New Delhi, Delhi 110074",28.5033,77.1772
+Northern,Delhi,Delhi,Kalkaji Temple,Tourist Attraction,Historical,2.0,4.5,0,Yes,None,Prominent religious temple in Delhi.,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Birla Mandir (Laxminarayan Temple),Tourist Attraction,Historical,2.0,4.5,0,Yes,None,Prominent religious temple in Delhi.,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Bangla Sahib Gurudwara,Tourist Attraction,1783.0,2.0,4.5,0,Yes,None,Prominent Sikh house of worship known for its holy pond and langar.,Yes,0.5,Oct-Mar,"Ashoka Rd, Connaught Place, New Delhi, Delhi 110001",28.6264,77.2091
+Northern,Delhi,Delhi,Gurudwara Sis Ganj Sahib,Tourist Attraction,Historical,2.0,4.5,0,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Sacred Heart Cathedral,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Cathedral Church of the Redemption,Tourist Attraction,Historical,2.0,4.5,0,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,St James Church,Tourist Attraction,Historical,2.0,4.5,0,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Nizamuddin Dargah,Tourist Attraction,Historical,2.0,4.5,0,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Chausath Khamba,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Sunder Nursery,Tourist Attraction,1924.0,2.0,4.5,50,Yes,None,Heritage park and nursery with Mughal-era monuments.,Yes,0.5,Oct-Mar,"Nizamuddin, New Delhi, Delhi 110013",28.5947,77.2462
+Northern,Delhi,Delhi,Nehru Park,Tourist Attraction,Historical,2.0,4.5,0,Yes,None,Lush green public park and garden.,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Deer Park,Tourist Attraction,Historical,2.0,4.5,0,Yes,None,Lush green public park and garden.,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Buddha Jayanti Park,Tourist Attraction,Historical,2.0,4.5,0,Yes,None,Lush green public park and garden.,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Talkatora Garden,Tourist Attraction,Historical,2.0,4.5,0,Yes,None,Lush green public park and garden.,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Central Park Connaught Place,Tourist Attraction,Historical,2.0,4.5,0,Yes,None,Lush green public park and garden.,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Japanese Park Rohini,Tourist Attraction,Historical,2.0,4.5,0,Yes,None,Lush green public park and garden.,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Asola Bhatti Wildlife Sanctuary,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Okhla Bird Sanctuary,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Tughlaqabad Fort,Tourist Attraction,1321.0,2.0,4.5,25,Yes,None,Ruined fort built by Ghiyas-ud-din Tughlaq.,Yes,0.5,Oct-Mar,"Tughlaqabad, New Delhi, Delhi 110044",28.5144,77.2605
+Northern,Delhi,Delhi,Adilabad Fort,Tourist Attraction,Historical,2.0,4.5,25,Yes,None,Ancient historical fort and ruins.,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Siri Fort Ruins,Tourist Attraction,Historical,2.0,4.5,25,Yes,None,Ancient historical fort and ruins.,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Jahanpanah City Forest,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Bijay Mandal,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Begumpur Mosque,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Khirki Masjid,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Satpula Bridge,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Hauz Shamsi,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Madhi Masjid,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Barakhamba Monument,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Salimgarh Fort,Tourist Attraction,Historical,2.0,4.5,25,Yes,None,Ancient historical fort and ruins.,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Shalimar Bagh,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Sheesh Mahal Shalimar Bagh,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Azad Hind Gram,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Mutiny Memorial (Ajitgarh),Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Delhi Haat INA,Tourist Attraction,1994.0,2.0,4.5,30,Yes,None,Open-air food plaza and craft bazaar.,Yes,0.5,Oct-Mar,"INA Market, Dilli Haat, New Delhi, Delhi 110023",28.5733,77.2085
+Northern,Delhi,Delhi,Delhi Haat Janakpuri,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Dilli Haat Pitampura,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Waste to Wonder Park,Tourist Attraction,2019.0,2.0,4.5,0,Yes,Monday,Theme park showcasing replicas of the seven wonders made from waste.,Yes,0.5,Oct-Mar,"Sarai Kale Khan, New Delhi, Delhi 110013",28.591,77.252
+Northern,Delhi,Delhi,Bharat Vandana Park,Tourist Attraction,Historical,2.0,4.5,0,Yes,None,Lush green public park and garden.,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Millennium Park,Tourist Attraction,Historical,2.0,4.5,0,Yes,None,Lush green public park and garden.,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Yamuna Biodiversity Park,Tourist Attraction,Historical,2.0,4.5,0,Yes,None,Lush green public park and garden.,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Aravalli Biodiversity Park,Tourist Attraction,Historical,2.0,4.5,0,Yes,None,Lush green public park and garden.,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Tilpath Valley Biodiversity Park,Tourist Attraction,Historical,2.0,4.5,0,Yes,None,Lush green public park and garden.,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Kamal Nehru Ridge,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Flagstaff Tower,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Khooni Jheel,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Majnu Ka Tila Monastery,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,ISKCON Temple East of Kailash,Tourist Attraction,Historical,2.0,4.5,0,Yes,None,Prominent religious temple in Delhi.,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Lotus Garden Noida Border View,Tourist Attraction,Historical,2.0,4.5,0,Yes,None,Lush green public park and garden.,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Dwarka Sector 10 Park,Tourist Attraction,Historical,2.0,4.5,0,Yes,None,Lush green public park and garden.,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Chandni Chowk Heritage Street,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Paranthe Wali Gali,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Connaught Place Inner Circle,Tourist Attraction,Historical,2.0,4.5,50,Yes,None,Popular tourist attraction in Delhi,Yes,0.5,Oct-Mar,"Delhi, India",28.6139,77.209
+Northern,Delhi,Delhi,Jantar Mantar Delhi,Tourist Attraction,1724.0,2.0,4.5,25,Yes,None,Equinoctial sundial and astronomical observatory built by Jai Singh II.,Yes,0.5,Oct-Mar,"Sansad Marg, Connaught Place, New Delhi, Delhi 110001",28.6271,77.2166
