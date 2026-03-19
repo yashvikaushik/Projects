@@ -1,0 +1,2396 @@
+{
+    "OOP": [
+        {
+            "id": "3cef2568",
+            "question": "What is Object-Oriented Programming?",
+            "keywords": [
+                "encapsulation",
+                "inheritance",
+                "polymorphism",
+                "abstraction",
+                "paradigm"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around encapsulation, inheritance, polymorphism."
+        },
+        {
+            "id": "274dab19",
+            "question": "Explain the concept of Object-Oriented Programming in detail.",
+            "keywords": [
+                "encapsulation",
+                "inheritance",
+                "polymorphism",
+                "abstraction",
+                "paradigm"
+            ],
+            "ideal_answer": "Focus on explaining Object-Oriented Programming thoroughly. Key concepts include: encapsulation, inheritance, polymorphism."
+        },
+        {
+            "id": "fd2fd29e",
+            "question": "How would you describe Object-Oriented Programming to a beginner?",
+            "keywords": [
+                "encapsulation",
+                "inheritance",
+                "polymorphism",
+                "abstraction",
+                "paradigm"
+            ],
+            "ideal_answer": "Use simple terms to describe Object-Oriented Programming. Mention aspects like encapsulation, inheritance, polymorphism."
+        },
+        {
+            "id": "b38403e2",
+            "question": "What are the core advantages or characteristics of Object-Oriented Programming?",
+            "keywords": [
+                "encapsulation",
+                "inheritance",
+                "polymorphism",
+                "abstraction",
+                "paradigm"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of Object-Oriented Programming, specifically referencing encapsulation, inheritance, polymorphism."
+        },
+        {
+            "id": "ff0ebdde",
+            "question": "What is encapsulation?",
+            "keywords": [
+                "data hiding",
+                "class",
+                "access",
+                "private",
+                "bundle"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around data hiding, class, access."
+        },
+        {
+            "id": "ef3da41a",
+            "question": "Explain the concept of encapsulation in detail.",
+            "keywords": [
+                "data hiding",
+                "class",
+                "access",
+                "private",
+                "bundle"
+            ],
+            "ideal_answer": "Focus on explaining encapsulation thoroughly. Key concepts include: data hiding, class, access."
+        },
+        {
+            "id": "a74171f9",
+            "question": "How would you describe encapsulation to a beginner?",
+            "keywords": [
+                "data hiding",
+                "class",
+                "access",
+                "private",
+                "bundle"
+            ],
+            "ideal_answer": "Use simple terms to describe encapsulation. Mention aspects like data hiding, class, access."
+        },
+        {
+            "id": "6653ebe9",
+            "question": "What are the core advantages or characteristics of encapsulation?",
+            "keywords": [
+                "data hiding",
+                "class",
+                "access",
+                "private",
+                "bundle"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of encapsulation, specifically referencing data hiding, class, access."
+        },
+        {
+            "id": "964b8ee8",
+            "question": "What is inheritance?",
+            "keywords": [
+                "reuse",
+                "parent",
+                "child",
+                "extend",
+                "base",
+                "derived"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around reuse, parent, child."
+        },
+        {
+            "id": "6ac3d15d",
+            "question": "Explain the concept of inheritance in detail.",
+            "keywords": [
+                "reuse",
+                "parent",
+                "child",
+                "extend",
+                "base",
+                "derived"
+            ],
+            "ideal_answer": "Focus on explaining inheritance thoroughly. Key concepts include: reuse, parent, child."
+        },
+        {
+            "id": "f3f48546",
+            "question": "How would you describe inheritance to a beginner?",
+            "keywords": [
+                "reuse",
+                "parent",
+                "child",
+                "extend",
+                "base",
+                "derived"
+            ],
+            "ideal_answer": "Use simple terms to describe inheritance. Mention aspects like reuse, parent, child."
+        },
+        {
+            "id": "581b2117",
+            "question": "What are the core advantages or characteristics of inheritance?",
+            "keywords": [
+                "reuse",
+                "parent",
+                "child",
+                "extend",
+                "base",
+                "derived"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of inheritance, specifically referencing reuse, parent, child."
+        },
+        {
+            "id": "6a98512f",
+            "question": "What is polymorphism?",
+            "keywords": [
+                "overloading",
+                "overriding",
+                "many forms",
+                "same interface"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around overloading, overriding, many forms."
+        },
+        {
+            "id": "89ccd85f",
+            "question": "Explain the concept of polymorphism in detail.",
+            "keywords": [
+                "overloading",
+                "overriding",
+                "many forms",
+                "same interface"
+            ],
+            "ideal_answer": "Focus on explaining polymorphism thoroughly. Key concepts include: overloading, overriding, many forms."
+        },
+        {
+            "id": "96e56153",
+            "question": "How would you describe polymorphism to a beginner?",
+            "keywords": [
+                "overloading",
+                "overriding",
+                "many forms",
+                "same interface"
+            ],
+            "ideal_answer": "Use simple terms to describe polymorphism. Mention aspects like overloading, overriding, many forms."
+        },
+        {
+            "id": "4f9f4425",
+            "question": "What are the core advantages or characteristics of polymorphism?",
+            "keywords": [
+                "overloading",
+                "overriding",
+                "many forms",
+                "same interface"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of polymorphism, specifically referencing overloading, overriding, many forms."
+        },
+        {
+            "id": "8e39e0fc",
+            "question": "What is abstraction?",
+            "keywords": [
+                "hide",
+                "details",
+                "interface",
+                "essential",
+                "background"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around hide, details, interface."
+        },
+        {
+            "id": "085381f8",
+            "question": "Explain the concept of abstraction in detail.",
+            "keywords": [
+                "hide",
+                "details",
+                "interface",
+                "essential",
+                "background"
+            ],
+            "ideal_answer": "Focus on explaining abstraction thoroughly. Key concepts include: hide, details, interface."
+        },
+        {
+            "id": "758f2f10",
+            "question": "How would you describe abstraction to a beginner?",
+            "keywords": [
+                "hide",
+                "details",
+                "interface",
+                "essential",
+                "background"
+            ],
+            "ideal_answer": "Use simple terms to describe abstraction. Mention aspects like hide, details, interface."
+        },
+        {
+            "id": "1d1c5132",
+            "question": "What are the core advantages or characteristics of abstraction?",
+            "keywords": [
+                "hide",
+                "details",
+                "interface",
+                "essential",
+                "background"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of abstraction, specifically referencing hide, details, interface."
+        },
+        {
+            "id": "539c549a",
+            "question": "Difference between class and object?",
+            "keywords": [
+                "blueprint",
+                "instance",
+                "template",
+                "memory"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around blueprint, instance, template."
+        },
+        {
+            "id": "0b3b4deb",
+            "question": "Explain the concept of class and object in detail.",
+            "keywords": [
+                "blueprint",
+                "instance",
+                "template",
+                "memory"
+            ],
+            "ideal_answer": "Focus on explaining class and object thoroughly. Key concepts include: blueprint, instance, template."
+        },
+        {
+            "id": "7b0b405b",
+            "question": "How would you describe class and object to a beginner?",
+            "keywords": [
+                "blueprint",
+                "instance",
+                "template",
+                "memory"
+            ],
+            "ideal_answer": "Use simple terms to describe class and object. Mention aspects like blueprint, instance, template."
+        },
+        {
+            "id": "94ed8e03",
+            "question": "What are the core advantages or characteristics of class and object?",
+            "keywords": [
+                "blueprint",
+                "instance",
+                "template",
+                "memory"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of class and object, specifically referencing blueprint, instance, template."
+        },
+        {
+            "id": "7dffd415",
+            "question": "What is a constructor?",
+            "keywords": [
+                "initialize",
+                "object",
+                "instantiation",
+                "memory"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around initialize, object, instantiation."
+        },
+        {
+            "id": "0aca4179",
+            "question": "Explain the concept of a constructor in detail.",
+            "keywords": [
+                "initialize",
+                "object",
+                "instantiation",
+                "memory"
+            ],
+            "ideal_answer": "Focus on explaining a constructor thoroughly. Key concepts include: initialize, object, instantiation."
+        },
+        {
+            "id": "1a18c278",
+            "question": "How would you describe a constructor to a beginner?",
+            "keywords": [
+                "initialize",
+                "object",
+                "instantiation",
+                "memory"
+            ],
+            "ideal_answer": "Use simple terms to describe a constructor. Mention aspects like initialize, object, instantiation."
+        },
+        {
+            "id": "466663c6",
+            "question": "What are the core advantages or characteristics of a constructor?",
+            "keywords": [
+                "initialize",
+                "object",
+                "instantiation",
+                "memory"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of a constructor, specifically referencing initialize, object, instantiation."
+        },
+        {
+            "id": "838788eb",
+            "question": "What is method overloading?",
+            "keywords": [
+                "same name",
+                "different parameters",
+                "compile time",
+                "static"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around same name, different parameters, compile time."
+        },
+        {
+            "id": "f566b3ac",
+            "question": "Explain the concept of method overloading in detail.",
+            "keywords": [
+                "same name",
+                "different parameters",
+                "compile time",
+                "static"
+            ],
+            "ideal_answer": "Focus on explaining method overloading thoroughly. Key concepts include: same name, different parameters, compile time."
+        },
+        {
+            "id": "e5e08ab3",
+            "question": "How would you describe method overloading to a beginner?",
+            "keywords": [
+                "same name",
+                "different parameters",
+                "compile time",
+                "static"
+            ],
+            "ideal_answer": "Use simple terms to describe method overloading. Mention aspects like same name, different parameters, compile time."
+        },
+        {
+            "id": "2c95de60",
+            "question": "What are the core advantages or characteristics of method overloading?",
+            "keywords": [
+                "same name",
+                "different parameters",
+                "compile time",
+                "static"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of method overloading, specifically referencing same name, different parameters, compile time."
+        },
+        {
+            "id": "221decfd",
+            "question": "What is method overriding?",
+            "keywords": [
+                "runtime",
+                "inheritance",
+                "dynamic",
+                "same signature"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around runtime, inheritance, dynamic."
+        },
+        {
+            "id": "d9f23ead",
+            "question": "Explain the concept of method overriding in detail.",
+            "keywords": [
+                "runtime",
+                "inheritance",
+                "dynamic",
+                "same signature"
+            ],
+            "ideal_answer": "Focus on explaining method overriding thoroughly. Key concepts include: runtime, inheritance, dynamic."
+        },
+        {
+            "id": "48062d38",
+            "question": "How would you describe method overriding to a beginner?",
+            "keywords": [
+                "runtime",
+                "inheritance",
+                "dynamic",
+                "same signature"
+            ],
+            "ideal_answer": "Use simple terms to describe method overriding. Mention aspects like runtime, inheritance, dynamic."
+        },
+        {
+            "id": "5c8116d6",
+            "question": "What are the core advantages or characteristics of method overriding?",
+            "keywords": [
+                "runtime",
+                "inheritance",
+                "dynamic",
+                "same signature"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of method overriding, specifically referencing runtime, inheritance, dynamic."
+        },
+        {
+            "id": "b8b09846",
+            "question": "What is an access modifier?",
+            "keywords": [
+                "public",
+                "private",
+                "protected",
+                "visibility",
+                "scope"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around public, private, protected."
+        },
+        {
+            "id": "b04eb7f9",
+            "question": "Explain the concept of an access modifier in detail.",
+            "keywords": [
+                "public",
+                "private",
+                "protected",
+                "visibility",
+                "scope"
+            ],
+            "ideal_answer": "Focus on explaining an access modifier thoroughly. Key concepts include: public, private, protected."
+        },
+        {
+            "id": "85cdfefa",
+            "question": "How would you describe an access modifier to a beginner?",
+            "keywords": [
+                "public",
+                "private",
+                "protected",
+                "visibility",
+                "scope"
+            ],
+            "ideal_answer": "Use simple terms to describe an access modifier. Mention aspects like public, private, protected."
+        },
+        {
+            "id": "1e0f0d53",
+            "question": "What are the core advantages or characteristics of an access modifier?",
+            "keywords": [
+                "public",
+                "private",
+                "protected",
+                "visibility",
+                "scope"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of an access modifier, specifically referencing public, private, protected."
+        }
+    ],
+    "DBMS": [
+        {
+            "id": "c377d1cd",
+            "question": "What is DBMS?",
+            "keywords": [
+                "database",
+                "management",
+                "system",
+                "store",
+                "retrieve"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around database, management, system."
+        },
+        {
+            "id": "b82df2aa",
+            "question": "Explain the concept of DBMS in detail.",
+            "keywords": [
+                "database",
+                "management",
+                "system",
+                "store",
+                "retrieve"
+            ],
+            "ideal_answer": "Focus on explaining DBMS thoroughly. Key concepts include: database, management, system."
+        },
+        {
+            "id": "7fbf1044",
+            "question": "How would you describe DBMS to a beginner?",
+            "keywords": [
+                "database",
+                "management",
+                "system",
+                "store",
+                "retrieve"
+            ],
+            "ideal_answer": "Use simple terms to describe DBMS. Mention aspects like database, management, system."
+        },
+        {
+            "id": "03db9699",
+            "question": "What are the core advantages or characteristics of DBMS?",
+            "keywords": [
+                "database",
+                "management",
+                "system",
+                "store",
+                "retrieve"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of DBMS, specifically referencing database, management, system."
+        },
+        {
+            "id": "50dc970f",
+            "question": "What is normalization?",
+            "keywords": [
+                "redundancy",
+                "normal forms",
+                "anomalies",
+                "organize"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around redundancy, normal forms, anomalies."
+        },
+        {
+            "id": "b8b9236c",
+            "question": "Explain the concept of normalization in detail.",
+            "keywords": [
+                "redundancy",
+                "normal forms",
+                "anomalies",
+                "organize"
+            ],
+            "ideal_answer": "Focus on explaining normalization thoroughly. Key concepts include: redundancy, normal forms, anomalies."
+        },
+        {
+            "id": "1cd9c75b",
+            "question": "How would you describe normalization to a beginner?",
+            "keywords": [
+                "redundancy",
+                "normal forms",
+                "anomalies",
+                "organize"
+            ],
+            "ideal_answer": "Use simple terms to describe normalization. Mention aspects like redundancy, normal forms, anomalies."
+        },
+        {
+            "id": "ce444674",
+            "question": "What are the core advantages or characteristics of normalization?",
+            "keywords": [
+                "redundancy",
+                "normal forms",
+                "anomalies",
+                "organize"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of normalization, specifically referencing redundancy, normal forms, anomalies."
+        },
+        {
+            "id": "75f958ee",
+            "question": "What is a primary key?",
+            "keywords": [
+                "unique",
+                "identifier",
+                "not null",
+                "table"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around unique, identifier, not null."
+        },
+        {
+            "id": "d2776765",
+            "question": "Explain the concept of a primary key in detail.",
+            "keywords": [
+                "unique",
+                "identifier",
+                "not null",
+                "table"
+            ],
+            "ideal_answer": "Focus on explaining a primary key thoroughly. Key concepts include: unique, identifier, not null."
+        },
+        {
+            "id": "3420586c",
+            "question": "How would you describe a primary key to a beginner?",
+            "keywords": [
+                "unique",
+                "identifier",
+                "not null",
+                "table"
+            ],
+            "ideal_answer": "Use simple terms to describe a primary key. Mention aspects like unique, identifier, not null."
+        },
+        {
+            "id": "ef1e13d5",
+            "question": "What are the core advantages or characteristics of a primary key?",
+            "keywords": [
+                "unique",
+                "identifier",
+                "not null",
+                "table"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of a primary key, specifically referencing unique, identifier, not null."
+        },
+        {
+            "id": "3d0a0df3",
+            "question": "What is a foreign key?",
+            "keywords": [
+                "reference",
+                "relation",
+                "link",
+                "parent table"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around reference, relation, link."
+        },
+        {
+            "id": "42bfc1b4",
+            "question": "Explain the concept of a foreign key in detail.",
+            "keywords": [
+                "reference",
+                "relation",
+                "link",
+                "parent table"
+            ],
+            "ideal_answer": "Focus on explaining a foreign key thoroughly. Key concepts include: reference, relation, link."
+        },
+        {
+            "id": "faff0985",
+            "question": "How would you describe a foreign key to a beginner?",
+            "keywords": [
+                "reference",
+                "relation",
+                "link",
+                "parent table"
+            ],
+            "ideal_answer": "Use simple terms to describe a foreign key. Mention aspects like reference, relation, link."
+        },
+        {
+            "id": "b7688a17",
+            "question": "What are the core advantages or characteristics of a foreign key?",
+            "keywords": [
+                "reference",
+                "relation",
+                "link",
+                "parent table"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of a foreign key, specifically referencing reference, relation, link."
+        },
+        {
+            "id": "a8466feb",
+            "question": "What is SQL?",
+            "keywords": [
+                "query",
+                "database",
+                "structured",
+                "manipulate"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around query, database, structured."
+        },
+        {
+            "id": "20b7df63",
+            "question": "Explain the concept of SQL in detail.",
+            "keywords": [
+                "query",
+                "database",
+                "structured",
+                "manipulate"
+            ],
+            "ideal_answer": "Focus on explaining SQL thoroughly. Key concepts include: query, database, structured."
+        },
+        {
+            "id": "b38b6e2b",
+            "question": "How would you describe SQL to a beginner?",
+            "keywords": [
+                "query",
+                "database",
+                "structured",
+                "manipulate"
+            ],
+            "ideal_answer": "Use simple terms to describe SQL. Mention aspects like query, database, structured."
+        },
+        {
+            "id": "a65f556d",
+            "question": "What are the core advantages or characteristics of SQL?",
+            "keywords": [
+                "query",
+                "database",
+                "structured",
+                "manipulate"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of SQL, specifically referencing query, database, structured."
+        },
+        {
+            "id": "d7515379",
+            "question": "Difference between SQL and NoSQL?",
+            "keywords": [
+                "structured",
+                "unstructured",
+                "relational",
+                "document",
+                "schema"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around structured, unstructured, relational."
+        },
+        {
+            "id": "9982ff40",
+            "question": "Explain the concept of SQL and NoSQL in detail.",
+            "keywords": [
+                "structured",
+                "unstructured",
+                "relational",
+                "document",
+                "schema"
+            ],
+            "ideal_answer": "Focus on explaining SQL and NoSQL thoroughly. Key concepts include: structured, unstructured, relational."
+        },
+        {
+            "id": "e3020f4f",
+            "question": "How would you describe SQL and NoSQL to a beginner?",
+            "keywords": [
+                "structured",
+                "unstructured",
+                "relational",
+                "document",
+                "schema"
+            ],
+            "ideal_answer": "Use simple terms to describe SQL and NoSQL. Mention aspects like structured, unstructured, relational."
+        },
+        {
+            "id": "5e82d9e0",
+            "question": "What are the core advantages or characteristics of SQL and NoSQL?",
+            "keywords": [
+                "structured",
+                "unstructured",
+                "relational",
+                "document",
+                "schema"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of SQL and NoSQL, specifically referencing structured, unstructured, relational."
+        },
+        {
+            "id": "b76432ab",
+            "question": "What is indexing?",
+            "keywords": [
+                "search",
+                "optimize",
+                "speed",
+                "data structure",
+                "b-tree"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around search, optimize, speed."
+        },
+        {
+            "id": "49a10545",
+            "question": "Explain the concept of indexing in detail.",
+            "keywords": [
+                "search",
+                "optimize",
+                "speed",
+                "data structure",
+                "b-tree"
+            ],
+            "ideal_answer": "Focus on explaining indexing thoroughly. Key concepts include: search, optimize, speed."
+        },
+        {
+            "id": "a5f831ee",
+            "question": "How would you describe indexing to a beginner?",
+            "keywords": [
+                "search",
+                "optimize",
+                "speed",
+                "data structure",
+                "b-tree"
+            ],
+            "ideal_answer": "Use simple terms to describe indexing. Mention aspects like search, optimize, speed."
+        },
+        {
+            "id": "d8c6ea87",
+            "question": "What are the core advantages or characteristics of indexing?",
+            "keywords": [
+                "search",
+                "optimize",
+                "speed",
+                "data structure",
+                "b-tree"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of indexing, specifically referencing search, optimize, speed."
+        },
+        {
+            "id": "6104e6df",
+            "question": "What is a transaction?",
+            "keywords": [
+                "ACID",
+                "atomicity",
+                "unit of work",
+                "commit",
+                "rollback"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around ACID, atomicity, unit of work."
+        },
+        {
+            "id": "5b97fc1e",
+            "question": "Explain the concept of a transaction in detail.",
+            "keywords": [
+                "ACID",
+                "atomicity",
+                "unit of work",
+                "commit",
+                "rollback"
+            ],
+            "ideal_answer": "Focus on explaining a transaction thoroughly. Key concepts include: ACID, atomicity, unit of work."
+        },
+        {
+            "id": "1854d0d6",
+            "question": "How would you describe a transaction to a beginner?",
+            "keywords": [
+                "ACID",
+                "atomicity",
+                "unit of work",
+                "commit",
+                "rollback"
+            ],
+            "ideal_answer": "Use simple terms to describe a transaction. Mention aspects like ACID, atomicity, unit of work."
+        },
+        {
+            "id": "3ea5b67c",
+            "question": "What are the core advantages or characteristics of a transaction?",
+            "keywords": [
+                "ACID",
+                "atomicity",
+                "unit of work",
+                "commit",
+                "rollback"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of a transaction, specifically referencing ACID, atomicity, unit of work."
+        },
+        {
+            "id": "46276786",
+            "question": "What is the ACID property?",
+            "keywords": [
+                "atomicity",
+                "consistency",
+                "isolation",
+                "durability",
+                "reliable"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around atomicity, consistency, isolation."
+        },
+        {
+            "id": "5550eb90",
+            "question": "Explain the concept of the ACID property in detail.",
+            "keywords": [
+                "atomicity",
+                "consistency",
+                "isolation",
+                "durability",
+                "reliable"
+            ],
+            "ideal_answer": "Focus on explaining the ACID property thoroughly. Key concepts include: atomicity, consistency, isolation."
+        },
+        {
+            "id": "c9b28b30",
+            "question": "How would you describe the ACID property to a beginner?",
+            "keywords": [
+                "atomicity",
+                "consistency",
+                "isolation",
+                "durability",
+                "reliable"
+            ],
+            "ideal_answer": "Use simple terms to describe the ACID property. Mention aspects like atomicity, consistency, isolation."
+        },
+        {
+            "id": "ad362980",
+            "question": "What are the core advantages or characteristics of the ACID property?",
+            "keywords": [
+                "atomicity",
+                "consistency",
+                "isolation",
+                "durability",
+                "reliable"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of the ACID property, specifically referencing atomicity, consistency, isolation."
+        },
+        {
+            "id": "b103b053",
+            "question": "What is a join?",
+            "keywords": [
+                "combine",
+                "tables",
+                "records",
+                "foreign key",
+                "inner",
+                "outer"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around combine, tables, records."
+        },
+        {
+            "id": "62816572",
+            "question": "Explain the concept of a join in detail.",
+            "keywords": [
+                "combine",
+                "tables",
+                "records",
+                "foreign key",
+                "inner",
+                "outer"
+            ],
+            "ideal_answer": "Focus on explaining a join thoroughly. Key concepts include: combine, tables, records."
+        },
+        {
+            "id": "7653f7fa",
+            "question": "How would you describe a join to a beginner?",
+            "keywords": [
+                "combine",
+                "tables",
+                "records",
+                "foreign key",
+                "inner",
+                "outer"
+            ],
+            "ideal_answer": "Use simple terms to describe a join. Mention aspects like combine, tables, records."
+        },
+        {
+            "id": "e6576440",
+            "question": "What are the core advantages or characteristics of a join?",
+            "keywords": [
+                "combine",
+                "tables",
+                "records",
+                "foreign key",
+                "inner",
+                "outer"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of a join, specifically referencing combine, tables, records."
+        }
+    ],
+    "OS": [
+        {
+            "id": "9f2353d6",
+            "question": "What is an operating system?",
+            "keywords": [
+                "interface",
+                "hardware",
+                "software",
+                "manage",
+                "resources"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around interface, hardware, software."
+        },
+        {
+            "id": "e8a13910",
+            "question": "Explain the concept of an operating system in detail.",
+            "keywords": [
+                "interface",
+                "hardware",
+                "software",
+                "manage",
+                "resources"
+            ],
+            "ideal_answer": "Focus on explaining an operating system thoroughly. Key concepts include: interface, hardware, software."
+        },
+        {
+            "id": "0c5f1f21",
+            "question": "How would you describe an operating system to a beginner?",
+            "keywords": [
+                "interface",
+                "hardware",
+                "software",
+                "manage",
+                "resources"
+            ],
+            "ideal_answer": "Use simple terms to describe an operating system. Mention aspects like interface, hardware, software."
+        },
+        {
+            "id": "eace7099",
+            "question": "What are the core advantages or characteristics of an operating system?",
+            "keywords": [
+                "interface",
+                "hardware",
+                "software",
+                "manage",
+                "resources"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of an operating system, specifically referencing interface, hardware, software."
+        },
+        {
+            "id": "46fdb11d",
+            "question": "What is a process?",
+            "keywords": [
+                "execution",
+                "program",
+                "memory",
+                "pcb",
+                "active"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around execution, program, memory."
+        },
+        {
+            "id": "45e66a06",
+            "question": "Explain the concept of a process in detail.",
+            "keywords": [
+                "execution",
+                "program",
+                "memory",
+                "pcb",
+                "active"
+            ],
+            "ideal_answer": "Focus on explaining a process thoroughly. Key concepts include: execution, program, memory."
+        },
+        {
+            "id": "0f1778f0",
+            "question": "How would you describe a process to a beginner?",
+            "keywords": [
+                "execution",
+                "program",
+                "memory",
+                "pcb",
+                "active"
+            ],
+            "ideal_answer": "Use simple terms to describe a process. Mention aspects like execution, program, memory."
+        },
+        {
+            "id": "79cd169a",
+            "question": "What are the core advantages or characteristics of a process?",
+            "keywords": [
+                "execution",
+                "program",
+                "memory",
+                "pcb",
+                "active"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of a process, specifically referencing execution, program, memory."
+        },
+        {
+            "id": "09936bce",
+            "question": "What is a thread?",
+            "keywords": [
+                "lightweight",
+                "process",
+                "execution unit",
+                "shared memory"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around lightweight, process, execution unit."
+        },
+        {
+            "id": "d916119c",
+            "question": "Explain the concept of a thread in detail.",
+            "keywords": [
+                "lightweight",
+                "process",
+                "execution unit",
+                "shared memory"
+            ],
+            "ideal_answer": "Focus on explaining a thread thoroughly. Key concepts include: lightweight, process, execution unit."
+        },
+        {
+            "id": "28392636",
+            "question": "How would you describe a thread to a beginner?",
+            "keywords": [
+                "lightweight",
+                "process",
+                "execution unit",
+                "shared memory"
+            ],
+            "ideal_answer": "Use simple terms to describe a thread. Mention aspects like lightweight, process, execution unit."
+        },
+        {
+            "id": "bf649ee5",
+            "question": "What are the core advantages or characteristics of a thread?",
+            "keywords": [
+                "lightweight",
+                "process",
+                "execution unit",
+                "shared memory"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of a thread, specifically referencing lightweight, process, execution unit."
+        },
+        {
+            "id": "a15f324c",
+            "question": "What is a deadlock?",
+            "keywords": [
+                "waiting",
+                "resources",
+                "circular",
+                "block",
+                "hold and wait"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around waiting, resources, circular."
+        },
+        {
+            "id": "a395af8b",
+            "question": "Explain the concept of a deadlock in detail.",
+            "keywords": [
+                "waiting",
+                "resources",
+                "circular",
+                "block",
+                "hold and wait"
+            ],
+            "ideal_answer": "Focus on explaining a deadlock thoroughly. Key concepts include: waiting, resources, circular."
+        },
+        {
+            "id": "cafeac05",
+            "question": "How would you describe a deadlock to a beginner?",
+            "keywords": [
+                "waiting",
+                "resources",
+                "circular",
+                "block",
+                "hold and wait"
+            ],
+            "ideal_answer": "Use simple terms to describe a deadlock. Mention aspects like waiting, resources, circular."
+        },
+        {
+            "id": "bb1fd9c4",
+            "question": "What are the core advantages or characteristics of a deadlock?",
+            "keywords": [
+                "waiting",
+                "resources",
+                "circular",
+                "block",
+                "hold and wait"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of a deadlock, specifically referencing waiting, resources, circular."
+        },
+        {
+            "id": "a525a176",
+            "question": "What is CPU scheduling?",
+            "keywords": [
+                "CPU",
+                "process",
+                "time",
+                "algorithm",
+                "fairness",
+                "throughput"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around CPU, process, time."
+        },
+        {
+            "id": "88adbd5f",
+            "question": "Explain the concept of CPU scheduling in detail.",
+            "keywords": [
+                "CPU",
+                "process",
+                "time",
+                "algorithm",
+                "fairness",
+                "throughput"
+            ],
+            "ideal_answer": "Focus on explaining CPU scheduling thoroughly. Key concepts include: CPU, process, time."
+        },
+        {
+            "id": "f7c02b12",
+            "question": "How would you describe CPU scheduling to a beginner?",
+            "keywords": [
+                "CPU",
+                "process",
+                "time",
+                "algorithm",
+                "fairness",
+                "throughput"
+            ],
+            "ideal_answer": "Use simple terms to describe CPU scheduling. Mention aspects like CPU, process, time."
+        },
+        {
+            "id": "8d30f119",
+            "question": "What are the core advantages or characteristics of CPU scheduling?",
+            "keywords": [
+                "CPU",
+                "process",
+                "time",
+                "algorithm",
+                "fairness",
+                "throughput"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of CPU scheduling, specifically referencing CPU, process, time."
+        },
+        {
+            "id": "f30d5d6c",
+            "question": "Difference between process and thread?",
+            "keywords": [
+                "memory",
+                "execution",
+                "shared",
+                "isolated",
+                "context switch"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around memory, execution, shared."
+        },
+        {
+            "id": "01d345d2",
+            "question": "Explain the concept of process and thread in detail.",
+            "keywords": [
+                "memory",
+                "execution",
+                "shared",
+                "isolated",
+                "context switch"
+            ],
+            "ideal_answer": "Focus on explaining process and thread thoroughly. Key concepts include: memory, execution, shared."
+        },
+        {
+            "id": "de3863ea",
+            "question": "How would you describe process and thread to a beginner?",
+            "keywords": [
+                "memory",
+                "execution",
+                "shared",
+                "isolated",
+                "context switch"
+            ],
+            "ideal_answer": "Use simple terms to describe process and thread. Mention aspects like memory, execution, shared."
+        },
+        {
+            "id": "b775f67e",
+            "question": "What are the core advantages or characteristics of process and thread?",
+            "keywords": [
+                "memory",
+                "execution",
+                "shared",
+                "isolated",
+                "context switch"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of process and thread, specifically referencing memory, execution, shared."
+        },
+        {
+            "id": "1167d3ff",
+            "question": "What is paging?",
+            "keywords": [
+                "memory",
+                "pages",
+                "non-contiguous",
+                "frames",
+                "physical"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around memory, pages, non-contiguous."
+        },
+        {
+            "id": "352b6058",
+            "question": "Explain the concept of paging in detail.",
+            "keywords": [
+                "memory",
+                "pages",
+                "non-contiguous",
+                "frames",
+                "physical"
+            ],
+            "ideal_answer": "Focus on explaining paging thoroughly. Key concepts include: memory, pages, non-contiguous."
+        },
+        {
+            "id": "69288218",
+            "question": "How would you describe paging to a beginner?",
+            "keywords": [
+                "memory",
+                "pages",
+                "non-contiguous",
+                "frames",
+                "physical"
+            ],
+            "ideal_answer": "Use simple terms to describe paging. Mention aspects like memory, pages, non-contiguous."
+        },
+        {
+            "id": "1d0ccd0d",
+            "question": "What are the core advantages or characteristics of paging?",
+            "keywords": [
+                "memory",
+                "pages",
+                "non-contiguous",
+                "frames",
+                "physical"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of paging, specifically referencing memory, pages, non-contiguous."
+        },
+        {
+            "id": "37b3eb04",
+            "question": "What is segmentation?",
+            "keywords": [
+                "memory",
+                "segments",
+                "logical",
+                "variable size",
+                "user view"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around memory, segments, logical."
+        },
+        {
+            "id": "9227c9dd",
+            "question": "Explain the concept of segmentation in detail.",
+            "keywords": [
+                "memory",
+                "segments",
+                "logical",
+                "variable size",
+                "user view"
+            ],
+            "ideal_answer": "Focus on explaining segmentation thoroughly. Key concepts include: memory, segments, logical."
+        },
+        {
+            "id": "d3854751",
+            "question": "How would you describe segmentation to a beginner?",
+            "keywords": [
+                "memory",
+                "segments",
+                "logical",
+                "variable size",
+                "user view"
+            ],
+            "ideal_answer": "Use simple terms to describe segmentation. Mention aspects like memory, segments, logical."
+        },
+        {
+            "id": "54281245",
+            "question": "What are the core advantages or characteristics of segmentation?",
+            "keywords": [
+                "memory",
+                "segments",
+                "logical",
+                "variable size",
+                "user view"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of segmentation, specifically referencing memory, segments, logical."
+        },
+        {
+            "id": "05f27757",
+            "question": "What is virtual memory?",
+            "keywords": [
+                "disk",
+                "RAM",
+                "illusion",
+                "large",
+                "swap"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around disk, RAM, illusion."
+        },
+        {
+            "id": "2fbaefee",
+            "question": "Explain the concept of virtual memory in detail.",
+            "keywords": [
+                "disk",
+                "RAM",
+                "illusion",
+                "large",
+                "swap"
+            ],
+            "ideal_answer": "Focus on explaining virtual memory thoroughly. Key concepts include: disk, RAM, illusion."
+        },
+        {
+            "id": "3ffb9c19",
+            "question": "How would you describe virtual memory to a beginner?",
+            "keywords": [
+                "disk",
+                "RAM",
+                "illusion",
+                "large",
+                "swap"
+            ],
+            "ideal_answer": "Use simple terms to describe virtual memory. Mention aspects like disk, RAM, illusion."
+        },
+        {
+            "id": "180337d5",
+            "question": "What are the core advantages or characteristics of virtual memory?",
+            "keywords": [
+                "disk",
+                "RAM",
+                "illusion",
+                "large",
+                "swap"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of virtual memory, specifically referencing disk, RAM, illusion."
+        },
+        {
+            "id": "177e443d",
+            "question": "What is context switching?",
+            "keywords": [
+                "CPU",
+                "switch",
+                "save state",
+                "load state",
+                "overhead"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around CPU, switch, save state."
+        },
+        {
+            "id": "49c801f8",
+            "question": "Explain the concept of context switching in detail.",
+            "keywords": [
+                "CPU",
+                "switch",
+                "save state",
+                "load state",
+                "overhead"
+            ],
+            "ideal_answer": "Focus on explaining context switching thoroughly. Key concepts include: CPU, switch, save state."
+        },
+        {
+            "id": "ca8eec59",
+            "question": "How would you describe context switching to a beginner?",
+            "keywords": [
+                "CPU",
+                "switch",
+                "save state",
+                "load state",
+                "overhead"
+            ],
+            "ideal_answer": "Use simple terms to describe context switching. Mention aspects like CPU, switch, save state."
+        },
+        {
+            "id": "09657f36",
+            "question": "What are the core advantages or characteristics of context switching?",
+            "keywords": [
+                "CPU",
+                "switch",
+                "save state",
+                "load state",
+                "overhead"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of context switching, specifically referencing CPU, switch, save state."
+        }
+    ],
+    "HR": [
+        {
+            "id": "0e885cd3",
+            "question": "Tell me about yourself",
+            "keywords": [
+                "background",
+                "skills",
+                "goals",
+                "experience",
+                "journey"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around background, skills, goals."
+        },
+        {
+            "id": "c64493d9",
+            "question": "Explain the concept of yourself in detail.",
+            "keywords": [
+                "background",
+                "skills",
+                "goals",
+                "experience",
+                "journey"
+            ],
+            "ideal_answer": "Focus on explaining yourself thoroughly. Key concepts include: background, skills, goals."
+        },
+        {
+            "id": "d4a10e7f",
+            "question": "How would you describe yourself to a beginner?",
+            "keywords": [
+                "background",
+                "skills",
+                "goals",
+                "experience",
+                "journey"
+            ],
+            "ideal_answer": "Use simple terms to describe yourself. Mention aspects like background, skills, goals."
+        },
+        {
+            "id": "b17e2129",
+            "question": "What are the core advantages or characteristics of yourself?",
+            "keywords": [
+                "background",
+                "skills",
+                "goals",
+                "experience",
+                "journey"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of yourself, specifically referencing background, skills, goals."
+        },
+        {
+            "id": "bb41c399",
+            "question": "Why should we hire you?",
+            "keywords": [
+                "skills",
+                "value",
+                "fit",
+                "contribute",
+                "asset"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around skills, value, fit."
+        },
+        {
+            "id": "abcb52d8",
+            "question": "Explain the concept of hire you in detail.",
+            "keywords": [
+                "skills",
+                "value",
+                "fit",
+                "contribute",
+                "asset"
+            ],
+            "ideal_answer": "Focus on explaining hire you thoroughly. Key concepts include: skills, value, fit."
+        },
+        {
+            "id": "f1c26a69",
+            "question": "How would you describe hire you to a beginner?",
+            "keywords": [
+                "skills",
+                "value",
+                "fit",
+                "contribute",
+                "asset"
+            ],
+            "ideal_answer": "Use simple terms to describe hire you. Mention aspects like skills, value, fit."
+        },
+        {
+            "id": "01493fb6",
+            "question": "What are the core advantages or characteristics of hire you?",
+            "keywords": [
+                "skills",
+                "value",
+                "fit",
+                "contribute",
+                "asset"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of hire you, specifically referencing skills, value, fit."
+        },
+        {
+            "id": "c3b7c423",
+            "question": "What are your greatest strengths?",
+            "keywords": [
+                "skills",
+                "qualities",
+                "dedicated",
+                "problem solving",
+                "adaptable"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around skills, qualities, dedicated."
+        },
+        {
+            "id": "e3bf47a1",
+            "question": "Explain the concept of your greatest strengths in detail.",
+            "keywords": [
+                "skills",
+                "qualities",
+                "dedicated",
+                "problem solving",
+                "adaptable"
+            ],
+            "ideal_answer": "Focus on explaining your greatest strengths thoroughly. Key concepts include: skills, qualities, dedicated."
+        },
+        {
+            "id": "86c63d9d",
+            "question": "How would you describe your greatest strengths to a beginner?",
+            "keywords": [
+                "skills",
+                "qualities",
+                "dedicated",
+                "problem solving",
+                "adaptable"
+            ],
+            "ideal_answer": "Use simple terms to describe your greatest strengths. Mention aspects like skills, qualities, dedicated."
+        },
+        {
+            "id": "47fe47fc",
+            "question": "What are the core advantages or characteristics of your greatest strengths?",
+            "keywords": [
+                "skills",
+                "qualities",
+                "dedicated",
+                "problem solving",
+                "adaptable"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of your greatest strengths, specifically referencing skills, qualities, dedicated."
+        },
+        {
+            "id": "fafe7cd6",
+            "question": "What are your weaknesses?",
+            "keywords": [
+                "improvement",
+                "learning",
+                "overcoming",
+                "aware",
+                "steps"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around improvement, learning, overcoming."
+        },
+        {
+            "id": "ccc6c156",
+            "question": "Explain the concept of your weaknesses in detail.",
+            "keywords": [
+                "improvement",
+                "learning",
+                "overcoming",
+                "aware",
+                "steps"
+            ],
+            "ideal_answer": "Focus on explaining your weaknesses thoroughly. Key concepts include: improvement, learning, overcoming."
+        },
+        {
+            "id": "66832bda",
+            "question": "How would you describe your weaknesses to a beginner?",
+            "keywords": [
+                "improvement",
+                "learning",
+                "overcoming",
+                "aware",
+                "steps"
+            ],
+            "ideal_answer": "Use simple terms to describe your weaknesses. Mention aspects like improvement, learning, overcoming."
+        },
+        {
+            "id": "0a8cf4e5",
+            "question": "What are the core advantages or characteristics of your weaknesses?",
+            "keywords": [
+                "improvement",
+                "learning",
+                "overcoming",
+                "aware",
+                "steps"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of your weaknesses, specifically referencing improvement, learning, overcoming."
+        },
+        {
+            "id": "e09be8e0",
+            "question": "Where do you see yourself in 5 years?",
+            "keywords": [
+                "growth",
+                "career",
+                "leadership",
+                "impact",
+                "senior"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around growth, career, leadership."
+        },
+        {
+            "id": "269279de",
+            "question": "Explain the concept of see yourself in 5 years in detail.",
+            "keywords": [
+                "growth",
+                "career",
+                "leadership",
+                "impact",
+                "senior"
+            ],
+            "ideal_answer": "Focus on explaining see yourself in 5 years thoroughly. Key concepts include: growth, career, leadership."
+        },
+        {
+            "id": "81d34206",
+            "question": "How would you describe see yourself in 5 years to a beginner?",
+            "keywords": [
+                "growth",
+                "career",
+                "leadership",
+                "impact",
+                "senior"
+            ],
+            "ideal_answer": "Use simple terms to describe see yourself in 5 years. Mention aspects like growth, career, leadership."
+        },
+        {
+            "id": "da49fdae",
+            "question": "What are the core advantages or characteristics of see yourself in 5 years?",
+            "keywords": [
+                "growth",
+                "career",
+                "leadership",
+                "impact",
+                "senior"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of see yourself in 5 years, specifically referencing growth, career, leadership."
+        },
+        {
+            "id": "467566be",
+            "question": "Why do you want this job?",
+            "keywords": [
+                "interest",
+                "company",
+                "culture",
+                "mission",
+                "align"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around interest, company, culture."
+        },
+        {
+            "id": "4114a8aa",
+            "question": "Explain the concept of want this job in detail.",
+            "keywords": [
+                "interest",
+                "company",
+                "culture",
+                "mission",
+                "align"
+            ],
+            "ideal_answer": "Focus on explaining want this job thoroughly. Key concepts include: interest, company, culture."
+        },
+        {
+            "id": "11e0e460",
+            "question": "How would you describe want this job to a beginner?",
+            "keywords": [
+                "interest",
+                "company",
+                "culture",
+                "mission",
+                "align"
+            ],
+            "ideal_answer": "Use simple terms to describe want this job. Mention aspects like interest, company, culture."
+        },
+        {
+            "id": "f8b6114e",
+            "question": "What are the core advantages or characteristics of want this job?",
+            "keywords": [
+                "interest",
+                "company",
+                "culture",
+                "mission",
+                "align"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of want this job, specifically referencing interest, company, culture."
+        },
+        {
+            "id": "3301312e",
+            "question": "Describe a challenge you faced and how you handled it",
+            "keywords": [
+                "problem",
+                "solution",
+                "action",
+                "result",
+                "STAR"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around problem, solution, action."
+        },
+        {
+            "id": "333f1210",
+            "question": "Explain the concept of Describe a challenge you faced and how you handled it in detail.",
+            "keywords": [
+                "problem",
+                "solution",
+                "action",
+                "result",
+                "STAR"
+            ],
+            "ideal_answer": "Focus on explaining Describe a challenge you faced and how you handled it thoroughly. Key concepts include: problem, solution, action."
+        },
+        {
+            "id": "cc9a258a",
+            "question": "How would you describe Describe a challenge you faced and how you handled it to a beginner?",
+            "keywords": [
+                "problem",
+                "solution",
+                "action",
+                "result",
+                "STAR"
+            ],
+            "ideal_answer": "Use simple terms to describe Describe a challenge you faced and how you handled it. Mention aspects like problem, solution, action."
+        },
+        {
+            "id": "97860015",
+            "question": "What are the core advantages or characteristics of Describe a challenge you faced and how you handled it?",
+            "keywords": [
+                "problem",
+                "solution",
+                "action",
+                "result",
+                "STAR"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of Describe a challenge you faced and how you handled it, specifically referencing problem, solution, action."
+        },
+        {
+            "id": "eb9b637c",
+            "question": "How do you handle stress and pressure?",
+            "keywords": [
+                "manage",
+                "pressure",
+                "prioritize",
+                "calm",
+                "focus"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around manage, pressure, prioritize."
+        },
+        {
+            "id": "6c6b088e",
+            "question": "Explain the concept of handle stress and pressure in detail.",
+            "keywords": [
+                "manage",
+                "pressure",
+                "prioritize",
+                "calm",
+                "focus"
+            ],
+            "ideal_answer": "Focus on explaining handle stress and pressure thoroughly. Key concepts include: manage, pressure, prioritize."
+        },
+        {
+            "id": "81f1c9b3",
+            "question": "How would you describe handle stress and pressure to a beginner?",
+            "keywords": [
+                "manage",
+                "pressure",
+                "prioritize",
+                "calm",
+                "focus"
+            ],
+            "ideal_answer": "Use simple terms to describe handle stress and pressure. Mention aspects like manage, pressure, prioritize."
+        },
+        {
+            "id": "60f69510",
+            "question": "What are the core advantages or characteristics of handle stress and pressure?",
+            "keywords": [
+                "manage",
+                "pressure",
+                "prioritize",
+                "calm",
+                "focus"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of handle stress and pressure, specifically referencing manage, pressure, prioritize."
+        },
+        {
+            "id": "b920bc9e",
+            "question": "Are you a team player?",
+            "keywords": [
+                "teamwork",
+                "collaboration",
+                "support",
+                "goal",
+                "communicate"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around teamwork, collaboration, support."
+        },
+        {
+            "id": "e1e9dfd9",
+            "question": "Explain the concept of Are you a team player in detail.",
+            "keywords": [
+                "teamwork",
+                "collaboration",
+                "support",
+                "goal",
+                "communicate"
+            ],
+            "ideal_answer": "Focus on explaining Are you a team player thoroughly. Key concepts include: teamwork, collaboration, support."
+        },
+        {
+            "id": "f4813688",
+            "question": "How would you describe Are you a team player to a beginner?",
+            "keywords": [
+                "teamwork",
+                "collaboration",
+                "support",
+                "goal",
+                "communicate"
+            ],
+            "ideal_answer": "Use simple terms to describe Are you a team player. Mention aspects like teamwork, collaboration, support."
+        },
+        {
+            "id": "3efc7bc7",
+            "question": "What are the core advantages or characteristics of Are you a team player?",
+            "keywords": [
+                "teamwork",
+                "collaboration",
+                "support",
+                "goal",
+                "communicate"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of Are you a team player, specifically referencing teamwork, collaboration, support."
+        },
+        {
+            "id": "28561876",
+            "question": "Why did you leave your last job?",
+            "keywords": [
+                "growth",
+                "reason",
+                "opportunity",
+                "advance",
+                "challenge"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around growth, reason, opportunity."
+        },
+        {
+            "id": "3c381cb7",
+            "question": "Explain the concept of Why did you leave your last job in detail.",
+            "keywords": [
+                "growth",
+                "reason",
+                "opportunity",
+                "advance",
+                "challenge"
+            ],
+            "ideal_answer": "Focus on explaining Why did you leave your last job thoroughly. Key concepts include: growth, reason, opportunity."
+        },
+        {
+            "id": "466df093",
+            "question": "How would you describe Why did you leave your last job to a beginner?",
+            "keywords": [
+                "growth",
+                "reason",
+                "opportunity",
+                "advance",
+                "challenge"
+            ],
+            "ideal_answer": "Use simple terms to describe Why did you leave your last job. Mention aspects like growth, reason, opportunity."
+        },
+        {
+            "id": "3456cdea",
+            "question": "What are the core advantages or characteristics of Why did you leave your last job?",
+            "keywords": [
+                "growth",
+                "reason",
+                "opportunity",
+                "advance",
+                "challenge"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of Why did you leave your last job, specifically referencing growth, reason, opportunity."
+        }
+    ],
+    "ML": [
+        {
+            "id": "c4a5dded",
+            "question": "What is machine learning?",
+            "keywords": [
+                "data",
+                "model",
+                "training",
+                "learn",
+                "predict"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around data, model, training."
+        },
+        {
+            "id": "462a0ee8",
+            "question": "Explain the concept of machine learning in detail.",
+            "keywords": [
+                "data",
+                "model",
+                "training",
+                "learn",
+                "predict"
+            ],
+            "ideal_answer": "Focus on explaining machine learning thoroughly. Key concepts include: data, model, training."
+        },
+        {
+            "id": "9a054f3e",
+            "question": "How would you describe machine learning to a beginner?",
+            "keywords": [
+                "data",
+                "model",
+                "training",
+                "learn",
+                "predict"
+            ],
+            "ideal_answer": "Use simple terms to describe machine learning. Mention aspects like data, model, training."
+        },
+        {
+            "id": "8ee91f59",
+            "question": "What are the core advantages or characteristics of machine learning?",
+            "keywords": [
+                "data",
+                "model",
+                "training",
+                "learn",
+                "predict"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of machine learning, specifically referencing data, model, training."
+        },
+        {
+            "id": "4a2be95a",
+            "question": "What is supervised learning?",
+            "keywords": [
+                "labeled",
+                "data",
+                "target",
+                "predict",
+                "examples"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around labeled, data, target."
+        },
+        {
+            "id": "acf5cb68",
+            "question": "Explain the concept of supervised learning in detail.",
+            "keywords": [
+                "labeled",
+                "data",
+                "target",
+                "predict",
+                "examples"
+            ],
+            "ideal_answer": "Focus on explaining supervised learning thoroughly. Key concepts include: labeled, data, target."
+        },
+        {
+            "id": "d170bbb4",
+            "question": "How would you describe supervised learning to a beginner?",
+            "keywords": [
+                "labeled",
+                "data",
+                "target",
+                "predict",
+                "examples"
+            ],
+            "ideal_answer": "Use simple terms to describe supervised learning. Mention aspects like labeled, data, target."
+        },
+        {
+            "id": "4ec72288",
+            "question": "What are the core advantages or characteristics of supervised learning?",
+            "keywords": [
+                "labeled",
+                "data",
+                "target",
+                "predict",
+                "examples"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of supervised learning, specifically referencing labeled, data, target."
+        },
+        {
+            "id": "412afd9e",
+            "question": "What is unsupervised learning?",
+            "keywords": [
+                "unlabeled",
+                "data",
+                "hidden",
+                "structure",
+                "patterns",
+                "clustering"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around unlabeled, data, hidden."
+        },
+        {
+            "id": "677b6200",
+            "question": "Explain the concept of unsupervised learning in detail.",
+            "keywords": [
+                "unlabeled",
+                "data",
+                "hidden",
+                "structure",
+                "patterns",
+                "clustering"
+            ],
+            "ideal_answer": "Focus on explaining unsupervised learning thoroughly. Key concepts include: unlabeled, data, hidden."
+        },
+        {
+            "id": "8a261aa8",
+            "question": "How would you describe unsupervised learning to a beginner?",
+            "keywords": [
+                "unlabeled",
+                "data",
+                "hidden",
+                "structure",
+                "patterns",
+                "clustering"
+            ],
+            "ideal_answer": "Use simple terms to describe unsupervised learning. Mention aspects like unlabeled, data, hidden."
+        },
+        {
+            "id": "219fc70f",
+            "question": "What are the core advantages or characteristics of unsupervised learning?",
+            "keywords": [
+                "unlabeled",
+                "data",
+                "hidden",
+                "structure",
+                "patterns",
+                "clustering"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of unsupervised learning, specifically referencing unlabeled, data, hidden."
+        },
+        {
+            "id": "c6bf2d14",
+            "question": "What is overfitting?",
+            "keywords": [
+                "training",
+                "generalization",
+                "noise",
+                "high variance",
+                "memorize"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around training, generalization, noise."
+        },
+        {
+            "id": "000f14f6",
+            "question": "Explain the concept of overfitting in detail.",
+            "keywords": [
+                "training",
+                "generalization",
+                "noise",
+                "high variance",
+                "memorize"
+            ],
+            "ideal_answer": "Focus on explaining overfitting thoroughly. Key concepts include: training, generalization, noise."
+        },
+        {
+            "id": "ccb5bdc4",
+            "question": "How would you describe overfitting to a beginner?",
+            "keywords": [
+                "training",
+                "generalization",
+                "noise",
+                "high variance",
+                "memorize"
+            ],
+            "ideal_answer": "Use simple terms to describe overfitting. Mention aspects like training, generalization, noise."
+        },
+        {
+            "id": "bd0e1b87",
+            "question": "What are the core advantages or characteristics of overfitting?",
+            "keywords": [
+                "training",
+                "generalization",
+                "noise",
+                "high variance",
+                "memorize"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of overfitting, specifically referencing training, generalization, noise."
+        },
+        {
+            "id": "844916eb",
+            "question": "What is underfitting?",
+            "keywords": [
+                "model",
+                "simple",
+                "high bias",
+                "poor performance",
+                "capture"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around model, simple, high bias."
+        },
+        {
+            "id": "328c91b9",
+            "question": "Explain the concept of underfitting in detail.",
+            "keywords": [
+                "model",
+                "simple",
+                "high bias",
+                "poor performance",
+                "capture"
+            ],
+            "ideal_answer": "Focus on explaining underfitting thoroughly. Key concepts include: model, simple, high bias."
+        },
+        {
+            "id": "7fe4846a",
+            "question": "How would you describe underfitting to a beginner?",
+            "keywords": [
+                "model",
+                "simple",
+                "high bias",
+                "poor performance",
+                "capture"
+            ],
+            "ideal_answer": "Use simple terms to describe underfitting. Mention aspects like model, simple, high bias."
+        },
+        {
+            "id": "37d1dfc5",
+            "question": "What are the core advantages or characteristics of underfitting?",
+            "keywords": [
+                "model",
+                "simple",
+                "high bias",
+                "poor performance",
+                "capture"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of underfitting, specifically referencing model, simple, high bias."
+        },
+        {
+            "id": "a96da873",
+            "question": "What is regression?",
+            "keywords": [
+                "continuous",
+                "prediction",
+                "output",
+                "value",
+                "linear"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around continuous, prediction, output."
+        },
+        {
+            "id": "a1b5408c",
+            "question": "Explain the concept of regression in detail.",
+            "keywords": [
+                "continuous",
+                "prediction",
+                "output",
+                "value",
+                "linear"
+            ],
+            "ideal_answer": "Focus on explaining regression thoroughly. Key concepts include: continuous, prediction, output."
+        },
+        {
+            "id": "28a5df49",
+            "question": "How would you describe regression to a beginner?",
+            "keywords": [
+                "continuous",
+                "prediction",
+                "output",
+                "value",
+                "linear"
+            ],
+            "ideal_answer": "Use simple terms to describe regression. Mention aspects like continuous, prediction, output."
+        },
+        {
+            "id": "afd92de9",
+            "question": "What are the core advantages or characteristics of regression?",
+            "keywords": [
+                "continuous",
+                "prediction",
+                "output",
+                "value",
+                "linear"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of regression, specifically referencing continuous, prediction, output."
+        },
+        {
+            "id": "1db78ef3",
+            "question": "What is classification?",
+            "keywords": [
+                "categories",
+                "labels",
+                "discrete",
+                "classes",
+                "predict"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around categories, labels, discrete."
+        },
+        {
+            "id": "ba695d78",
+            "question": "Explain the concept of classification in detail.",
+            "keywords": [
+                "categories",
+                "labels",
+                "discrete",
+                "classes",
+                "predict"
+            ],
+            "ideal_answer": "Focus on explaining classification thoroughly. Key concepts include: categories, labels, discrete."
+        },
+        {
+            "id": "74d10e50",
+            "question": "How would you describe classification to a beginner?",
+            "keywords": [
+                "categories",
+                "labels",
+                "discrete",
+                "classes",
+                "predict"
+            ],
+            "ideal_answer": "Use simple terms to describe classification. Mention aspects like categories, labels, discrete."
+        },
+        {
+            "id": "798fe865",
+            "question": "What are the core advantages or characteristics of classification?",
+            "keywords": [
+                "categories",
+                "labels",
+                "discrete",
+                "classes",
+                "predict"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of classification, specifically referencing categories, labels, discrete."
+        },
+        {
+            "id": "6c24bb78",
+            "question": "What is KNN?",
+            "keywords": [
+                "distance",
+                "neighbors",
+                "majority",
+                "lazy",
+                "algorithm"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around distance, neighbors, majority."
+        },
+        {
+            "id": "644d550f",
+            "question": "Explain the concept of KNN in detail.",
+            "keywords": [
+                "distance",
+                "neighbors",
+                "majority",
+                "lazy",
+                "algorithm"
+            ],
+            "ideal_answer": "Focus on explaining KNN thoroughly. Key concepts include: distance, neighbors, majority."
+        },
+        {
+            "id": "5997f9ab",
+            "question": "How would you describe KNN to a beginner?",
+            "keywords": [
+                "distance",
+                "neighbors",
+                "majority",
+                "lazy",
+                "algorithm"
+            ],
+            "ideal_answer": "Use simple terms to describe KNN. Mention aspects like distance, neighbors, majority."
+        },
+        {
+            "id": "860760b4",
+            "question": "What are the core advantages or characteristics of KNN?",
+            "keywords": [
+                "distance",
+                "neighbors",
+                "majority",
+                "lazy",
+                "algorithm"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of KNN, specifically referencing distance, neighbors, majority."
+        },
+        {
+            "id": "0a32fbef",
+            "question": "What is a decision tree?",
+            "keywords": [
+                "nodes",
+                "splitting",
+                "rules",
+                "leaves",
+                "branches",
+                "entropy"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around nodes, splitting, rules."
+        },
+        {
+            "id": "77dcd275",
+            "question": "Explain the concept of a decision tree in detail.",
+            "keywords": [
+                "nodes",
+                "splitting",
+                "rules",
+                "leaves",
+                "branches",
+                "entropy"
+            ],
+            "ideal_answer": "Focus on explaining a decision tree thoroughly. Key concepts include: nodes, splitting, rules."
+        },
+        {
+            "id": "0860c2a6",
+            "question": "How would you describe a decision tree to a beginner?",
+            "keywords": [
+                "nodes",
+                "splitting",
+                "rules",
+                "leaves",
+                "branches",
+                "entropy"
+            ],
+            "ideal_answer": "Use simple terms to describe a decision tree. Mention aspects like nodes, splitting, rules."
+        },
+        {
+            "id": "c30fb7d8",
+            "question": "What are the core advantages or characteristics of a decision tree?",
+            "keywords": [
+                "nodes",
+                "splitting",
+                "rules",
+                "leaves",
+                "branches",
+                "entropy"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of a decision tree, specifically referencing nodes, splitting, rules."
+        },
+        {
+            "id": "fd8881c4",
+            "question": "Explain Bias vs Variance tradeoff",
+            "keywords": [
+                "error",
+                "tradeoff",
+                "underfitting",
+                "overfitting",
+                "balance",
+                "complexity"
+            ],
+            "ideal_answer": "The fundamental answer should revolve around error, tradeoff, underfitting."
+        },
+        {
+            "id": "b83a6674",
+            "question": "Explain the concept of Bias vs Variance tradeoff in detail.",
+            "keywords": [
+                "error",
+                "tradeoff",
+                "underfitting",
+                "overfitting",
+                "balance",
+                "complexity"
+            ],
+            "ideal_answer": "Focus on explaining Bias vs Variance tradeoff thoroughly. Key concepts include: error, tradeoff, underfitting."
+        },
+        {
+            "id": "7d72f480",
+            "question": "How would you describe Bias vs Variance tradeoff to a beginner?",
+            "keywords": [
+                "error",
+                "tradeoff",
+                "underfitting",
+                "overfitting",
+                "balance",
+                "complexity"
+            ],
+            "ideal_answer": "Use simple terms to describe Bias vs Variance tradeoff. Mention aspects like error, tradeoff, underfitting."
+        },
+        {
+            "id": "b801f102",
+            "question": "What are the core advantages or characteristics of Bias vs Variance tradeoff?",
+            "keywords": [
+                "error",
+                "tradeoff",
+                "underfitting",
+                "overfitting",
+                "balance",
+                "complexity"
+            ],
+            "ideal_answer": "Discuss the benefits and traits of Bias vs Variance tradeoff, specifically referencing error, tradeoff, underfitting."
+        }
+    ]
+}
